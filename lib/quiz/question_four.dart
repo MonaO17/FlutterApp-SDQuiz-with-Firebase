@@ -26,12 +26,12 @@ class _Question_fourState extends State<Question_four> {
             children: <Widget> [
               Container(
                 child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
                   child: Image(
-                    //borderRadius: BorderRadius.circular(20),
                     image: AssetImage('assets/Frage1.JPG'),
-                    width: 350,
+                    //width: 350,
                     height:250,
-                    //fit: BoxFit.cover,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
