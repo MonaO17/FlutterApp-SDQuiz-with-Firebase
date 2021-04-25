@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/quiz/question_four.dart';
 import 'package:sd_quiz/database/quiz_content.dart';
 
-//Mona war hier
-void main() => runApp(MaterialApp(
-  initialRoute: '/',
-  routes: {
-    '/':(context) => QuizContent(),
-   // '/home': (context) => Home(),
-  //  '/location': (context) => ChooseLocation(),
-  },
-));
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: QuizContent(),
+    );
+  }
+}

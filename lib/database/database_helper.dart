@@ -49,6 +49,7 @@ class DatabaseHelper {
     if (_database != null) return _database;
 
     _database = await _initiateDatabase(); //create new db and initalize with function _initiateDatabase (see below)
+    await _data();
     return _database;
   }
 
@@ -88,6 +89,10 @@ class DatabaseHelper {
     $rightAnswer INTEGER NOT NULL
     )
     ''');
+  }
+
+  Future _data() {
+  //TODO Methode um Daten aus GoogleSheet in DB zu schreiben
   }
 
 
