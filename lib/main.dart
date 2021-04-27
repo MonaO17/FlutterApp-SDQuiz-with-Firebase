@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/database/quiz_content.dart';
+import 'package:sd_quiz/pages/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,11 +10,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Quiz',
+      debugShowCheckedModeBanner:false ,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.amber[50],
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        //primarySwatch: Colors.blue,
       ),
-      home: QuizContent(),
+      home: SplashScreen(),
     );
   }
 }
+
