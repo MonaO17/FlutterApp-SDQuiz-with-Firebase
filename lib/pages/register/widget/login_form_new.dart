@@ -23,6 +23,11 @@ class LoginFormNew extends StatelessWidget {
             password: true,
             onChange: (value) {},
           ),
+          InputTextField(
+            label: 'Passwort Wiederholen',
+            password: true,
+            onChange: (value) {},
+          ),
         ],
       ),
     );

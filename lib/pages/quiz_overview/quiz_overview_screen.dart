@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/pages/quiz_overview/drawer_navigation.dart';
+import 'package:sd_quiz/pages/language_screen.dart';
+import 'package:sd_quiz/pages/quiz_overview/widget/drawer_navigation.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
-// Quelle https://www.youtube.com/watch?v=qQ75cxc5q8o&t=34s
 
-// Sprachflaggen/Icons oben links?
+
 
 class QuizOverviewScreen extends StatelessWidget {
+
+  String dropdownValue = 'Deutsch - DE';
+  String icon = "uk.png";
+
+
+
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size; // total height and with from device
@@ -14,30 +22,55 @@ class QuizOverviewScreen extends StatelessWidget {
       appBar: AppBar(
         //title: Text('Guten Tag Spieler'), Text oben anzeigen?
 
+        //Sprachauswahl
+        actions:[
+          Padding(padding:EdgeInsets.all(8.0),
+            child:   IconButton(
+           icon: Icon(Icons.language),
+            color:Colors.white,
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder:(context)=>LanguageScreen()));
+              },
 
+    ),
+    ),
+    ],
+
+
+
+
+
+//hier actions ende
         backgroundColor: Colors.teal[900],
       ),
-
+// hier Appbar Ende
 
       drawer: DrawerNavigation(), // bessere Platzierung, vlt AppBar raus nehmen?
       body:
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20,),
-            child: SafeArea(
+            padding: const EdgeInsets.symmetric(horizontal: 10,),
 
+            child: SafeArea(
               child: Column(
                 children: [
-                  Center( // nochmal anpassen
-                    child: Text('Guten Tag Spieler', // Hier könnte der personalisierte Spielername stehen
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.teal[900],
-                        fontSize: 28,
-                        fontWeight: FontWeight.w600,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+                        child: Text( 'guten_tag'.tr(),
+                          // Hier könnte der personalisierte Spielername stehen
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.teal[900],
+                            fontSize: 28,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  SizedBox(height: 120,),
+                  SizedBox(height: 60,),
                   Expanded(
                     child: GridView.count(
                       crossAxisCount: 2,
@@ -46,34 +79,35 @@ class QuizOverviewScreen extends StatelessWidget {
                       mainAxisSpacing: 15,
                       children: [
                         CategoryCard(
-                          title: 'Digitalisierung',
+                          title: ('digitalisierung'.tr()),
                           image: 'assets/digital.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),
                         CategoryCard(
-                          title: 'Social Media',
+                          title: ('social_media'.tr()),
                           image: 'assets/social_media.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),CategoryCard(
-                          title: 'It Sicherheit',
+                          title: ('digitalisierung'.tr()),
                           image: 'assets/digital.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),
                         CategoryCard(
-                          title: 'Aktuelle Trends',
+                          title: ('it'.tr()),
                           image: 'assets/trend.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),
                         CategoryCard(
-                          title: 'Aktuelle Trends',
+                          title: ('aktuell'.tr()),
                           image: 'assets/trend.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),
                         CategoryCard(
-                          title: 'Aktuelle Trends',
+                          title: ('digitalisierung'.tr()),
                           image: 'assets/trend.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),
+
 
                       ],
                     ),
@@ -87,7 +121,17 @@ class QuizOverviewScreen extends StatelessWidget {
 
     );
   }
+
+
+
 }
+
+
+
+
+
+
+
 
 // Initial Kategorie Feld /
 class CategoryCard extends StatelessWidget {
@@ -104,16 +148,8 @@ class CategoryCard extends StatelessWidget {
       //borderRadius: BorderRadius.circular(13),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.grey[100],
               borderRadius: BorderRadius.circular(13),
-              boxShadow: [ //Schatten für die Kategorie Boxen (Spielerei kann man auch weg lassen)
-                BoxShadow(
-                  offset: Offset(0,17),
-                  blurRadius: 17,
-                  spreadRadius: -23,
-                  color: Colors.teal[900],
-                ),
-              ],
             ),
             child: Material(
               color: Colors.transparent,

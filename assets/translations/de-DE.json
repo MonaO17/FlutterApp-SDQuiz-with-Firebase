@@ -1,0 +1,36 @@
+{
+
+  "test": "test_de",
+  "willkommensText": "Willkommen bei der Quiz App",
+  "login": "login",
+  "neu_anmelden": "Neu Anmelden",
+
+  "bitte_daten_eingeben": "Bitte geben sie ihre Daten ein",
+  "spielername": "Spielername",
+  "passwort": "Passwort",
+  "passwort_wdh": "Passwort wiederholen",
+  "schon_einen_account": "Du hast schon einen Account?",
+  "hier_einloggen": "Hier Einloggen",
+
+  "passwort_vergessen": "Passwort vergessen?",
+  "keinen_account": "Keinen Account?",
+
+
+
+
+  "guten_tag": "Hallo Spieler",
+  "digitalisierung": "Digitalisierung",
+  "social_media": "Social Media",
+  "it": "It Sicherheit",
+  "aktuell": "Aktuelle Trends",
+
+  "sprache": "Sprache",
+  "deutsch": "Deutsch",
+  "englisch": "Englisch",
+  "bitte_sprache": "Bitte wählen Sie eine Sprache aus.",
+
+  "pokal": "Pokale",
+  "start": "Startseite"
+
+
+}
