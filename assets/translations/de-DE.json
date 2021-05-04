@@ -30,7 +30,14 @@
   "bitte_sprache": "Bitte wählen Sie eine Sprache aus.",
 
   "pokal": "Pokale",
-  "start": "Startseite"
-
-
+  "start": "Startseite",
+  "meine_Seite": "Meine Seite",
+  "danke_spiel": "Danke fürs Spielen",
+  "punkte_quiz": "Punkte Quiz: ",
+  "punkte_gesamt": "Gesamtpunkte: ",
+  "richtig": "Richitg",
+  "nochmal_spielen": "Nochmal Spielen",
+  "quiz_uebersicht": "Quiz Übersicht",
+  "herzlichen": "Herzlichen Glückwunsch Sie haben eine ",
+  "podium": "Podium"
 }

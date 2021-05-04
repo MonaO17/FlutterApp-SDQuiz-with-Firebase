@@ -41,7 +41,7 @@ class QuizOverviewScreen extends StatelessWidget {
 
 
 //hier actions ende
-        backgroundColor: Colors.teal[900],
+        backgroundColor: Colors.teal[800],
       ),
 // hier Appbar Ende
 

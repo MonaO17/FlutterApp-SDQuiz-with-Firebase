@@ -46,17 +46,17 @@ class RegisterScreen extends StatelessWidget {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.amber[50],
+      backgroundColor: Colors.teal[800],
       elevation: 0,
       centerTitle: true,
       title: Text('Neu Anmelden', style: TextStyle(
-        color: Colors.teal[900],
+        color: Colors.white,
       ),
       ),
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back_ios,
-          color: Colors.teal[900],
+          color: Colors.white,
         ),
         onPressed: () {
           Navigator.pop(context);

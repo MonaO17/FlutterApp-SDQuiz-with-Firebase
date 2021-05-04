@@ -12,7 +12,16 @@
   "englisch": "English",
   "bitte_sprache": "Please choose a language.",
   "pokal": "Cups",
-  "start": "Home Screen"
+  "start": "Home Screen",
+  "meine_Seite": "My Page",
+  "danke_spiel": "Thank you for playing",
+  "punkte_quiz": "Punkte Quiz: ",
+  "punkte_gesamt": "Gesamtpunkte: ",
+  "richtig": "Correct",
+  "nochmal:spielen": "Play Again",
+  "quiz_uebersicht": "Quiz Overview",
+  "herzlichen": "Congratulations you have win a ",
+  "podium": "Cups"
 
 
 

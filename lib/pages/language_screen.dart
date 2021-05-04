@@ -8,17 +8,17 @@ class LanguageScreen extends StatelessWidget {
 
 
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.teal[800],
         elevation: 0,
         centerTitle: true,
         title: Text('sprache', style: TextStyle(
-          color: Colors.teal[900],
+          color: Colors.white,
         ),
         ).tr(),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.teal[900],
+            color: Colors.white,
           ),
           onPressed: () {
             Navigator.pop(context);

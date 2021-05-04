@@ -55,6 +55,9 @@ flutter:
   assets:
     - assets/translations/
     - assets/icons/
+    - assets/gold.png
+    - assets/silber.png
+    - assets/bronze.png
     - assets/digital.jpg
     - assets/Frage1.JPG
     - assets/quiz.jpg

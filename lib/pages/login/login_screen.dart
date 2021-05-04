@@ -54,17 +54,17 @@ class LoginScreen extends StatelessWidget {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal[800],
       elevation: 0,
       centerTitle: true,
       title: Text('Login', style: TextStyle(
-        color: Colors.teal[900],
+        color: Colors.white,
       ),
       ),
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back_ios,
-          color: Colors.teal[900],
+          color: Colors.white,
         ),
         onPressed: () {
           Navigator.pop(context);

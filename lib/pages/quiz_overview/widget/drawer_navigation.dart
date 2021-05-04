@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sd_quiz/pages/language_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:sd_quiz/pages/podium_screen.dart';
+import 'package:sd_quiz/pages/quiz_end.dart';
 import 'package:sd_quiz/pages/quiz_overview/quiz_overview_screen.dart';
 
 
@@ -24,7 +26,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                       NetworkImage('https://cdn.pixabay.com/photo/2017/11/29/09/15/paint-2985569_1280.jpg'),
                     ),
                     accountName: Text('Spielername'), accountEmail: Text('Punktestand: 90'),
-                    decoration: BoxDecoration( color: Colors.teal[900],),
+                    decoration: BoxDecoration( color: Colors.teal[800],),
 
                   ),
                 ),
@@ -42,12 +44,12 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                 ListTile(
                   leading: Icon(Icons.auto_awesome,
                     size: 30,),
-                  title: Text('pokal',
+                  title: Text('podium',
                   style: TextStyle(
                     fontSize: 17
                   ),
                   ).tr(),
-                  onTap: () {},//=> Navigator.of(context).push(MaterialPageRoute(builder:(context)=>HomeScreen())),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder:(context)=>QuizPodiumScreen())),
                 ),
                 ListTile(
                   leading: Icon(Icons.language,
@@ -59,8 +61,22 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                   ).tr(),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(builder:(context)=>LanguageScreen())),
                 ),
+                //nur zur Überprüfung, später entfernen
+                ListTile(
+                  leading: Icon(Icons.language,
+                    size: 30,),
+                  title: Text('meine_Seite',
+                    style: TextStyle(
+                        fontSize: 17
+                    ),
+                  ).tr(),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder:(context)=>QuizEndScreen())),
+                ),
+
+
               ],
             )
+
         )
     );
   }
