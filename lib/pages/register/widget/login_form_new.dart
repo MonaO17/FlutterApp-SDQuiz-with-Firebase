@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sd_quiz/pages/login/widget/input_text_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 class LoginFormNew extends StatelessWidget {
@@ -19,12 +20,12 @@ class LoginFormNew extends StatelessWidget {
           ),
           SizedBox(height: 16,),
           InputTextField(
-            label: 'Passwort',
+            label: 'passwort'.tr(),
             password: true,
             onChange: (value) {},
           ),
           InputTextField(
-            label: 'Passwort Wiederholen',
+            label: 'passwort_wdh'.tr(),
             password: true,
             onChange: (value) {},
           ),

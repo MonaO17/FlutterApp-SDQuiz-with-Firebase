@@ -1,8 +1,9 @@
 {
 
   "test": "test_de",
+
   "willkommensText": "Willkommen bei der Quiz App",
-  "login": "login",
+  "login": "Login",
   "neu_anmelden": "Neu Anmelden",
 
   "bitte_daten_eingeben": "Bitte geben sie ihre Daten ein",
@@ -14,6 +15,9 @@
 
   "passwort_vergessen": "Passwort vergessen?",
   "keinen_account": "Keinen Account?",
+  "neu_anmelden": "Neu Anmelden",
+
+  "willkommen": "Willkommen",
 
 
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sd_quiz/pages/login/login_screen.dart';
 import 'package:sd_quiz/pages/register/register_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 class LoginAndRegister extends StatelessWidget {
@@ -30,10 +31,10 @@ class LoginAndRegister extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 alignment: Alignment.center,
                 width: double.infinity,
-                child: Text('Login',
+                child: Text('login',
                   style: TextStyle(
                     color: Colors.white,
-                  ),),
+                  ),).tr(),
               ),
             ),
           ),
@@ -57,10 +58,10 @@ class LoginAndRegister extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 alignment: Alignment.center,
                 width: double.infinity,
-                child: Text('Neu Anmelden',
+                child: Text('neu_anmelden"',
                   style: TextStyle(
                     color: Colors.white,
-                  ),),
+                  ),).tr(),
               ),
             ),
           ),

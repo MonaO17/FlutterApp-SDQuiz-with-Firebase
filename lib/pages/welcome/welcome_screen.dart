@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sd_quiz/pages/welcome/widget/login_and_register.dart';
 import 'package:sd_quiz/pages/welcome/widget/slider.dot.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -11,14 +12,14 @@ class WelcomeScreen extends StatelessWidget {
           Image.asset('assets/quiz.jpg'),
           SliderDot(),
           SizedBox(height: 20,),
-           Text('Willkommen bei der It Quiz App\ndie Spaß macht\n& kostenfrei für Sie nutzbar ist! ',
+           Text('willkommensText',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.teal[900],
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
             ),
-           ),
+           ).tr(),
           SizedBox(height: 190,),
           LoginAndRegister(),
             ],

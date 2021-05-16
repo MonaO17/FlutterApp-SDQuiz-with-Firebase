@@ -16,12 +16,12 @@ class LoginForm extends StatelessWidget {
       child: Column(
         children: [
           InputTextField(
-            label: 'Spielername',
+            label: 'spielername',
             onChange: (value) {},
           ),
           SizedBox(height: 16,),
           InputTextField(
-            label: 'Passwort',
+            label: 'passwort',
             password: true,
             onChange: (value) {},
           ),

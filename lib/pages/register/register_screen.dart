@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sd_quiz/pages/login/widget/login_button.dart';
 import 'package:sd_quiz/pages/register/widget/login_form_new.dart';
 import 'package:sd_quiz/pages/register/widget/register_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 class RegisterScreen extends StatelessWidget {
@@ -26,9 +27,9 @@ class RegisterScreen extends StatelessWidget {
               text: TextSpan(
                 style: TextStyle(color: Colors.grey),
                 children: [
-                  TextSpan( text: 'Du hasten schon einen Account?'),
+                  TextSpan( text: 'schon_einen_account'.tr()),
                   TextSpan(
-                      text: 'Hier Einloggen', style: TextStyle(
+                      text: 'hier_einloggen'.tr(), style: TextStyle(
                     color: Colors.teal[900],
                   ),
                       recognizer: TapGestureRecognizer()..onTap = () {
@@ -49,10 +50,10 @@ class RegisterScreen extends StatelessWidget {
       backgroundColor: Colors.teal[800],
       elevation: 0,
       centerTitle: true,
-      title: Text('Neu Anmelden', style: TextStyle(
+      title: Text('neu_anmelden"', style: TextStyle(
         color: Colors.white,
-      ),
-      ),
+      ),).tr(),
+
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back_ios,

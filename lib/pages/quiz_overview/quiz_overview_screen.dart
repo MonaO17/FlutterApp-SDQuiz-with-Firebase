@@ -80,31 +80,31 @@ class QuizOverviewScreen extends StatelessWidget {
                       children: [
                         CategoryCard(
                           title: ('digitalisierung'.tr()),
-                          image: 'assets/digital.jpg',
+                          image: 'assets/digital1.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),
                         CategoryCard(
                           title: ('social_media'.tr()),
-                          image: 'assets/social_media.jpg',
+                          image: 'assets/android.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),CategoryCard(
                           title: ('digitalisierung'.tr()),
-                          image: 'assets/digital.jpg',
+                          image: 'assets/digital1.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),
                         CategoryCard(
                           title: ('it'.tr()),
-                          image: 'assets/trend.jpg',
+                          image: 'assets/trend1.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),
                         CategoryCard(
                           title: ('aktuell'.tr()),
-                          image: 'assets/trend.jpg',
+                          image: 'assets/android.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),
                         CategoryCard(
                           title: ('digitalisierung'.tr()),
-                          image: 'assets/trend.jpg',
+                          image: 'assets/trend1.jpg',
                           press: () {}, //Verlinkung zu Quizfragen
                         ),
 

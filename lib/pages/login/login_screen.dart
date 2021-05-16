@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sd_quiz/pages/login/widget/login_button.dart';
 import 'package:sd_quiz/pages/login/widget/login_form.dart';
 import 'package:sd_quiz/pages/login/widget/welcome_back.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 class LoginScreen extends StatelessWidget {
@@ -19,9 +20,8 @@ class LoginScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             alignment: Alignment.centerRight,
-            child: Text('Passwort Vergessen?',
-              style: TextStyle(color: Colors.teal[800]),
-            ),
+            child: Text('passwort_vergessen',
+              style: TextStyle(color: Colors.teal[800]),).tr(),
           ),
           //Login Button
           SizedBox(height: 60,),
@@ -34,15 +34,15 @@ class LoginScreen extends StatelessWidget {
               text: TextSpan(
                 style: TextStyle(color: Colors.grey),
                 children: [
-                  TextSpan( text: 'Keinen Account?  '),
+                  TextSpan( text: 'keinen_account'.tr()),
                   TextSpan(
-                    text: 'Neu Anmelden', style: TextStyle(
+                    text: 'neu_anmelden'.tr(), style: TextStyle(
                     color: Colors.teal[900],
                   ),
                     recognizer: TapGestureRecognizer()..onTap = () {
                       Navigator.pop(context);
                     }
-                  ),
+                  )
               ],
               ),
             ),
@@ -57,10 +57,9 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: Colors.teal[800],
       elevation: 0,
       centerTitle: true,
-      title: Text('Login', style: TextStyle(
+      title: Text('login', style: TextStyle(
         color: Colors.white,
-      ),
-      ),
+      ),).tr(),
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back_ios,

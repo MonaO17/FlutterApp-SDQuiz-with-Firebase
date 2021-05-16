@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//vielleicht raus nehmen?
+
 
 class SliderDot extends StatelessWidget {
   const SliderDot({

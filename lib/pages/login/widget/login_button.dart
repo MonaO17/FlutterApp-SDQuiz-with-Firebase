@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sd_quiz/pages/quiz_overview/quiz_overview_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 class LoginButton extends StatelessWidget {
@@ -27,12 +28,12 @@ class LoginButton extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 16),
           alignment: Alignment.center,
-          child: Text('Login',
+          child: Text('login',
             style: TextStyle(
               color: Colors.white,
             ),
+          ).tr(),
           ),
-        ),
       ),
     );
   }
