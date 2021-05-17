@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/pages/login/widget/login_button.dart';
-import 'package:sd_quiz/pages/register/widget/login_form_new.dart';
-import 'package:sd_quiz/pages/register/widget/register_text.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:sd_quiz/view/login/widget/login_button.dart';
+import 'package:sd_quiz/view/register/widget/login_form_new.dart';
+import 'package:sd_quiz/view/register/widget/register_text.dart';
 
 
 class RegisterScreen extends StatelessWidget {

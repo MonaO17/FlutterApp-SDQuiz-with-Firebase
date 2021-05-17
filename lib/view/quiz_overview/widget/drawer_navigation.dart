@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/pages/language_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:sd_quiz/pages/podium_screen.dart';
-import 'package:sd_quiz/pages/quiz_end.dart';
-import 'package:sd_quiz/pages/quiz_overview/quiz_overview_screen.dart';
+import '../../language_screen.dart';
+import '../../quiz/podium_screen.dart';
+import '../../quiz/quiz_end.dart';
+import '../quiz_overview_screen.dart';
 
 
 class DrawerNavigation extends StatefulWidget {
@@ -39,7 +39,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                     ),
                   ).tr(),
 
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder:(context)=>QuizOverviewScreen())),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder:(context)=>QuizOverview())),
                 ),
                 ListTile(
                   leading: Icon(Icons.auto_awesome,

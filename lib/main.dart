@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/pages/splash_screen.dart';
+import 'package:sd_quiz/view/login/login_screen.dart';
 
 void main() {
   runApp(
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         //primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: Login(),
     );
   }
 }

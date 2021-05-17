@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/pages/quiz_overview/quiz_overview_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:sd_quiz/view/quiz_overview/quiz_overview_screen.dart';
+
 
 
 class LoginButton extends StatelessWidget {
@@ -21,7 +22,7 @@ class LoginButton extends StatelessWidget {
     context,
     MaterialPageRoute(
     builder: (context){
-    return QuizOverviewScreen(); // hier muss die Startseite mit den QuizKategorien rein
+    return QuizOverview(); // hier muss die Startseite mit den QuizKategorien rein
     },),);
     },
         child: Container(

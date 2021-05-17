@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/pages/login/login_screen.dart';
-import 'package:sd_quiz/pages/register/register_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:sd_quiz/view/login/login_screen.dart';
+import 'package:sd_quiz/view/register/register_screen.dart';
 
 
 class LoginAndRegister extends StatelessWidget {
@@ -25,7 +25,7 @@ class LoginAndRegister extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context){
-                    return LoginScreen();
+                    return Login();
                   },),);},
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 16),

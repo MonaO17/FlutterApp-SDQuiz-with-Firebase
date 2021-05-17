@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:sd_quiz/pages/quiz_overview/quiz_overview_screen.dart';
+import 'package:sd_quiz/view/quiz_overview/quiz_overview_screen.dart';
 
-// Screen für die Anzeige der Pokale + 2 Buttons
+// Screen für jedes Quiz am Ende zeigt die Punkteanzahl an und 2 Buttons
 // Funktion für die Ausgabe der Punkte noch implementieren
 
-class QuizPodiumScreen extends StatelessWidget {
+class QuizEndScreen extends StatelessWidget {
+  int finalScore;
 
+  //constructor
+  QuizEndScreen({Key key, @required this.finalScore}) : super(key: key);
 
+  //Variabeln für die Punkte, noch anpassen!
+  var punkte_q = 10;
+  var punkte_gesamt = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +22,11 @@ class QuizPodiumScreen extends StatelessWidget {
         backgroundColor: Colors.teal[800],
         elevation: 0,
         centerTitle: true,
-        title: Text('podium', style: TextStyle(
-          color: Colors.white,
-        ),
+        title: Text(
+          'meine_Seite',
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ).tr(),
         leading: IconButton(
           icon: Icon(
@@ -37,26 +45,48 @@ class QuizPodiumScreen extends StatelessWidget {
             padding: const EdgeInsets.all(60.0),
             child: Center(
               child: Text(
-                'herzlichen' ,
+                'danke_spiel',
                 style: TextStyle(
-                  fontSize: 23,
+                  fontSize: 25,
                   color: Colors.red[900],
-                  fontWeight: FontWeight.w800,),
+                  fontWeight: FontWeight.w800,
+                ),
               ).tr(),
             ),
           ),
-
-          Image(image: AssetImage('assets/gold.png')),
-          SizedBox(height: 10),
+          SizedBox(height: 80),
+          Center(
+            child: Text(
+              'Quizpunkte: ' '$finalScore',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.red[800],
+                fontWeight: FontWeight.w600,
+              ),
+            ).tr(),
+          ),
+          SizedBox(height: 20),
+          Center(
+            child: Text(
+              'Gesamtpunkte: ' '$punkte_gesamt',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.red[800],
+                fontWeight: FontWeight.w600,
+              ),
+            ).tr(),
+          ),
+          SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.all(60.0),
             child: Center(
               child: Text(
-                '5 von 10 Richtig' , // hier noch Variablen einsetzen
+                '5 von 10 Richtig', // hier noch Variablen einsetzen
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.red[900],
-                  fontWeight: FontWeight.w800,),
+                  fontWeight: FontWeight.w800,
+                ),
               ).tr(),
             ),
           ),
@@ -67,43 +97,22 @@ class QuizPodiumScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(36),
               ),
               color: Colors.teal[700],
-              onPressed: () {Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context){
-                    return QuizOverviewScreen(); // Quizseite verlinken
-                  },),);
-              },
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                alignment: Alignment.center,
-                child: Text('nochmal_spielen',
-                  style: TextStyle(
-                    color: Colors.white,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return QuizOverview(); // Quizseite verlinken
+                    },
                   ),
-                ).tr(),
-              ),
-            ),
-          ),Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: FlatButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(36),
-              ),
-              color: Colors.teal[700],
-              onPressed: () {Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context){
-                    return QuizOverviewScreen(); //
-                  },),);
+                );
               },
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 alignment: Alignment.center,
-                child: Text('quiz_uebersicht',
+                child: Text(
+                  'nochmal_spielen',
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -111,10 +120,38 @@ class QuizPodiumScreen extends StatelessWidget {
               ),
             ),
           ),
-
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: FlatButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(36),
+              ),
+              color: Colors.teal[700],
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return QuizOverview();
+                    },
+                  ),
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                alignment: Alignment.center,
+                child: Text(
+                  'quiz_uebersicht',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ).tr(),
+              ),
+            ),
+          ),
         ],
       ),
-
     );
   }
 }

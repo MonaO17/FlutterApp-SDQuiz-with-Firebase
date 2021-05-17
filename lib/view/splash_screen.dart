@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/pages/welcome/welcome_screen.dart';
+import 'package:sd_quiz/view/welcome/welcome_screen.dart';
 
 
 
