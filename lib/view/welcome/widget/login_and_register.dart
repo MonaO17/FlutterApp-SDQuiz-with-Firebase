@@ -25,7 +25,7 @@ class LoginAndRegister extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context){
-                    return Login();
+                    return LoginScreen();
                   },),);},
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 16),

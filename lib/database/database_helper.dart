@@ -115,15 +115,12 @@ class DatabaseHelper {
   //****************          METHODS REGARDING USER          ****************//
   Future<List<Map<String, dynamic>>> getUserMapList() async {
     Database db = await this.database;
-
     var result = await db.rawQuery('SELECT * FROM $userTable');
-    // var result = await db.query(noteTable, orderBy: '$colPriority ASC');
     return result;
   }
 
   Future<int> insertUser(String name, String pw) async {
     var db = await this.database;
-    // var result = await db.update(userTable, user.toMap(), where: '$colId = ?', whereArgs: [user.id]);
     var result = await db.rawInsert('''
       INSERT INTO $userTable (
       $colName, $colPassword
@@ -133,11 +130,43 @@ class DatabaseHelper {
     return result;
   }
 
+  //Check for registration, whether a username is already taken
+  Future<bool> userExistsAlreadyCheck (String name) async {
+    bool userExists = false;
+    var userMapList = await getUserMapList(); // Get 'Map List' from database
+    int count = userMapList.length; // Count the number of map entries in db table
+
+    List<User> userList = List<User>();  // For loop to create a 'Note List' from a 'Map List'
+    for (int i = 0; i < count; i++) {
+      User user = User.fromMapObject(userMapList[i]);
+      if(user.name == name){
+        userExists = true;
+      }
+    }
+    return userExists;
+  }
+
+  //check for login, whether username & password match
+  Future<int> userExistsCheck(String name, String pw) async{
+    int userExists = null;
+    var userMapList = await getUserMapList(); // Get 'Map List' from database
+    int count = userMapList.length; // Count the number of map entries in db table
+
+    List<User> userList = List<User>();
+    // For loop to create a 'Note List' from a 'Map List'
+    for (int i = 0; i < count; i++) {
+      User user = User.fromMapObject(userMapList[i]);
+      if(user.name == name && user.password == pw){
+        userExists = user.id;
+      }
+    }
+    return userExists;
+  }
+
   // Get the 'Map List' [ List<Map> ] and convert it to 'User List' [ List<User> ]
   Future<List<User>> getUserList() async {
     var userMapList = await getUserMapList(); // Get 'Map List' from database
-    int count =
-        userMapList.length; // Count the number of map entries in db table
+    int count = userMapList.length; // Count the number of map entries in db table
 
     List<User> userList = List<User>();
     // For loop to create a 'Note List' from a 'Map List'

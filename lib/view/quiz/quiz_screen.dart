@@ -6,9 +6,9 @@ import 'package:sd_quiz/view/quiz/quiz_end.dart';
 import '../../database/database_helper.dart';
 import 'package:flutter/rendering.dart';
 
-class QuizPage extends StatefulWidget {
+class QuizScreen extends StatefulWidget {
   @override
-  _QuizPageState createState() => _QuizPageState();
+  _QuizScreenState createState() => _QuizScreenState();
 }
 
 // Allgemeine Variablen
@@ -22,9 +22,8 @@ Color buttonColor2 = Color(0xff004445);
 Color buttonColor3 = Color(0xff004445);
 Color buttonColor4 = Color(0xff004445);
 
-class _QuizPageState extends State<QuizPage> {
-  DatabaseHelper helper =
-  DatabaseHelper(); // get singelton instance of Database-Helper class
+class _QuizScreenState extends State<QuizScreen> {
+  DatabaseHelper helper = DatabaseHelper(); // get singelton instance of Database-Helper class
   Future futureList;
   List<Quiz> quizList;
   int quizID = 1;
@@ -44,8 +43,7 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async => false,
-        //disabel the back button, otherwise user could go back to questions to increase their score
+        onWillPop: () async => false, //disabel the back button, otherwise user could go back to questions to increase their score
         child: Center(
           child: Scaffold(
             appBar: AppBar(

@@ -7,12 +7,12 @@ import 'package:sd_quiz/view/login/widget/input_text_field.dart';
 import 'package:sd_quiz/view/quiz_overview/quiz_overview_screen.dart';
 import '../../database/database_helper.dart';
 
-class Login extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginScreenState extends State<LoginScreen> {
   DatabaseHelper helper = DatabaseHelper();
   var name, pw;
   int idCurrentUser;
@@ -21,7 +21,26 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context),
+      appBar: AppBar(
+        backgroundColor: Colors.teal[800],
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          'login',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ).tr(),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +48,7 @@ class _LoginState extends State<Login> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Text(
-                'willkommen',
+                'Willkommen',
                 style: TextStyle(
                   color: Colors.teal[900],
                   fontSize: 32,
@@ -72,8 +91,6 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 60,
                   ),
-                  //LoginButton(),
-                  //Keinen Account/ Register
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: FlatButton(
@@ -82,9 +99,7 @@ class _LoginState extends State<Login> {
                       ),
                       color: Colors.teal[700],
                       onPressed: () async {
-                        debugPrint("Save button clicked");
-                        await _save();
-                        _navigateNext();
+                        await _loginCheck(name, pw);
                       },
                       child: Container(
                         width: double.infinity,
@@ -130,49 +145,35 @@ class _LoginState extends State<Login> {
     );
   }
 
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.teal[800],
-      elevation: 0,
-      centerTitle: true,
-      title: Text(
-        'login',
-        style: TextStyle(
-          color: Colors.white,
+  Future _loginCheck(String name, String pw) async{
+    int idCurrentUser = await helper.userExistsCheck(name, pw);
+
+    if (idCurrentUser == null) {
+      _showAlertDialog('Fehler!',
+          'Spielername oder Passwort ist falsch!');
+          name = null;
+          pw = null;
+    } else {
+      _showAlertDialog('Willkommen!',
+          'Sie haben sich erfolgreich eingeloggt. Viel Spaß beim spielen!');
+      print(idCurrentUser);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return QuizOverview(idCurrentUser: idCurrentUser);
+          },
         ),
-      ).tr(),
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back_ios,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
+      );
+    }
+  }
+
+  void _showAlertDialog(String title, String message) {
+    AlertDialog alertDialog = AlertDialog(
+      title: Text(title),
+      content: Text(message),
     );
+    showDialog(context: context, builder: (_) => alertDialog);
   }
 
-  Future<int> _save() async {
-    //TODO Check if already exists _showAlaertDialog('Nutzername oder Passwort ist falsch!'
-    idCurrentUser = await helper.insertUser(name, pw);
-    print(idCurrentUser);
-    return idCurrentUser;
-  }
-
-  Future<User> _getUser() async {
-    print('user $idCurrentUser');
-    user = await helper.getCurrentUser(idCurrentUser);
-    print(user.name);
-    print(user.password);
-    return user;
-  }
-
-  _navigateNext() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => QuizOverview(idCurrentUser: idCurrentUser),
-      ),
-    );
-  }
 }

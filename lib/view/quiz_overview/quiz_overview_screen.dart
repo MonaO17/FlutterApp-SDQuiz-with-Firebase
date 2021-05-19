@@ -6,7 +6,6 @@ import '../../database/database_helper.dart';
 import '../language_screen.dart';
 
 class QuizOverview extends StatefulWidget {
-
   int idCurrentUser;
 
   //constructor
@@ -44,16 +43,15 @@ class _QuizOverviewState extends State<QuizOverview> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery
-        .of(context)
-        .size; // total height and with from device
+    var size = MediaQuery.of(context).size; // total height and with from device
     return Scaffold(
       appBar: AppBar(
         //title: Text('Guten Tag Spieler'), Text oben anzeigen?
 
         //Sprachauswahl
         actions: [
-          Padding(padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: EdgeInsets.all(8.0),
             child: IconButton(
               icon: Icon(Icons.language),
               color: Colors.white,
@@ -61,7 +59,6 @@ class _QuizOverviewState extends State<QuizOverview> {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => LanguageScreen()));
               },
-
             ),
           ),
         ],
@@ -73,31 +70,43 @@ class _QuizOverviewState extends State<QuizOverview> {
 
       drawer: DrawerNavigation(),
       // bessere Platzierung, vlt AppBar raus nehmen?
-      body:
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10,),
-
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+        ),
         child: SafeArea(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-                    child: Text('guten_tag'.tr(),
-                      // Hier könnte der personalisierte Spielername stehen
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.teal[900],
-                        fontSize: 28,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
+              FutureBuilder(
+                  future: userFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+                            child: Text(
+                              "guten_tag ${snapshot.data.name}".tr(),
+                              // Hier könnte der personalisierte Spielername stehen
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.teal[900],
+                                fontSize: 28,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  }),
+              SizedBox(
+                height: 60,
               ),
-              SizedBox(height: 60,),
               Expanded(
                 child: GridView.count(
                   crossAxisCount: 2,
@@ -114,7 +123,8 @@ class _QuizOverviewState extends State<QuizOverview> {
                       title: ('social_media'.tr()),
                       image: 'assets/android.jpg',
                       press: () {}, //Verlinkung zu Quizfragen
-                    ), CategoryCard(
+                    ),
+                    CategoryCard(
                       title: ('digitalisierung'.tr()),
                       image: 'assets/digital1.jpg',
                       press: () {}, //Verlinkung zu Quizfragen
@@ -134,8 +144,6 @@ class _QuizOverviewState extends State<QuizOverview> {
                       image: 'assets/trend1.jpg',
                       press: () {}, //Verlinkung zu Quizfragen
                     ),
-
-
                   ],
                 ),
               ),
@@ -145,13 +153,9 @@ class _QuizOverviewState extends State<QuizOverview> {
       ),
 
       //),
-
     );
   }
-
-
 }
-
 
 // Initial Kategorie Feld /
 class CategoryCard extends StatelessWidget {
@@ -160,7 +164,10 @@ class CategoryCard extends StatelessWidget {
   final Function press;
 
   const CategoryCard({
-    Key key, this.image, this.title, this.press,
+    Key key,
+    this.image,
+    this.title,
+    this.press,
   }) : super(key: key);
 
   @override
@@ -200,8 +207,6 @@ class CategoryCard extends StatelessWidget {
           ),
         ),
       ),
-
-
     );
   }
 }
