@@ -38,119 +38,121 @@ class QuizEndScreen extends StatelessWidget {
           },
         ),
       ),
-      body: Column(
-        //mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(60.0),
-            child: Center(
-              child: Text(
-                'danke_spiel',
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.red[900],
-                  fontWeight: FontWeight.w800,
-                ),
-              ).tr(),
+      body: SingleChildScrollView(
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(60.0),
+              child: Center(
+                child: Text(
+                  'danke_spiel',
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.red[900],
+                    fontWeight: FontWeight.w800,
+                  ),
+                ).tr(),
+              ),
             ),
-          ),
-          SizedBox(height: 80),
-          Center(
-            child: Text(
-              'Quizpunkte: ' '$finalScore',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.red[800],
-                fontWeight: FontWeight.w600,
-              ),
-            ).tr(),
-          ),
-          SizedBox(height: 20),
-          Center(
-            child: Text(
-              'Gesamtpunkte: ' '$punkte_gesamt',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.red[800],
-                fontWeight: FontWeight.w600,
-              ),
-            ).tr(),
-          ),
-          SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.all(60.0),
-            child: Center(
+            SizedBox(height: 80),
+            Center(
               child: Text(
-                '5 von 10 Richtig', // hier noch Variablen einsetzen
+                'Quizpunkte: ' '$finalScore',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.red[900],
-                  fontWeight: FontWeight.w800,
+                  color: Colors.red[800],
+                  fontWeight: FontWeight.w600,
                 ),
               ).tr(),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: FlatButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(36),
-              ),
-              color: Colors.teal[700],
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return QuizOverview(); // Quizseite verlinken
-                    },
-                  ),
-                );
-              },
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                alignment: Alignment.center,
+            SizedBox(height: 20),
+            Center(
+              child: Text(
+                'Gesamtpunkte: ' '$punkte_gesamt',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.red[800],
+                  fontWeight: FontWeight.w600,
+                ),
+              ).tr(),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(60.0),
+              child: Center(
                 child: Text(
-                  'nochmal_spielen',
+                  '5 von 10 Richtig', // hier noch Variablen einsetzen
                   style: TextStyle(
-                    color: Colors.white,
+                    fontSize: 20,
+                    color: Colors.red[900],
+                    fontWeight: FontWeight.w800,
                   ),
                 ).tr(),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: FlatButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(36),
-              ),
-              color: Colors.teal[700],
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return QuizOverview();
-                    },
-                  ),
-                );
-              },
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                alignment: Alignment.center,
-                child: Text(
-                  'quiz_uebersicht',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ).tr(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(36),
+                ),
+                color: Colors.teal[700],
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return QuizOverviewScreen(); // Quizseite verlinken
+                      },
+                    ),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'nochmal_spielen',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ).tr(),
+                ),
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(36),
+                ),
+                color: Colors.teal[700],
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return QuizOverviewScreen();
+                      },
+                    ),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'quiz_uebersicht',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ).tr(),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

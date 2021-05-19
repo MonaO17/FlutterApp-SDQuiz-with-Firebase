@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/model/user.dart';
+import 'package:sd_quiz/view/quiz/quiz_screen.dart';
 import 'package:sd_quiz/view/quiz_overview/widget/drawer_navigation.dart';
 import '../../database/database_helper.dart';
 import '../language_screen.dart';
 
-class QuizOverview extends StatefulWidget {
+class QuizOverviewScreen extends StatefulWidget {
   int idCurrentUser;
 
   //constructor
-  QuizOverview({Key key, @required this.idCurrentUser}) : super(key: key);
+  QuizOverviewScreen({Key key, @required this.idCurrentUser}) : super(key: key);
 
   @override
-  _QuizOverviewState createState() => _QuizOverviewState(idCurrentUser);
+  _QuizOverviewScreenState createState() => _QuizOverviewScreenState(idCurrentUser);
 }
 
-class _QuizOverviewState extends State<QuizOverview> {
-  int idCurrentUser;
+class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
+  int idCurrentUser, userID;
   DatabaseHelper helper = DatabaseHelper();
-  int userID;
   User user;
   Future userFuture;
+  int a = 1;
+  int b = 2;
 
   //constructor
-  _QuizOverviewState(this.idCurrentUser);
+  _QuizOverviewScreenState(this.idCurrentUser);
 
   @override
   void initState() {
@@ -31,9 +33,9 @@ class _QuizOverviewState extends State<QuizOverview> {
     userFuture = _getUser(idCurrentUser);
   }
 
-  _getUser(userID) async {
-    print('user $userID');
-    user = await helper.getCurrentUser(userID);
+  _getUser(idCurrentUser) async {
+    print('user $idCurrentUser');
+    user = await helper.getCurrentUser(idCurrentUser);
     print(user.name);
     return user;
   }
@@ -46,9 +48,6 @@ class _QuizOverviewState extends State<QuizOverview> {
     var size = MediaQuery.of(context).size; // total height and with from device
     return Scaffold(
       appBar: AppBar(
-        //title: Text('Guten Tag Spieler'), Text oben anzeigen?
-
-        //Sprachauswahl
         actions: [
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -62,14 +61,9 @@ class _QuizOverviewState extends State<QuizOverview> {
             ),
           ),
         ],
-
-//hier actions ende
         backgroundColor: Colors.teal[800],
       ),
-// hier Appbar Ende
-
       drawer: DrawerNavigation(),
-      // bessere Platzierung, vlt AppBar raus nehmen?
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 10,
@@ -89,7 +83,6 @@ class _QuizOverviewState extends State<QuizOverview> {
                                 const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                             child: Text(
                               "guten_tag ${snapshot.data.name}".tr(),
-                              // Hier könnte der personalisierte Spielername stehen
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.teal[900],
@@ -105,7 +98,7 @@ class _QuizOverviewState extends State<QuizOverview> {
                     }
                   }),
               SizedBox(
-                height: 60,
+                height: 30,
               ),
               Expanded(
                 child: GridView.count(
@@ -117,12 +110,30 @@ class _QuizOverviewState extends State<QuizOverview> {
                     CategoryCard(
                       title: ('digitalisierung'.tr()),
                       image: 'assets/digital1.jpg',
-                      press: () {}, //Verlinkung zu Quizfragen
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return QuizScreen(topicID: a, idCurrentUser: idCurrentUser); // Quizseite verlinken
+                            },
+                          ),
+                        );
+                      }, //Verlinkung zu Quizfragen
                     ),
                     CategoryCard(
                       title: ('social_media'.tr()),
                       image: 'assets/android.jpg',
-                      press: () {}, //Verlinkung zu Quizfragen
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return QuizScreen(topicID: b, idCurrentUser: idCurrentUser); // Quizseite verlinken
+                            },
+                          ),
+                        );
+                      }, //Verlinkung zu Quizfragen
                     ),
                     CategoryCard(
                       title: ('digitalisierung'.tr()),

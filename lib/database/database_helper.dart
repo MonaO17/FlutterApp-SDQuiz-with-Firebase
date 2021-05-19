@@ -119,13 +119,13 @@ class DatabaseHelper {
     return result;
   }
 
-  Future<int> insertUser(String name, String pw) async {
+  Future<int> insertUser(String name, String pw, int counter) async {
     var db = await this.database;
     var result = await db.rawInsert('''
       INSERT INTO $userTable (
-      $colName, $colPassword
-      ) VALUES (?,?)
-    ''', [name, pw]);
+      $colName, $colPassword, $colCounter
+      ) VALUES (?,?,?)
+    ''', [name, pw, counter]);
     print('insert: $result');
     return result;
   }
@@ -179,8 +179,21 @@ class DatabaseHelper {
   Future<User> getCurrentUser(int id) async {
     final db = await this.database;
     var result = await db.rawQuery('SELECT * FROM $userTable WHERE id = $id');
-    print("user with no $id");
+    print("user with id $id");
     return result.isNotEmpty ? User.fromMapObject(result.first) : Null;
+  }
+
+  Future<int> updateScore(int id, int quizScore) async {
+    final db = await this.database;
+    User user = await getCurrentUser(id);
+
+    int score = user.counter + quizScore;
+    print('score: $score');
+
+    var res = await db.rawUpdate('UPDATE $userTable SET $colCounter = ? WHERE id = ?', [score, id]);
+    print('update: $res');
+
+    return score;
   }
 
   //****************          METHODS REGARDING QUIZ          ****************//

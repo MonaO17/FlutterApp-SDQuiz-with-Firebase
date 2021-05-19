@@ -6,14 +6,9 @@ import 'package:sd_quiz/view/quiz/quiz_end.dart';
 import '../../database/database_helper.dart';
 import 'package:flutter/rendering.dart';
 
-class QuizScreen extends StatefulWidget {
-  @override
-  _QuizScreenState createState() => _QuizScreenState();
-}
-
-// Allgemeine Variablen
+// variables
 int counter = 0;
-int finalScore = 0;
+int quizScore = 0;
 int questionNumber = 0;
 int len;
 int ans = 0;
@@ -22,21 +17,37 @@ Color buttonColor2 = Color(0xff004445);
 Color buttonColor3 = Color(0xff004445);
 Color buttonColor4 = Color(0xff004445);
 
+
+
+class QuizScreen extends StatefulWidget {
+  int topicID, idCurrentUser;
+
+  //constructor
+  QuizScreen({Key key, @required this.topicID,  @required this.idCurrentUser}) : super(key: key);
+
+  @override
+  _QuizScreenState createState() => _QuizScreenState(topicID, idCurrentUser);
+}
+
+
 class _QuizScreenState extends State<QuizScreen> {
   DatabaseHelper helper = DatabaseHelper(); // get singelton instance of Database-Helper class
   Future futureList;
   List<Quiz> quizList;
-  int quizID = 1;
   int len = 8;
+  int topicID, idCurrentUser;
+
+  //constructor
+  _QuizScreenState(this.topicID, this.idCurrentUser);
 
   @override
   void initState() {
     super.initState();
-    futureList = _getQuiz(quizID);
+    futureList = _getQuiz(topicID);
   }
 
   _getQuiz(quizID) async {
-    quizList = await helper.getQuizList(quizID);
+    quizList = await helper.getQuizList(topicID);
     return quizList;
   }
 
@@ -67,7 +78,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 style: TextStyle(fontSize: 20.0),
                               ),
                               Text(
-                                "Punkte: $finalScore",
+                                "Punkte: $quizScore",
                                 style: TextStyle(fontSize: 20.0),
                               )
                             ],
@@ -95,7 +106,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               setState(() {
                                 buttonColor1 = Colors.green;
                               });
-                              finalScore += 5;
+                              quizScore += 5;
                             } else {
                               setState(() {
                                 buttonColor1 = Colors.red;
@@ -127,7 +138,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               setState(() {
                                 buttonColor2 = Colors.green;
                               });
-                              finalScore += 5;
+                              quizScore += 5;
                             } else {
                               setState(() {
                                 buttonColor2 = Colors.red;
@@ -159,7 +170,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               setState(() {
                                 buttonColor3 = Colors.green;
                               });
-                              finalScore += 5;
+                              quizScore += 5;
                             } else {
                               setState(() {
                                 buttonColor3 = Colors.red;
@@ -191,7 +202,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               setState(() {
                                 buttonColor4 = Colors.green;
                               });
-                              finalScore += 5;
+                              quizScore += 5;
                             } else {
                               setState(() {
                                 buttonColor4 = Colors.red;
@@ -234,16 +245,19 @@ class _QuizScreenState extends State<QuizScreen> {
       buttonColor4 = Color(0xff004445);
 
       setState(() {
-        if (questionNumber == len - 1 && finalScore >= 30) {
+        if (questionNumber == len - 1 && quizScore >= 30) {
           Navigator.push(
               context,
               new MaterialPageRoute(
-                  builder: (context) => QuizPodiumScreen(finalScore: finalScore)));
-        } else if (questionNumber == len - 1 && finalScore < 30) {
+                  builder: (context) => QuizPodiumScreen(quizScore: quizScore, idCurrentUser: idCurrentUser)));
+        } else if (questionNumber == len - 1 && quizScore < 30) {
+          /*
           Navigator.push(
               context,
               new MaterialPageRoute(
-                  builder: (context) => QuizEndScreen(finalScore: finalScore)));
+                  builder: (context) => QuizEndScreen(quizScore: quizScore, idCurrentUser: idCurrentUser)));
+
+           */
         } else {
           questionNumber++;
         }

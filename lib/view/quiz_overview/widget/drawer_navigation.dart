@@ -39,7 +39,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                     ),
                   ).tr(),
 
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder:(context)=>QuizOverview())),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder:(context)=>QuizOverviewScreen())),
                 ),
                 ListTile(
                   leading: Icon(Icons.auto_awesome,

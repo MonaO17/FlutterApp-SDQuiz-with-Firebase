@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/view/login/login_screen.dart';
-import 'package:sd_quiz/view/quiz/quiz_screen.dart';
 import 'package:sd_quiz/view/register/register_screen.dart';
 
 void main() {
@@ -16,7 +14,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -57,10 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ).tr(),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 20,
-                horizontal: 30,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30,),
               child: Column(
                 children: [
                   InputTextField(
@@ -161,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return QuizOverview(idCurrentUser: idCurrentUser);
+            return QuizOverviewScreen(idCurrentUser: idCurrentUser);
           },
         ),
       );

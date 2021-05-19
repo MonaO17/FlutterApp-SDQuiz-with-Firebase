@@ -5,16 +5,16 @@ class User {
   int _counter;
 
   // constructor
-  User(this._name, this._password, [this._counter]); // [] makes the description optional!
+  User(this._name, this._password, this._counter); // [] makes the description optional!
 
   // named constructor
-  User.withID(this._name, this._password, [this._counter]);                     // MIT ID ??????
+  User.withID(this._name, this._password, this._counter);                     // MIT ID ??????
 
   // getters
   int get id => _id;
   String get name => _name;
   String get password => _password;
-  int get priority => _counter;
+  int get counter => _counter;
 
   // setters
   //id is generated automatically
