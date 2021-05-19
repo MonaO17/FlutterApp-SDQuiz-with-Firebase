@@ -10,7 +10,6 @@ import 'package:flutter/rendering.dart';
 int counter = 0;
 int quizScore = 0;
 int questionNumber = 0;
-int len;
 int ans = 0;
 Color buttonColor1 = Color(0xff004445);
 Color buttonColor2 = Color(0xff004445);
@@ -46,7 +45,7 @@ class _QuizScreenState extends State<QuizScreen> {
     futureList = _getQuiz(topicID);
   }
 
-  _getQuiz(quizID) async {
+  _getQuiz(topicID) async {
     quizList = await helper.getQuizList(topicID);
     return quizList;
   }
@@ -58,7 +57,15 @@ class _QuizScreenState extends State<QuizScreen> {
         child: Center(
           child: Scaffold(
             appBar: AppBar(
-              title: Text('Quiz'),
+              backgroundColor: Colors.teal[800],
+              elevation: 0,
+              centerTitle: true,
+              title: Text(
+                'Quiz',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
             body: FutureBuilder(
               future: futureList,
@@ -112,7 +119,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 buttonColor1 = Colors.red;
                               });
                             }
-                            updateQuestion();
+                            updateQuestion(idCurrentUser, quizScore, topicID);
                           },
                           child: Text(
                             snapshot.data[questionNumber].answerOne,
@@ -144,7 +151,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 buttonColor2 = Colors.red;
                               });
                             }
-                            updateQuestion();
+                            updateQuestion(idCurrentUser, quizScore, topicID);
                           },
                           child: Text(
                             snapshot.data[questionNumber].answerTwo,
@@ -176,7 +183,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 buttonColor3 = Colors.red;
                               });
                             }
-                            updateQuestion();
+                            updateQuestion(idCurrentUser, quizScore, topicID);
                           },
                           child: Text(
                             snapshot.data[questionNumber].answerThree,
@@ -208,7 +215,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 buttonColor4 = Colors.red;
                               });
                             }
-                            updateQuestion();
+                            updateQuestion(idCurrentUser, quizScore, topicID);
                           },
                           child: Text(
                             snapshot.data[questionNumber].answerFour,
@@ -237,7 +244,7 @@ class _QuizScreenState extends State<QuizScreen> {
         ));
   }
 
-  void updateQuestion() {
+  void updateQuestion(int idCurrentUser, int quizScore, int topicID) {
     Future.delayed(const Duration(seconds: 4), () {
       buttonColor1 = Color(0xff004445);
       buttonColor2 = Color(0xff004445);
@@ -249,15 +256,12 @@ class _QuizScreenState extends State<QuizScreen> {
           Navigator.push(
               context,
               new MaterialPageRoute(
-                  builder: (context) => QuizPodiumScreen(quizScore: quizScore, idCurrentUser: idCurrentUser)));
+                  builder: (context) => QuizPodiumScreen(idCurrentUser: idCurrentUser, quizScore: quizScore, topicID: topicID)));
         } else if (questionNumber == len - 1 && quizScore < 30) {
-          /*
           Navigator.push(
               context,
               new MaterialPageRoute(
-                  builder: (context) => QuizEndScreen(quizScore: quizScore, idCurrentUser: idCurrentUser)));
-
-           */
+                  builder: (context) => QuizEndScreen(idCurrentUser: idCurrentUser, quizScore: quizScore, topicID: topicID)));
         } else {
           questionNumber++;
         }

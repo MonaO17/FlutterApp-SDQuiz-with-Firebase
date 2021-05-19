@@ -2,31 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/database/database_helper.dart';
 import 'package:sd_quiz/model/user.dart';
+import 'package:sd_quiz/view/quiz/quiz_screen.dart';
 import 'package:sd_quiz/view/quiz_overview/quiz_overview_screen.dart';
 
 class QuizPodiumScreen extends StatefulWidget {
   //variables
-  int quizScore, idCurrentUser;
+  int quizScore, idCurrentUser, topicID;
 
   //constructor
   QuizPodiumScreen(
-      {Key key, @required this.quizScore, @required this.idCurrentUser})
-      : super(key: key);
+      {Key key, @required this.idCurrentUser, @required this.quizScore, @required this.topicID}): super(key: key);
 
   @override
-  _QuizPodiumScreenState createState() =>
-      _QuizPodiumScreenState(quizScore, idCurrentUser);
+  _QuizPodiumScreenState createState() => _QuizPodiumScreenState(idCurrentUser, quizScore, topicID);
 }
 
 class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
   //variables
-  int score, quizScore, idCurrentUser;
+  int score, quizScore, idCurrentUser, topicID;
   DatabaseHelper helper = DatabaseHelper();
   User user;
   Future userFuture;
 
   //constructor
-  _QuizPodiumScreenState(this.quizScore, this.idCurrentUser);
+  _QuizPodiumScreenState(this.idCurrentUser, this.quizScore, this.topicID);
 
   @override
   void initState() {
@@ -37,7 +36,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
   _updateScore(idCurrentUser, quizScore) async {
     score = await helper.updateScore(idCurrentUser, quizScore);
     print(score);
-    user = _getUser(idCurrentUser);
+    user = await _getUser(idCurrentUser);
     return user;
   }
 
@@ -114,8 +113,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return QuizOverviewScreen(
-                                    idCurrentUser: idCurrentUser);
+                                return QuizScreen(topicID: topicID, idCurrentUser: idCurrentUser); // Quizseite verlinken
                               },
                             ),
                           );
