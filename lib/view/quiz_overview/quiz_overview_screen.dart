@@ -82,7 +82,7 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
                             padding:
                                 const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                             child: Text(
-                              "guten_tag ${snapshot.data.name}".tr(),
+                              "Willkommen ${snapshot.data.name}".tr(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.teal[900],

@@ -23,7 +23,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                   child: UserAccountsDrawerHeader(
                     currentAccountPicture: CircleAvatar(
                       backgroundImage: // Profilbild vom User einfügen
-                      NetworkImage('https://cdn.pixabay.com/photo/2017/11/29/09/15/paint-2985569_1280.jpg'),
+                      NetworkImage('https://cdn.pixabay.com/photo/2016/12/21/00/36/woman-1921883_1280.jpg'),
                     ),
                     accountName: Text('Spielername'), accountEmail: Text('Punktestand: 90'),
                     decoration: BoxDecoration( color: Colors.teal[800],),
@@ -38,7 +38,6 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                         fontSize: 17
                     ),
                   ).tr(),
-
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(builder:(context)=>QuizOverviewScreen())),
                 ),
                 ListTile(
