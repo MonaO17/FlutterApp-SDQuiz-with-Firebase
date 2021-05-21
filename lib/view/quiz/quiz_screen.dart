@@ -124,12 +124,12 @@ class _QuizScreenState extends State<QuizScreen> {
                             onPressed: () {
                               if (1 == snapshot.data[questionNumber].answerID) {
                                 setState(() {
-                                  buttonColor1 = Colors.green;
+                                  buttonColor1 = Colors.green[600];
                                 });
                                 quizScore += 5;
                               } else {
                                 setState(() {
-                                  buttonColor1 = Colors.red;
+                                  buttonColor1 = Colors.red[800];
                                 });
                               }
                               updateQuestion(idCurrentUser, quizScore, topicID);
@@ -159,12 +159,12 @@ class _QuizScreenState extends State<QuizScreen> {
                             onPressed: () {
                               if (2 == snapshot.data[questionNumber].answerID) {
                                 setState(() {
-                                  buttonColor2 = Colors.green;
+                                  buttonColor2 = Colors.green[600];
                                 });
                                 quizScore += 5;
                               } else {
                                 setState(() {
-                                  buttonColor2 = Colors.red;
+                                  buttonColor2 =  Colors.red[800];
                                 });
                               }
                               updateQuestion(idCurrentUser, quizScore, topicID);
@@ -194,12 +194,12 @@ class _QuizScreenState extends State<QuizScreen> {
                             onPressed: () {
                               if (3 == snapshot.data[questionNumber].answerID) {
                                 setState(() {
-                                  buttonColor3 = Colors.green;
+                                  buttonColor3 = Colors.green[600];
                                 });
                                 quizScore += 5;
                               } else {
                                 setState(() {
-                                  buttonColor3 = Colors.red;
+                                  buttonColor3 =  Colors.red[800];
                                 });
                               }
                               updateQuestion(idCurrentUser, quizScore, topicID);
@@ -229,12 +229,12 @@ class _QuizScreenState extends State<QuizScreen> {
                             onPressed: () {
                               if (4 == snapshot.data[questionNumber].answerID) {
                                 setState(() {
-                                  buttonColor4 = Colors.green;
+                                  buttonColor4 = Colors.green[600];
                                 });
                                 quizScore += 5;
                               } else {
                                 setState(() {
-                                  buttonColor4 = Colors.red;
+                                  buttonColor4 =  Colors.red[800];
                                 });
                               }
                               updateQuestion(idCurrentUser, quizScore, topicID);
