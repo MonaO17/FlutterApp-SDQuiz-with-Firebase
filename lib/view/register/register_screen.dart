@@ -152,6 +152,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'Ihre Passwörter stimmen nicht überein. Versuchen Sie es erneut.');
       pw = null;
       pw2 = null;
+    } if(pw.length < 4 ){
+      _showAlertDialog('Fehler!',
+          'Das Passwort muss mindestens 4 Zeichen lang sein');
+      pw = null;
+      pw2 = null;
     } else {
       _addUserToDB(name, pw, counter);
     }

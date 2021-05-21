@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../../language_screen.dart';
+import '../../settings/language_screen.dart';
 import '../../quiz/podium_screen.dart';
 import '../../quiz/quiz_end.dart';
 import '../quiz_overview_screen.dart';

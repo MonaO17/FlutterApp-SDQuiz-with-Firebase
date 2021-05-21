@@ -4,7 +4,7 @@ import 'package:sd_quiz/model/user.dart';
 import 'package:sd_quiz/view/quiz/quiz_screen.dart';
 import 'package:sd_quiz/view/quiz_overview/widget/drawer_navigation.dart';
 import '../../database/database_helper.dart';
-import '../language_screen.dart';
+import '../settings/language_screen.dart';
 
 class QuizOverviewScreen extends StatefulWidget {
   int idCurrentUser;
