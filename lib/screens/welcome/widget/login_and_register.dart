@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:sd_quiz/view/login/login_screen.dart';
-import 'package:sd_quiz/view/register/register_screen.dart';
-
+import 'package:sd_quiz/screens/login/login_screen.dart';
+import 'package:sd_quiz/screens/register/register_screen.dart';
 
 class LoginAndRegister extends StatelessWidget {
   const LoginAndRegister({

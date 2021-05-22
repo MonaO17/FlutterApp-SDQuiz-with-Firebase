@@ -27,7 +27,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
-
 class DatabaseHelper {
   static DatabaseHelper _databaseHelper; // Singleton DatabaseHelper
   static Database _database; // Singleton Database
@@ -76,11 +75,11 @@ class DatabaseHelper {
   Future<Database> initializeDatabase() async {
     // Get the directory path for both Android and iOS to store database.
     Directory directory = await getApplicationDocumentsDirectory();
-    String path = directory.path + 'quizzz.db';
+    String path = directory.path + 'db2.db';
 
     // Open/create the database at a given path
     var notesDatabase =
-    await openDatabase(path, version: 1, onCreate: _createDb);
+        await openDatabase(path, version: 1, onCreate: _createDb);
     return notesDatabase;
   }
 
@@ -135,15 +134,17 @@ class DatabaseHelper {
   }
 
   //Check for registration, whether a username is already taken
-  Future<bool> userExistsAlreadyCheck (String name) async {
+  Future<bool> userExistsAlreadyCheck(String name) async {
     bool userExists = false;
     var userMapList = await getUserMapList(); // Get 'Map List' from database
-    int count = userMapList.length; // Count the number of map entries in db table
+    int count =
+        userMapList.length; // Count the number of map entries in db table
 
-    List<User> userList = List<User>();  // For loop to create a 'Note List' from a 'Map List'
+    List<User> userList =
+        List<User>(); // For loop to create a 'Note List' from a 'Map List'
     for (int i = 0; i < count; i++) {
       User user = User.fromMapObject(userMapList[i]);
-      if(user.name == name){
+      if (user.name == name) {
         userExists = true;
       }
     }
@@ -151,16 +152,17 @@ class DatabaseHelper {
   }
 
   //check for login, whether username & password match
-  Future<int> userExistsCheck(String name, String pw) async{
+  Future<int> userExistsCheck(String name, String pw) async {
     int userExists = null;
     var userMapList = await getUserMapList(); // Get 'Map List' from database
-    int count = userMapList.length; // Count the number of map entries in db table
+    int count =
+        userMapList.length; // Count the number of map entries in db table
 
     List<User> userList = List<User>();
     // For loop to create a 'Note List' from a 'Map List'
     for (int i = 0; i < count; i++) {
       User user = User.fromMapObject(userMapList[i]);
-      if(user.name == name && user.password == pw){
+      if (user.name == name && user.password == pw) {
         userExists = user.id;
       }
     }
@@ -170,10 +172,11 @@ class DatabaseHelper {
   // Get the 'Map List' [ List<Map> ] and convert it to 'User List' [ List<User> ]
   Future<List<User>> getUserList() async {
     var userMapList = await getUserMapList(); // Get 'Map List' from database
-    int count = userMapList.length; // Count the number of map entries in db table
+    int count =
+        userMapList.length; // Count the number of map entries in db table
 
-    List<User> userList = List<User>();
-    // For loop to create a 'Note List' from a 'Map List'
+    List<User> userList =
+        List<User>(); // For loop to create a 'Note List' from a 'Map List'
     for (int i = 0; i < count; i++) {
       userList.add(User.fromMapObject(userMapList[i]));
     }
@@ -194,7 +197,8 @@ class DatabaseHelper {
     int score = user.counter + quizScore;
     print('score: $score');
 
-    var res = await db.rawUpdate('UPDATE $userTable SET $colCounter = ? WHERE id = ?', [score, id]);
+    var res = await db.rawUpdate(
+        'UPDATE $userTable SET $colCounter = ? WHERE id = ?', [score, id]);
     print('update: $res');
 
     return score;
@@ -203,7 +207,8 @@ class DatabaseHelper {
   //****************          METHODS REGARDING QUIZ          ****************//
   Future _getDataFromGoogleSheet() async {
     //get Data from Google Sheet
-    var url = 'https://script.google.com/macros/s/AKfycbw_6uvHxG5QNXiOrGMCX-F1qFUF2v6xERPEucVQoI5nJeA7K_uN/exec';
+    var url =
+        'https://script.google.com/macros/s/AKfycbw_6uvHxG5QNXiOrGMCX-F1qFUF2v6xERPEucVQoI5nJeA7K_uN/exec';
     http.Response raw = await http.get(url);
 
     var jsonSDQuizAppContent = convert.jsonDecode(raw.body);
@@ -220,24 +225,34 @@ class DatabaseHelper {
       quizContentHelper.answerFour = element['ans4'];
 
       _addDataToDB(quizContentHelper);
-
     });
   }
 
   Future _addDataToDB(Quiz quiz) async {
     Database db = await this.database;
+
     var result = await db.rawInsert('''
       INSERT INTO quizTable (
       quizID, answerID, question, answerOne, answerTwo, answerThree, answerFour
       ) VALUES (?,?,?,?,?,?,?)
-    ''', [quiz.quizID, quiz.answerID, quiz.question, quiz.answerOne, quiz.answerTwo, quiz.answerThree, quiz.answerFour]);
+    ''', [
+      quiz.quizID,
+      quiz.answerID,
+      quiz.question,
+      quiz.answerOne,
+      quiz.answerTwo,
+      quiz.answerThree,
+      quiz.answerFour
+    ]);
     return result;
   }
 
-  // Get the 'Map List' [ List<Map> ] and convert it to 'Quiz List' [ List<Quiz> ]
+// Get the 'Map List' [ List<Map> ] and convert it to 'Quiz List' [ List<Quiz> ]
   Future<List<Quiz>> getQuizList(quizID) async {
-    var quizMapList = await getQuizMapList(quizID); // Get 'Map List' from database
-    int count = quizMapList.length; // Count the number of map entries in db table
+    var quizMapList =
+        await getQuizMapList(quizID); // Get 'Map List' from database
+    int count =
+        quizMapList.length; // Count the number of map entries in db table
 
     List<Quiz> quizList = List<Quiz>();
     // For loop to create a 'Note List' from a 'Map List'
@@ -250,9 +265,9 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> getQuizMapList(quizID) async {
     Database db = await this.database;
 
-    var result = await db.rawQuery('SELECT * FROM $quizTable WHERE quizID = $quizID');
+    var result =
+        await db.rawQuery('SELECT * FROM $quizTable WHERE quizID = $quizID');
     // var result = await db.query(noteTable, orderBy: '$colPriority ASC');
     return result;
   }
-
 }

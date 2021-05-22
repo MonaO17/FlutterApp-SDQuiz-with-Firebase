@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:sd_quiz/view/quiz_overview/quiz_overview_screen.dart';
-import 'package:sd_quiz/view/register/widget/register_form.dart';
 
 class LoginButton extends StatefulWidget {
   @override
@@ -19,20 +17,7 @@ class _LoginButtonState extends State<LoginButton> {
           borderRadius: BorderRadius.circular(36),
         ),
         color: Colors.teal[700],
-        onPressed: () {
-         // checkPassword(pw, pw2);
-          /*
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return QuizOverview(idCurrentUser: idCurrentUser);// hier muss die Startseite mit den QuizKategorien rein
-              },
-            ),
-                  );
-          */
-
-        },
+        onPressed: () {},
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 16),

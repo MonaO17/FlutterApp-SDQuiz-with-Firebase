@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/view/login/login_screen.dart';
-import 'package:sd_quiz/view/register/register_screen.dart';
-import 'package:sd_quiz/view/welcome/welcome_screen.dart';
+import 'package:sd_quiz/screens/welcome/welcome_screen.dart';
 
 void main() {
   runApp(
@@ -27,7 +25,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        //primarySwatch: Colors.blue,
       ),
       home: WelcomeScreen(),
     );

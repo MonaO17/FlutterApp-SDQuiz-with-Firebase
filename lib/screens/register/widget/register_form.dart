@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:sd_quiz/view/login/widget/input_text_field.dart';
+import 'package:sd_quiz/screens/login/widget/input_text_field.dart';
 
 class RegisterForm extends StatefulWidget {
   @override

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/view/welcome/welcome_screen.dart';
-
-
+import 'package:sd_quiz/screens/welcome/welcome_screen.dart';
 
 //Logo Screen, zeigt ein Logo ein paar Sekunden lang, leitet dann zum HomeScreen (WillkomenScreen) weiter
 

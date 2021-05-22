@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:sd_quiz/view/welcome/widget/login_and_register.dart';
-import 'package:sd_quiz/view/welcome/widget/slider.dot.dart';
+import 'package:sd_quiz/screens/welcome/widget/login_and_register.dart';
+import 'package:sd_quiz/screens/welcome/widget/slider.dot.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override

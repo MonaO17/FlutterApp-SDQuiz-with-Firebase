@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sd_quiz/model/quiz.dart';
-import 'package:sd_quiz/view/quiz/podium_screen.dart';
-import 'package:sd_quiz/view/quiz/quiz_end.dart';
+import 'package:sd_quiz/screens/quiz/podium_screen.dart';
+import 'package:sd_quiz/screens/quiz/quiz_end.dart';
 import '../../database/database_helper.dart';
 import 'package:flutter/rendering.dart';
 
@@ -46,6 +46,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   _getQuiz(topicID) async {
     quizList = await helper.getQuizList(topicID);
+   // len = quizList.length;
     return quizList;
   }
 
@@ -86,6 +87,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          Padding(padding: EdgeInsets.all(5.0)),
                           Container(
                             alignment: Alignment.centerRight,
                             child: Row(
@@ -102,7 +104,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               ],
                             ),
                           ),
-                          Padding(padding: EdgeInsets.all(10.0)),
+                          Padding(padding: EdgeInsets.all(7.0)),
                           Container(
                             height:
                                 MediaQuery.of(context).copyWith().size.height / 3,
@@ -277,7 +279,6 @@ class _QuizScreenState extends State<QuizScreen> {
         buttonColor3 = Colors.teal[800];
         buttonColor4 = Colors.teal[800];
         if (questionNumber == len - 1 && quizScore >= 30) {
-          questionNumber = 0;
           Navigator.push(
               context,
               new MaterialPageRoute(
@@ -285,8 +286,8 @@ class _QuizScreenState extends State<QuizScreen> {
                       idCurrentUser: idCurrentUser,
                       quizScore: quizScore,
                       topicID: topicID)));
-        } else if (questionNumber == len - 1 && quizScore < 30) {
           questionNumber = 0;
+        } else if (questionNumber == len - 1 && quizScore < 30) {
           Navigator.push(
               context,
               new MaterialPageRoute(
@@ -294,6 +295,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       idCurrentUser: idCurrentUser,
                       quizScore: quizScore,
                       topicID: topicID)));
+          questionNumber = 0;
         } else {
           questionNumber++;
         }
