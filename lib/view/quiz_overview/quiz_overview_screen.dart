@@ -13,7 +13,8 @@ class QuizOverviewScreen extends StatefulWidget {
   QuizOverviewScreen({Key key, @required this.idCurrentUser}) : super(key: key);
 
   @override
-  _QuizOverviewScreenState createState() => _QuizOverviewScreenState(idCurrentUser);
+  _QuizOverviewScreenState createState() =>
+      _QuizOverviewScreenState(idCurrentUser);
 }
 
 class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
@@ -23,6 +24,8 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
   Future userFuture;
   int a = 1;
   int b = 2;
+  int c = 3;
+  int d = 4;
 
   //constructor
   _QuizOverviewScreenState(this.idCurrentUser);
@@ -108,52 +111,106 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
                   mainAxisSpacing: 15,
                   children: [
                     CategoryCard(
-                      title: ('digitalisierung'.tr()),
-                      image: 'assets/digital1.jpg',
+                      title: ('trends'.tr()),
+                      image: 'assets/trends.png',
                       press: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return QuizScreen(topicID: a, idCurrentUser: idCurrentUser); // Quizseite verlinken
+                              return QuizScreen(
+                                  topicID: a,
+                                  idCurrentUser:
+                                      idCurrentUser); // Quizseite verlinken
                             },
                           ),
                         );
                       }, //Verlinkung zu Quizfragen
                     ),
                     CategoryCard(
-                      title: ('social_media'.tr()),
-                      image: 'assets/android.jpg',
+                      title: ('unternehmen'.tr()),
+                      image: 'assets/unternehmen.png',
                       press: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return QuizScreen(topicID: b, idCurrentUser: idCurrentUser); // Quizseite verlinken
+                              return QuizScreen(
+                                  topicID: b,
+                                  idCurrentUser:
+                                      idCurrentUser); // Quizseite verlinken
                             },
                           ),
                         );
                       }, //Verlinkung zu Quizfragen
                     ),
                     CategoryCard(
-                      title: ('digitalisierung'.tr()),
-                      image: 'assets/digital1.jpg',
-                      press: () {}, //Verlinkung zu Quizfragen
+                      title: ('daten'.tr()),
+                      image: 'assets/daten.png',
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return QuizScreen(
+                                  topicID: c,
+                                  idCurrentUser:
+                                      idCurrentUser); // Quizseite verlinken
+                            },
+                          ),
+                        );
+                      }, //Verlinkung zu Quizfragen
                     ),
                     CategoryCard(
-                      title: ('it'.tr()),
-                      image: 'assets/trend1.jpg',
-                      press: () {}, //Verlinkung zu Quizfragen
+                      title: ('abkuerzungen'.tr()),
+                      image: 'assets/abkrz.png',
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return QuizScreen(
+                                  topicID: d,
+                                  idCurrentUser:
+                                      idCurrentUser); // Quizseite verlinken
+                            },
+                          ),
+                        );
+                      }, //Verlinkung zu Quizfragen
                     ),
                     CategoryCard(
-                      title: ('aktuell'.tr()),
-                      image: 'assets/android.jpg',
-                      press: () {}, //Verlinkung zu Quizfragen
+                      title: ('trends'.tr()),
+                      image: 'assets/trends.png',
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return QuizScreen(
+                                  topicID: a,
+                                  idCurrentUser:
+                                      idCurrentUser); // Quizseite verlinken
+                            },
+                          ),
+                        );
+                      }, //Verlinkung zu Quizfragen
                     ),
                     CategoryCard(
-                      title: ('digitalisierung'.tr()),
-                      image: 'assets/trend1.jpg',
-                      press: () {}, //Verlinkung zu Quizfragen
+                      title: ('unternehmen'.tr()),
+                      image: 'assets/unternehmen.png',
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return QuizScreen(
+                                  topicID: b,
+                                  idCurrentUser:
+                                      idCurrentUser); // Quizseite verlinken
+                            },
+                          ),
+                        );
+                      }, //Verlinkung zu Quizfragen
                     ),
                   ],
                 ),

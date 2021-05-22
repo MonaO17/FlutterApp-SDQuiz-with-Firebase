@@ -58,7 +58,7 @@ class LoginAndRegister extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 alignment: Alignment.center,
                 width: double.infinity,
-                child: Text('neu_an',
+                child: Text('neu_anmelden',
                   style: TextStyle(
                     color: Colors.white,
                   ),).tr(),

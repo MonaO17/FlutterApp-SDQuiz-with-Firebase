@@ -65,15 +65,15 @@ flutter:
     - assets/gold.png
     - assets/silber.png
     - assets/bronze.png
-    - assets/digital.jpg
-    - assets/digital1.jpg
+    - assets/logo.png
     - assets/android.jpg
     - assets/qbackground.jpg
     - assets/quiz.jpg
     - assets/rocket.jpg
-    - assets/social_media.jpg
-    - assets/trend.jpg
-    - assets/trend1.jpg
+    - assets/abkrz.png
+    - assets/daten.png
+    - assets/trends.png
+    - assets/unternehmen.png
     #- lib/services/en.json
    # - lib/services/de.json
   #   - images/a_dot_burr.jpeg

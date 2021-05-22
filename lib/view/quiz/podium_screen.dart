@@ -76,7 +76,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
                       padding: const EdgeInsets.all(40.0),
                       child: Center(
                         child: Text(
-                          'herzlichen ',
+                          'herzlichen',
                           style: TextStyle(
                             fontSize: 23,
                             color: Colors.red[900],

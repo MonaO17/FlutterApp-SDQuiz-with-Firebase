@@ -69,7 +69,6 @@ class DatabaseHelper {
   Future<Database> get database async {
     if (_database == null) {
       _database = await initializeDatabase();
-      await _getDataFromGoogleSheet();
     }
     return _database;
   }
@@ -121,12 +120,17 @@ class DatabaseHelper {
 
   Future<int> insertUser(String name, String pw, int counter) async {
     var db = await this.database;
+
+    //Get Quiz data at new registration
+    await _getDataFromGoogleSheet();
+
     var result = await db.rawInsert('''
       INSERT INTO $userTable (
       $colName, $colPassword, $colCounter
       ) VALUES (?,?,?)
     ''', [name, pw, counter]);
     print('insert: $result');
+
     return result;
   }
 
@@ -222,7 +226,6 @@ class DatabaseHelper {
 
   Future _addDataToDB(Quiz quiz) async {
     Database db = await this.database;
-
     var result = await db.rawInsert('''
       INSERT INTO quizTable (
       quizID, answerID, question, answerOne, answerTwo, answerThree, answerFour

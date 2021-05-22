@@ -77,189 +77,191 @@ class _QuizScreenState extends State<QuizScreen> {
                 fit: BoxFit.cover,
               ),
             ),
-            child: FutureBuilder(
-              future: futureList,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          alignment: Alignment.centerRight,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                "Frage ${questionNumber + 1} von ${len} ",
-                                style: TextStyle(fontSize: 20.0),
+            child: SingleChildScrollView(
+              child: FutureBuilder(
+                future: futureList,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            alignment: Alignment.centerRight,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  "Frage ${questionNumber + 1} von ${len} ",
+                                  style: TextStyle(fontSize: 20.0),
+                                ),
+                                Text(
+                                  "Punkte: $quizScore",
+                                  style: TextStyle(fontSize: 20.0),
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(padding: EdgeInsets.all(10.0)),
+                          Container(
+                            height:
+                                MediaQuery.of(context).copyWith().size.height / 3,
+                            child: Center(
+                              child: Text(
+                                snapshot.data[questionNumber].question,
+                                textAlign: TextAlign.center,
+                                style: new TextStyle(
+                                  fontSize: 20.0,
+                                ),
                               ),
-                              Text(
-                                "Punkte: $quizScore",
-                                style: TextStyle(fontSize: 20.0),
-                              )
-                            ],
+                            ),
                           ),
-                        ),
-                        Padding(padding: EdgeInsets.all(10.0)),
-                        Container(
-                          height:
-                              MediaQuery.of(context).copyWith().size.height / 3,
-                          child: Center(
-                            child: Text(
-                              snapshot.data[questionNumber].question,
-                              textAlign: TextAlign.center,
-                              style: new TextStyle(
-                                fontSize: 20.0,
+                          Padding(padding: EdgeInsets.all(5.0)),
+                          Container(
+                            height:
+                                MediaQuery.of(context).copyWith().size.height /
+                                    10,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (1 == snapshot.data[questionNumber].answerID) {
+                                  setState(() {
+                                    buttonColor1 = Colors.green[600];
+                                  });
+                                  quizScore += 5;
+                                } else {
+                                  setState(() {
+                                    buttonColor1 = Colors.red[800];
+                                  });
+                                }
+                                updateQuestion(idCurrentUser, quizScore, topicID);
+                              },
+                              child: Text(
+                                snapshot.data[questionNumber].answerOne,
                               ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: buttonColor1,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)),
+                                  ),
+                                  textStyle: TextStyle(
+                                      //fontFamily: "alex",
+                                      )),
                             ),
                           ),
-                        ),
-                        Padding(padding: EdgeInsets.all(5.0)),
-                        Container(
-                          height:
-                              MediaQuery.of(context).copyWith().size.height /
-                                  10,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (1 == snapshot.data[questionNumber].answerID) {
-                                setState(() {
-                                  buttonColor1 = Colors.green[600];
-                                });
-                                quizScore += 5;
-                              } else {
-                                setState(() {
-                                  buttonColor1 = Colors.red[800];
-                                });
-                              }
-                              updateQuestion(idCurrentUser, quizScore, topicID);
-                            },
-                            child: Text(
-                              snapshot.data[questionNumber].answerOne,
+                          Padding(padding: EdgeInsets.all(5.0)),
+                          Container(
+                            height:
+                                MediaQuery.of(context).copyWith().size.height /
+                                    10,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (2 == snapshot.data[questionNumber].answerID) {
+                                  setState(() {
+                                    buttonColor2 = Colors.green[600];
+                                  });
+                                  quizScore += 5;
+                                } else {
+                                  setState(() {
+                                    buttonColor2 =  Colors.red[800];
+                                  });
+                                }
+                                updateQuestion(idCurrentUser, quizScore, topicID);
+                              },
+                              child: Text(
+                                snapshot.data[questionNumber].answerTwo,
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: buttonColor2,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)),
+                                  ),
+                                  textStyle: TextStyle(
+                                      //fontSize: 13,
+                                      )),
                             ),
-                            style: ElevatedButton.styleFrom(
-                                primary: buttonColor1,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                ),
-                                textStyle: TextStyle(
-                                    //fontFamily: "alex",
-                                    )),
                           ),
-                        ),
-                        Padding(padding: EdgeInsets.all(5.0)),
-                        Container(
-                          height:
-                              MediaQuery.of(context).copyWith().size.height /
-                                  10,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (2 == snapshot.data[questionNumber].answerID) {
-                                setState(() {
-                                  buttonColor2 = Colors.green[600];
-                                });
-                                quizScore += 5;
-                              } else {
-                                setState(() {
-                                  buttonColor2 =  Colors.red[800];
-                                });
-                              }
-                              updateQuestion(idCurrentUser, quizScore, topicID);
-                            },
-                            child: Text(
-                              snapshot.data[questionNumber].answerTwo,
+                          Padding(padding: EdgeInsets.all(5.0)),
+                          Container(
+                            height:
+                                MediaQuery.of(context).copyWith().size.height /
+                                    10,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (3 == snapshot.data[questionNumber].answerID) {
+                                  setState(() {
+                                    buttonColor3 = Colors.green[600];
+                                  });
+                                  quizScore += 5;
+                                } else {
+                                  setState(() {
+                                    buttonColor3 =  Colors.red[800];
+                                  });
+                                }
+                                updateQuestion(idCurrentUser, quizScore, topicID);
+                              },
+                              child: Text(
+                                snapshot.data[questionNumber].answerThree,
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: buttonColor3,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)),
+                                  ),
+                                  textStyle: TextStyle(
+                                      //fontSize: 13,
+                                      )),
                             ),
-                            style: ElevatedButton.styleFrom(
-                                primary: buttonColor2,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                ),
-                                textStyle: TextStyle(
-                                    //fontSize: 13,
-                                    )),
                           ),
-                        ),
-                        Padding(padding: EdgeInsets.all(5.0)),
-                        Container(
-                          height:
-                              MediaQuery.of(context).copyWith().size.height /
-                                  10,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (3 == snapshot.data[questionNumber].answerID) {
-                                setState(() {
-                                  buttonColor3 = Colors.green[600];
-                                });
-                                quizScore += 5;
-                              } else {
-                                setState(() {
-                                  buttonColor3 =  Colors.red[800];
-                                });
-                              }
-                              updateQuestion(idCurrentUser, quizScore, topicID);
-                            },
-                            child: Text(
-                              snapshot.data[questionNumber].answerThree,
+                          Padding(padding: EdgeInsets.all(5.0)),
+                          Container(
+                            height:
+                                MediaQuery.of(context).copyWith().size.height /
+                                    10,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (4 == snapshot.data[questionNumber].answerID) {
+                                  setState(() {
+                                    buttonColor4 = Colors.green[600];
+                                  });
+                                  quizScore += 5;
+                                } else {
+                                  setState(() {
+                                    buttonColor4 =  Colors.red[800];
+                                  });
+                                }
+                                updateQuestion(idCurrentUser, quizScore, topicID);
+                              },
+                              child: Text(
+                                snapshot.data[questionNumber].answerFour,
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: buttonColor4,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)),
+                                  ),
+                                  textStyle: TextStyle(
+                                      //fontSize: 13,
+                                      )),
                             ),
-                            style: ElevatedButton.styleFrom(
-                                primary: buttonColor3,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                ),
-                                textStyle: TextStyle(
-                                    //fontSize: 13,
-                                    )),
                           ),
-                        ),
-                        Padding(padding: EdgeInsets.all(5.0)),
-                        Container(
-                          height:
-                              MediaQuery.of(context).copyWith().size.height /
-                                  10,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (4 == snapshot.data[questionNumber].answerID) {
-                                setState(() {
-                                  buttonColor4 = Colors.green[600];
-                                });
-                                quizScore += 5;
-                              } else {
-                                setState(() {
-                                  buttonColor4 =  Colors.red[800];
-                                });
-                              }
-                              updateQuestion(idCurrentUser, quizScore, topicID);
-                            },
-                            child: Text(
-                              snapshot.data[questionNumber].answerFour,
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                primary: buttonColor4,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                ),
-                                textStyle: TextStyle(
-                                    //fontSize: 13,
-                                    )),
-                          ),
-                        ),
-                      ]);
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
+                        ]);
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
             ),
           ),
         ),

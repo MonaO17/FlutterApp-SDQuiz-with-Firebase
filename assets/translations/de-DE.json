@@ -1,32 +1,24 @@
 {
-
-  "test": "test_de",
-
-  "willkommensText": "Willkommen bei der Quiz App",
+  "willkommensText": "Willkommen bei der Sorgenfrei Digital Quiz-App . Dies ist eine vollkommen kostenlose App, mit der Sie spielerisch Ihre Kenntnisse über Themen rund um IT und die Digitalisierung testen und verbessern können. Möchten Sie mehr Informationen zu den Themen in den Quizzen? Besuchen Sie unsere Webseite und erfahren Sie mehr: www.sorgenfrei-digital.com \n Viel Spaß!",
   "login": "Login",
-  "neu_an": "Neu Anmelden",
+  "neu_anmelden": "Neu Anmelden",
 
-  "bitte_daten_eingeben": "Bitte geben sie ihre Daten ein",
+  "bitte_daten_eingeben": "Bitte geben Sie Ihre Daten ein",
   "spielername": "Spielername",
   "passwort": "Passwort",
   "passwort_wdh": "Passwort wiederholen",
-  "schon_einen_account": "Du hast schon einen Account?",
+  "schon_einen_account": "Sie haben schon einen Account? ",
   "hier_einloggen": "Hier Einloggen",
 
   "passwort_vergessen": "Passwort vergessen?",
   "keinen_account": "Keinen Account?",
-  "neu_anmelden": "Neu Anmelden",
 
   "willkommen": "Willkommen",
 
-
-
-
-  "guten_tag": "Hallo Spieler",
-  "digitalisierung": "Digitalisierung",
-  "social_media": "Social Media",
-  "it": "It Sicherheit",
-  "aktuell": "Aktuelle Trends",
+  "trends": "Aktuelle Trends",
+  "unternehmen": "IT Unternehmen",
+  "daten": "Daten",
+  "abkuerzungen": "Abkürzungen",
 
   "sprache": "Sprache",
   "deutsch": "Deutsch",
@@ -39,9 +31,9 @@
   "danke_spiel": "Danke fürs Spielen",
   "punkte_quiz": "Punkte Quiz: ",
   "punkte_gesamt": "Gesamtpunkte: ",
-  "richtig": "Richitg",
+  "richtig": "Richtig",
   "nochmal_spielen": "Nochmal Spielen",
   "quiz_uebersicht": "Quiz Übersicht",
-  "herzlichen": "Herzlichen Glückwunsch Sie haben eine ",
-  "podium": "Podium"
+  "herzlichen": "Sie haben gewonnen!",
+  "podium": "Siegerpodium"
 }

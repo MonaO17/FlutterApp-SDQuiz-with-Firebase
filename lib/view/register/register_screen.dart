@@ -27,7 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'neu_an',
+          'neu_anmelden',
           style: TextStyle(
             color: Colors.white,
           ),

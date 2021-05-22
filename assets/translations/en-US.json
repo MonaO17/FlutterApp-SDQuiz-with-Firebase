@@ -1,43 +1,38 @@
 {
-
-  "test": "test_en",
   "willkommensText": "Welcome",
   "login": "Login",
-  "neu_an": "New registration",
+  "neu_anmelden": "Register",
   "bitte_daten_eingeben": "Please enter your data",
   "passwort": "Password",
   "passwort_wdh": "Repeat password",
-  "schon_einen_account": "You already have an account?",
+  "schon_einen_account": "Do you already have an account? ",
   "hier_einloggen": "Log in here",
 
-  "passwort_vergessen": "Password forgotten?",
+  "passwort_vergessen": "Forgot your password?",
   "keinen_account": "No account?",
-  "neu_anmelden": "New log in",
+  "neu_anmelden": "New registration",
 
   "willkommen": "Welcome",
 
-  "guten_tag": "Hello Playername",
-  "digitalisierung": "Digitisation",
-  "social_media": "Social Media",
-  "it": "It Secruity",
-  "aktuell": "Trends",
+  "trends": "Current trends",
+  "unternehmen": "IT companies",
+  "daten": "Data",
+  "abkuerzungen": "Abbreviations",
 
   "sprache": "Language",
   "deutsch": "German",
   "englisch": "English",
   "bitte_sprache": "Please choose a language.",
-  "pokal": "Cups",
+  "pokal": "Trophies",
   "start": "Home Screen",
   "meine_Seite": "My Page",
   "danke_spiel": "Thank you for playing",
-  "punkte_quiz": "Punkte Quiz: ",
-  "punkte_gesamt": "Gesamtpunkte: ",
+  "punkte_quiz": "Score Quiz: ",
+  "punkte_gesamt": "Total Score: ",
   "richtig": "Correct",
   "nochmal:spielen": "Play Again",
   "quiz_uebersicht": "Quiz Overview",
-  "herzlichen": "Congratulations you have win a ",
-  "podium": "Cups"
-
-
+  "herzlichen": "Congratulations you won!",
+  "podium": "Winners podium "
 
 }
