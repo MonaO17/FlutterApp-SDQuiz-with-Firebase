@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sd_quiz/model/quiz.dart';
 import 'package:sd_quiz/screens/quiz/podium_screen.dart';
 import 'package:sd_quiz/screens/quiz/quiz_end.dart';
+import 'package:sd_quiz/screens/shared/constants.dart';
+import 'package:sd_quiz/screens/shared/loading.dart';
 import '../../database/database_helper.dart';
 import 'package:flutter/rendering.dart';
 
@@ -31,8 +33,7 @@ class _QuizScreenState extends State<QuizScreen> {
       DatabaseHelper(); // get singelton instance of Database-Helper class
   Future futureList;
   List<Quiz> quizList;
-  int len = 8;
-  int topicID, idCurrentUser;
+  int len, totalQuizScore, topicID, idCurrentUser;
 
   //constructor
   _QuizScreenState(this.topicID, this.idCurrentUser);
@@ -46,7 +47,8 @@ class _QuizScreenState extends State<QuizScreen> {
 
   _getQuiz(topicID) async {
     quizList = await helper.getQuizList(topicID);
-   // len = quizList.length;
+    len = quizList.length;
+    totalQuizScore = len * 3;
     return quizList;
   }
 
@@ -57,6 +59,7 @@ class _QuizScreenState extends State<QuizScreen> {
       //disabel the back button, otherwise user could go back to questions to increase their score
       child: Center(
         child: Scaffold(
+          //*******   AppBar (Leiste oben)   *******
           appBar: AppBar(
             backgroundColor: Colors.teal[800],
             elevation: 0,
@@ -68,7 +71,10 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
             ),
           ),
-          body: Container(
+          //*******   Body (Restlicher Screen)   *******
+          body:
+              //*******   Hintergrundbild Karteikarte   *******
+              Container(
             constraints: BoxConstraints.expand(),
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -78,11 +84,13 @@ class _QuizScreenState extends State<QuizScreen> {
                 fit: BoxFit.cover,
               ),
             ),
+            //*******   SingleChildScrollView & FutureBuilder   *******
             child: SingleChildScrollView(
               child: FutureBuilder(
                 future: futureList,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
+                    //*******   Zeile oben (Frage 1/8, Score:...  *******
                     return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -105,9 +113,12 @@ class _QuizScreenState extends State<QuizScreen> {
                             ),
                           ),
                           Padding(padding: EdgeInsets.all(7.0)),
+
+                          //*******   Frage   *******
                           Container(
                             height:
-                                MediaQuery.of(context).copyWith().size.height / 3,
+                                MediaQuery.of(context).copyWith().size.height /
+                                    3,
                             child: Center(
                               child: Text(
                                 snapshot.data[questionNumber].question,
@@ -119,148 +130,144 @@ class _QuizScreenState extends State<QuizScreen> {
                             ),
                           ),
                           Padding(padding: EdgeInsets.all(5.0)),
+
+                          //*******   Antwort 1   *******
                           Container(
                             height:
                                 MediaQuery.of(context).copyWith().size.height /
                                     10,
                             child: ElevatedButton(
                               onPressed: () {
-                                if (1 == snapshot.data[questionNumber].answerID) {
+                                if (1 ==
+                                    snapshot.data[questionNumber].answerID) {
                                   setState(() {
                                     buttonColor1 = Colors.green[600];
                                   });
-                                  quizScore += 5;
+                                  quizScore += 3;
                                 } else {
                                   setState(() {
                                     buttonColor1 = Colors.red[800];
                                   });
                                 }
-                                updateQuestion(idCurrentUser, quizScore, topicID);
+                                updateQuestion(
+                                    idCurrentUser, quizScore, topicID);
                               },
                               child: Text(
                                 snapshot.data[questionNumber].answerOne,
                               ),
                               style: ElevatedButton.styleFrom(
-                                  primary: buttonColor1,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30)),
-                                  ),
-                                  textStyle: TextStyle(
-                                      //fontFamily: "alex",
-                                      )),
+                                primary: buttonColor1,
+                                padding: quizButtonPadding,
+                                shape: quizButtonShape,
+                                textStyle: quizButtonTextStyle,
+                              ),
                             ),
                           ),
                           Padding(padding: EdgeInsets.all(5.0)),
+
+                          //*******   Antwort 2   *******
                           Container(
                             height:
                                 MediaQuery.of(context).copyWith().size.height /
                                     10,
                             child: ElevatedButton(
                               onPressed: () {
-                                if (2 == snapshot.data[questionNumber].answerID) {
+                                if (2 ==
+                                    snapshot.data[questionNumber].answerID) {
                                   setState(() {
                                     buttonColor2 = Colors.green[600];
                                   });
-                                  quizScore += 5;
+                                  quizScore += 3;
                                 } else {
                                   setState(() {
-                                    buttonColor2 =  Colors.red[800];
+                                    buttonColor2 = Colors.red[800];
                                   });
                                 }
-                                updateQuestion(idCurrentUser, quizScore, topicID);
+                                updateQuestion(
+                                    idCurrentUser, quizScore, topicID);
                               },
                               child: Text(
                                 snapshot.data[questionNumber].answerTwo,
                               ),
                               style: ElevatedButton.styleFrom(
-                                  primary: buttonColor2,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30)),
-                                  ),
-                                  textStyle: TextStyle(
-                                      //fontSize: 13,
-                                      )),
+                                primary: buttonColor2,
+                                padding: quizButtonPadding,
+                                shape: quizButtonShape,
+                                textStyle: quizButtonTextStyle,
+                              ),
                             ),
                           ),
                           Padding(padding: EdgeInsets.all(5.0)),
+
+                          //*******   Antwort 3   *******
                           Container(
                             height:
                                 MediaQuery.of(context).copyWith().size.height /
                                     10,
                             child: ElevatedButton(
                               onPressed: () {
-                                if (3 == snapshot.data[questionNumber].answerID) {
+                                if (3 ==
+                                    snapshot.data[questionNumber].answerID) {
                                   setState(() {
                                     buttonColor3 = Colors.green[600];
                                   });
-                                  quizScore += 5;
+                                  quizScore += 3;
                                 } else {
                                   setState(() {
-                                    buttonColor3 =  Colors.red[800];
+                                    buttonColor3 = Colors.red[800];
                                   });
                                 }
-                                updateQuestion(idCurrentUser, quizScore, topicID);
+                                updateQuestion(
+                                    idCurrentUser, quizScore, topicID);
                               },
                               child: Text(
                                 snapshot.data[questionNumber].answerThree,
                               ),
                               style: ElevatedButton.styleFrom(
-                                  primary: buttonColor3,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30)),
-                                  ),
-                                  textStyle: TextStyle(
-                                      //fontSize: 13,
-                                      )),
+                                primary: buttonColor3,
+                                padding: quizButtonPadding,
+                                shape: quizButtonShape,
+                                textStyle: quizButtonTextStyle,
+                              ),
                             ),
                           ),
                           Padding(padding: EdgeInsets.all(5.0)),
+
+                          //*******   Antwort 4   *******
                           Container(
                             height:
                                 MediaQuery.of(context).copyWith().size.height /
                                     10,
                             child: ElevatedButton(
                               onPressed: () {
-                                if (4 == snapshot.data[questionNumber].answerID) {
+                                if (4 ==
+                                    snapshot.data[questionNumber].answerID) {
                                   setState(() {
                                     buttonColor4 = Colors.green[600];
                                   });
-                                  quizScore += 5;
+                                  quizScore += 3;
                                 } else {
                                   setState(() {
-                                    buttonColor4 =  Colors.red[800];
+                                    buttonColor4 = Colors.red[800];
                                   });
                                 }
-                                updateQuestion(idCurrentUser, quizScore, topicID);
+                                updateQuestion(
+                                    idCurrentUser, quizScore, topicID);
                               },
                               child: Text(
                                 snapshot.data[questionNumber].answerFour,
                               ),
                               style: ElevatedButton.styleFrom(
-                                  primary: buttonColor4,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30)),
-                                  ),
-                                  textStyle: TextStyle(
-                                      //fontSize: 13,
-                                      )),
+                                primary: buttonColor4,
+                                padding: quizButtonPadding,
+                                shape: quizButtonShape,
+                                textStyle: quizButtonTextStyle,
+                              ),
                             ),
                           ),
                         ]);
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return Loading();
                   }
                 },
               ),
@@ -272,22 +279,24 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void updateQuestion(int idCurrentUser, int quizScore, int topicID) {
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         buttonColor1 = Colors.teal[800];
         buttonColor2 = Colors.teal[800];
         buttonColor3 = Colors.teal[800];
         buttonColor4 = Colors.teal[800];
-        if (questionNumber == len - 1 && quizScore >= 30) {
+        if (questionNumber == len - 1 && quizScore >= (totalQuizScore * 0.7)) {
           Navigator.push(
               context,
               new MaterialPageRoute(
                   builder: (context) => QuizPodiumScreen(
                       idCurrentUser: idCurrentUser,
                       quizScore: quizScore,
+                      totalQuizScore: totalQuizScore,
                       topicID: topicID)));
           questionNumber = 0;
-        } else if (questionNumber == len - 1 && quizScore < 30) {
+        } else if (questionNumber == len - 1 &&
+            quizScore < (totalQuizScore * 0.7)) {
           Navigator.push(
               context,
               new MaterialPageRoute(

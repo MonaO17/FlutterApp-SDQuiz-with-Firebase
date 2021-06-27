@@ -4,28 +4,29 @@ import 'package:sd_quiz/database/database_helper.dart';
 import 'package:sd_quiz/model/user.dart';
 import 'package:sd_quiz/screens/quiz/quiz_screen.dart';
 import 'package:sd_quiz/screens/quiz_overview/quiz_overview_screen.dart';
+import 'package:sd_quiz/screens/shared/constants.dart';
 
 class QuizPodiumScreen extends StatefulWidget {
   //variables
-  int quizScore, idCurrentUser, topicID;
+  int quizScore, totalQuizScore, idCurrentUser, topicID;
 
   //constructor
   QuizPodiumScreen(
-      {Key key, @required this.idCurrentUser, @required this.quizScore, @required this.topicID}): super(key: key);
+      {Key key, @required this.idCurrentUser, @required this.quizScore, @required this.totalQuizScore, @required this.topicID}): super(key: key);
 
   @override
-  _QuizPodiumScreenState createState() => _QuizPodiumScreenState(idCurrentUser, quizScore, topicID);
+  _QuizPodiumScreenState createState() => _QuizPodiumScreenState(idCurrentUser, quizScore, totalQuizScore, topicID);
 }
 
 class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
   //variables
-  int score, quizScore, idCurrentUser, topicID;
+  int score, quizScore, totalQuizScore, idCurrentUser, topicID, percent;
   DatabaseHelper helper = DatabaseHelper();
   User user;
   Future userFuture;
 
   //constructor
-  _QuizPodiumScreenState(this.idCurrentUser, this.quizScore, this.topicID);
+  _QuizPodiumScreenState(this.idCurrentUser, this.quizScore, this.totalQuizScore, this.topicID);
 
   @override
   void initState() {
@@ -49,6 +50,8 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
 
   @override
   Widget build(BuildContext context) {
+    percent = ( quizScore *100/ totalQuizScore ).toInt();
+
     return WillPopScope(
       onWillPop: () async => false,
       //disabel the back button, otherwise user could go back to questions to increase their score
@@ -58,10 +61,8 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
           elevation: 0,
           centerTitle: true,
           title: Text(
-            'Podium',
-            style: TextStyle(
-              color: Colors.white,
-            ),
+            'podium',
+            style: textAppBar,
           ).tr(),
         ),
         body: FutureBuilder(
@@ -77,27 +78,19 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
                       child: Center(
                         child: Text(
                           'herzlichen',
-                          style: TextStyle(
-                            fontSize: 23,
-                            color: Colors.red[900],
-                            fontWeight: FontWeight.w800,
-                          ),
+                          style: textStyle1,
                         ).tr(),
                       ),
                     ),
-                    Image(image: AssetImage('assets/gold.png')),
+                    Image(image: AssetImage(getTrophyImage(percent))),
                     SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.all(40.0),
                       child: Center(
                         child: Text(
-                          '${snapshot.data.counter} Punkte!!!',
-                          // hier noch Variablen einsetzen
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.red[900],
-                            fontWeight: FontWeight.w800,
-                          ),
+                          '${(quizScore/3).toInt()} von ${(totalQuizScore/3).toInt()} Richtige! \n\n'
+                              '      ${quizScore} Punkte!!!',
+                          style: textStyle1
                         ).tr(),
                       ),
                     ),
@@ -172,5 +165,17 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
         ),
       ),
     );
+  }
+
+  String getTrophyImage(int percentage){
+    if(percentage<80){
+      return 'assets/bronze.png';
+    }
+    if(percentage>=80 && percentage<90){
+      return 'assets/silber.png';
+    }
+    else {
+      return 'assets/gold.png';
+    }
   }
 }

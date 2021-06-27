@@ -5,6 +5,7 @@ import 'package:sd_quiz/model/user.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/screens/login/widget/input_text_field.dart';
 import 'package:sd_quiz/screens/quiz_overview/quiz_overview_screen.dart';
+import 'package:sd_quiz/screens/register/register_screen.dart';
 import '../../database/database_helper.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -130,7 +131,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return RegisterScreen();
+                                },
+                              ),
+                            );
                           }),
                   ],
                 ),
@@ -154,6 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _showAlertDialog('Willkommen!',
           'Sie haben sich erfolgreich eingeloggt. Viel Spaß beim spielen!');
       print(idCurrentUser);
+      await helper.getDataFromGoogleSheet();
       Navigator.push(
         context,
         MaterialPageRoute(

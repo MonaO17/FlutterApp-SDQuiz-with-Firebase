@@ -11,7 +11,7 @@ class LoginAndRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       child: Row(
         children: [
           Expanded(
@@ -20,24 +20,32 @@ class LoginAndRegister extends StatelessWidget {
                 borderRadius: BorderRadius.circular(36),
               ),
               color: Colors.teal[600],
-              onPressed: () {Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context){
-                    return LoginScreen();
-                  },),);},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginScreen();
+                    },
+                  ),
+                );
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 alignment: Alignment.center,
                 width: double.infinity,
-                child: Text('login',
+                child: Text(
+                  'login',
                   style: TextStyle(
                     color: Colors.white,
-                  ),).tr(),
+                  ),
+                ).tr(),
               ),
             ),
           ),
-          SizedBox(width: 30,),
+          SizedBox(
+            width: 30,
+          ),
           Expanded(
             child: FlatButton(
               shape: RoundedRectangleBorder(
@@ -49,25 +57,27 @@ class LoginAndRegister extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context){
+                    builder: (context) {
                       return RegisterScreen();
-                    },),);
+                    },
+                  ),
+                );
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 alignment: Alignment.center,
                 width: double.infinity,
-                child: Text('neu_anmelden',
+                child: Text(
+                  'neu_anmelden',
                   style: TextStyle(
                     color: Colors.white,
-                  ),).tr(),
+                  ),
+                ).tr(),
               ),
             ),
           ),
         ],
       ),
-
     );
   }
 }
-

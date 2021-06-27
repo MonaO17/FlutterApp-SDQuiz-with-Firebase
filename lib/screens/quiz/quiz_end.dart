@@ -4,6 +4,7 @@ import 'package:sd_quiz/database/database_helper.dart';
 import 'package:sd_quiz/model/user.dart';
 import 'package:sd_quiz/screens/quiz/quiz_screen.dart';
 import 'package:sd_quiz/screens/quiz_overview/quiz_overview_screen.dart';
+import 'package:sd_quiz/screens/shared/constants.dart';
 
 // Screen für jedes Quiz am Ende zeigt die Punkteanzahl an und 2 Buttons
 // Funktion für die Ausgabe der Punkte noch implementieren
@@ -59,9 +60,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
         centerTitle: true,
         title: Text(
           'meine_Seite',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          style: textAppBar,
         ).tr(),
         leading: IconButton(
           icon: Icon(

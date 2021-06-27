@@ -1,6 +1,7 @@
 class Quiz {
   int itemID;
   int quizID;
+  int qTopicID;
   int answerID;
   String question;
   String answerOne;
@@ -9,8 +10,8 @@ class Quiz {
   String answerFour;
 
   // constructor
-  Quiz({this.quizID, this.answerID, this.question, this.answerOne,
-    this.answerTwo, this.answerThree, this.answerFour}); // [] makes the description optional!
+  Quiz({this.quizID, this.qTopicID, this.answerID, this.question, this.answerOne,
+    this.answerTwo, this.answerThree, this.answerFour});
 
   //Convert a Quiz object into a Map object
   Map<String, dynamic> toMap() {
@@ -21,6 +22,7 @@ class Quiz {
       map['itemID'] = itemID;
     }
     map['quizID'] = quizID;
+    map['qTopicID'] = qTopicID;
     map['answerID'] = answerID;
     map['question'] = question;
     map['answerOne'] = answerOne;
@@ -32,9 +34,10 @@ class Quiz {
   }
 
   //Extract a Quiz object from a Map object
-  Quiz.fromMapObject(Map<String, dynamic> map){
+  Quiz.fromMapObject(Map<String, dynamic> map) {
     this.itemID = map['itemID'];
     this.quizID = map['quizID'];
+    this.qTopicID = map['qTopicID'];
     this.answerID = map['answerID'];
     this.question = map['question'];
     this.answerOne = map['answerOne'];
@@ -48,6 +51,7 @@ class Quiz {
   factory Quiz.fromJson(dynamic json) {
     return Quiz(
         quizID: json['quizID'],
+        qTopicID: json['topicID'],
         answerID: json['answerID'],
         question: "${json['question']}",
         answerOne: "${json['ans1']}",

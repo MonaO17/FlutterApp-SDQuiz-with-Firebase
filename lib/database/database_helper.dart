@@ -42,6 +42,7 @@ class DatabaseHelper {
   static final String quizTable = 'quizTable';
   static final String colItemID = 'itemID';
   static final String colQuizID = 'quizID';
+  static final String colQTopicID = 'qTopicID';
   static final String colAnswerID = 'answerID';
   static final String colQuestion = 'question';
   static final String colAnswerOne = 'answerOne';
@@ -75,8 +76,7 @@ class DatabaseHelper {
   Future<Database> initializeDatabase() async {
     // Get the directory path for both Android and iOS to store database.
     Directory directory = await getApplicationDocumentsDirectory();
-    String path = directory.path + 'db2.db';
-
+    String path = directory.path + 'db5.db';
     // Open/create the database at a given path
     var notesDatabase =
         await openDatabase(path, version: 1, onCreate: _createDb);
@@ -95,6 +95,7 @@ class DatabaseHelper {
     CREATE TABLE $quizTable (
     $colItemID INTEGER PRIMARY KEY AUTOINCREMENT,
     $colQuizID INTEGER NOT NULL,
+    $colQTopicID INTEGER NOT NULL,
     $colAnswerID INTEGER NOT NULL,
     $colQuestion TEXT NOT NULL,
     $colAnswerOne TEXT NOT NULL,
@@ -117,11 +118,25 @@ class DatabaseHelper {
     return result;
   }
 
+  //check for login, whether username & password match
+  Future<int> userExistsCheck(String name, String pw) async {
+    int userExists = null;
+    var userMapList = await getUserMapList(); // Get 'Map List' from database
+    int count =
+        userMapList.length; // Count the number of map entries in db table
+
+    //List<User> userList = List<User>();
+    for (int i = 0; i < count; i++) {
+      User user = User.fromMapObject(userMapList[i]);
+      if (user.name == name && user.password == pw) {
+        userExists = user.id;
+      }
+    }
+    return userExists;
+  }
+
   Future<int> insertUser(String name, String pw, int counter) async {
     var db = await this.database;
-
-    //Get Quiz data at new registration
-    await _getDataFromGoogleSheet();
 
     var result = await db.rawInsert('''
       INSERT INTO $userTable (
@@ -146,24 +161,6 @@ class DatabaseHelper {
       User user = User.fromMapObject(userMapList[i]);
       if (user.name == name) {
         userExists = true;
-      }
-    }
-    return userExists;
-  }
-
-  //check for login, whether username & password match
-  Future<int> userExistsCheck(String name, String pw) async {
-    int userExists = null;
-    var userMapList = await getUserMapList(); // Get 'Map List' from database
-    int count =
-        userMapList.length; // Count the number of map entries in db table
-
-    List<User> userList = List<User>();
-    // For loop to create a 'Note List' from a 'Map List'
-    for (int i = 0; i < count; i++) {
-      User user = User.fromMapObject(userMapList[i]);
-      if (user.name == name && user.password == pw) {
-        userExists = user.id;
       }
     }
     return userExists;
@@ -205,7 +202,7 @@ class DatabaseHelper {
   }
 
   //****************          METHODS REGARDING QUIZ          ****************//
-  Future _getDataFromGoogleSheet() async {
+  Future getDataFromGoogleSheet() async {
     //get Data from Google Sheet
     var url =
         'https://script.google.com/macros/s/AKfycbw_6uvHxG5QNXiOrGMCX-F1qFUF2v6xERPEucVQoI5nJeA7K_uN/exec';
@@ -214,9 +211,10 @@ class DatabaseHelper {
     var jsonSDQuizAppContent = convert.jsonDecode(raw.body);
 
     jsonSDQuizAppContent.forEach((element) {
-      print('$element THIS IS NEXT!!');
+      //print('$element THIS IS NEXT!!');
       Quiz quizContentHelper = new Quiz();
       quizContentHelper.quizID = element['quizID'];
+      quizContentHelper.qTopicID = element['topicID'];
       quizContentHelper.answerID = element['answerID'];
       quizContentHelper.question = element['question'];
       quizContentHelper.answerOne = element['ans1'];
@@ -226,24 +224,63 @@ class DatabaseHelper {
 
       _addDataToDB(quizContentHelper);
     });
+    print("getDataFromGoogleSheet done!");
   }
 
+  //
   Future _addDataToDB(Quiz quiz) async {
     Database db = await this.database;
+    bool exists = false;
 
-    var result = await db.rawInsert('''
-      INSERT INTO quizTable (
-      quizID, answerID, question, answerOne, answerTwo, answerThree, answerFour
-      ) VALUES (?,?,?,?,?,?,?)
+    //check if QuizID already exists
+    List<Quiz> existingQuiz =
+        await allGetQuizList(); //List with existing Quizzes
+    for (int i = 0; i < existingQuiz.length; i++) {
+      if (existingQuiz[i].quizID == quiz.quizID) {
+        exists = true;
+      }
+    }
+      if (exists == false) {
+        print("NEW QUIZ: ${quiz.quizID} , ${quiz.question}");
+        //add new quizIDs to database
+        var result = await db.rawInsert(''' INSERT INTO quizTable (
+        quizID, qTopicID, answerID, question, answerOne, answerTwo, answerThree, answerFour
+    ) VALUES (?,?,?,?,?,?,?,?)
     ''', [
-      quiz.quizID,
-      quiz.answerID,
-      quiz.question,
-      quiz.answerOne,
-      quiz.answerTwo,
-      quiz.answerThree,
-      quiz.answerFour
-    ]);
+          quiz.quizID,
+          quiz.qTopicID,
+          quiz.answerID,
+          quiz.question,
+          quiz.answerOne,
+          quiz.answerTwo,
+          quiz.answerThree,
+          quiz.answerFour
+        ]);
+      }
+    print("adDataToDB done!");
+  }
+
+// Get the 'Map List' [ List<Map> ] and convert it to 'Quiz List' [ List<Quiz> ]
+  Future<List<Quiz>> allGetQuizList() async {
+    var quizMapList = await allGetQuizMapList(); // Get 'Map List' from database
+    int count =
+        quizMapList.length; // Count the number of map entries in db table
+
+    List<Quiz> quizList = List<Quiz>();
+    // For loop to create a 'Note List' from a 'Map List'
+    for (int i = 0; i < count; i++) {
+      quizList.add(Quiz.fromMapObject(quizMapList[i]));
+    }
+    print("allGetQuizList done!");
+    return quizList;
+  }
+
+  Future<List<Map<String, dynamic>>> allGetQuizMapList() async {
+    Database db = await this.database;
+
+    var result = await db.rawQuery('SELECT * FROM $quizTable');
+    // var result = await db.query(noteTable, orderBy: '$colPriority ASC');
+    print("allGetQuizMapList done!");
     return result;
   }
 
@@ -262,11 +299,11 @@ class DatabaseHelper {
     return quizList;
   }
 
-  Future<List<Map<String, dynamic>>> getQuizMapList(quizID) async {
+  Future<List<Map<String, dynamic>>> getQuizMapList(topicID) async {
     Database db = await this.database;
 
     var result =
-        await db.rawQuery('SELECT * FROM $quizTable WHERE quizID = $quizID');
+        await db.rawQuery('SELECT * FROM $quizTable WHERE qTopicID = $topicID');
     // var result = await db.query(noteTable, orderBy: '$colPriority ASC');
     return result;
   }

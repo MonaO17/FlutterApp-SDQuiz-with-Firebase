@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/model/user.dart';
 import 'package:sd_quiz/screens/quiz/quiz_screen.dart';
 import 'package:sd_quiz/screens/quiz_overview/widget/drawer_navigation.dart';
+import 'package:sd_quiz/screens/shared/loading.dart';
 import '../../database/database_helper.dart';
 import '../settings/language_screen.dart';
 
@@ -86,7 +87,7 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
                         padding:
                         const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                         child: Text(
-                          "Willkommen ${snapshot.data.name}".tr(),
+                          'willkommen'.tr() + " ${snapshot.data.name}",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.teal[900],
@@ -207,6 +208,40 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
                             );
                           }, //Verlinkung zu Quizfragen
                         ),
+                        CategoryCard(
+                          title: ('trends'.tr()),
+                          image: 'assets/trends.png',
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return QuizScreen(
+                                      topicID: a,
+                                      idCurrentUser:
+                                      idCurrentUser); // Quizseite verlinken
+                                },
+                              ),
+                            );
+                          }, //Verlinkung zu Quizfragen
+                        ),
+                        CategoryCard(
+                          title: ('unternehmen'.tr()),
+                          image: 'assets/unternehmen.png',
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return QuizScreen(
+                                      topicID: b,
+                                      idCurrentUser:
+                                      idCurrentUser); // Quizseite verlinken
+                                },
+                              ),
+                            );
+                          }, //Verlinkung zu Quizfragen
+                        ),
                       ],
                     ),
                   ),
@@ -215,7 +250,7 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
               ),
             );
             } else {
-            return Center(child: CircularProgressIndicator());
+            return Loading();
             }
           }),
     );
