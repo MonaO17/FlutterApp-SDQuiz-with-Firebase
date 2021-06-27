@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/screens/login/login_screen.dart';
 import 'package:sd_quiz/screens/register/register_screen.dart';
+import 'package:sd_quiz/screens/shared/constants.dart';
 
 class LoginAndRegister extends StatelessWidget {
   const LoginAndRegister({
@@ -16,9 +17,7 @@ class LoginAndRegister extends StatelessWidget {
         children: [
           Expanded(
             child: FlatButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(36),
-              ),
+              shape: quizButtonShape,
               color: Colors.teal[600],
               onPressed: () {
                 Navigator.push(
@@ -48,10 +47,7 @@ class LoginAndRegister extends StatelessWidget {
           ),
           Expanded(
             child: FlatButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(36),
-                //side: BorderSide(color: Colors.teal[600] ),
-              ),
+              shape: quizButtonShape,
               color: Colors.teal[600],
               onPressed: () {
                 Navigator.push(

@@ -38,7 +38,6 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
 
   @override
   Widget build(BuildContext context) {
-    percent = (quizScore * 100 / totalQuizScore).toInt();
     return Scaffold(
 
       appBar: AppBar(
@@ -47,7 +46,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'podium',
+          'meine_Seite',
           style: textStyleAppBar,
         ).tr(),
         actions: [
@@ -61,18 +60,19 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
 
       body: SingleChildScrollView(
         child: Column(
+
           //gratulations
           children: [
             Padding(
               padding: const EdgeInsets.all(40.0),
               child: Center(
                 child: Text(
-                  'herzlichen',
+                  'danke_spiel',
                   style: textStyle1,
                 ).tr(),
               ),
             ),
-            Image(image: AssetImage(getTrophyImage(percent))),
+            Image(image: AssetImage('assets/thumbsUp.JPG')),
             SizedBox(height: 10),
 
             //score
@@ -154,17 +154,5 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
         ),
       ),
     );
-  }
-
-  //method to select trophy-image based on score
-  String getTrophyImage(int percentage) {
-    if (percentage < 80) {
-      return 'assets/bronze.png';
-    }
-    if (percentage >= 80 && percentage < 90) {
-      return 'assets/silber.png';
-    } else {
-      return 'assets/gold.png';
-    }
   }
 }

@@ -6,7 +6,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/screens/login/widget/input_text_field.dart';
 import 'package:sd_quiz/screens/quiz_overview/quiz_overview_screen.dart';
 import 'package:sd_quiz/screens/register/register_screen.dart';
+import 'package:sd_quiz/screens/shared/constants.dart';
+import 'package:sd_quiz/screens/shared/leading_text_button_app_bar.dart';
+import 'package:sd_quiz/screens/shared/text_button_app_bar.dart';
 import '../../database/database_helper.dart';
+
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -14,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  //variables
   DatabaseHelper helper = DatabaseHelper();
   var name, pw;
   int idCurrentUser;
@@ -22,26 +27,25 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
-        backgroundColor: Colors.teal[800],
+        backgroundColor: mainColorSD,
         elevation: 0,
         centerTitle: true,
         title: Text(
           'login',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          style: textStyleAppBar,
         ).tr(),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        leading: LeadingTextButtonAppBar(),
+        actions: [
+          TextButtonAppBar(
+              iconAppBar: Icons.person,
+              title: 'Register',                                  //NEUER TEXT
+              nextPage: RegisterScreen()),
+        ],
       ),
+
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,8 +61,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ).tr(),
             ),
+
+            //Input fields for name & password
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30,),
+              padding: const EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 30,
+              ),
               child: Column(
                 children: [
                   InputTextField(
@@ -82,20 +91,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerRight,
                     child: Text(
                       'passwort_vergessen',
-                      style: TextStyle(color: Colors.teal[800]),
+                      style: textStyleBody,
                     ).tr(),
                   ),
                   //Login Button
                   SizedBox(
                     height: 60,
                   ),
+
+                  //Button to login
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: FlatButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(36),
-                      ),
-                      color: Colors.teal[700],
+                      shape: quizButtonShape,
+                      color: colorOne,
                       onPressed: () async {
                         await _loginCheck(name, pw);
                       },
@@ -115,7 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
-            // Passwort Vergessen
+
+            //switch to register
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
               alignment: Alignment.center,
@@ -150,20 +160,20 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future _loginCheck(String name, String pw) async{
+  // method checks weather user data is correct. If not it gives back an error-message, if yes the user gets logged in
+  Future _loginCheck(String name, String pw) async {
     int idCurrentUser = await helper.userExistsCheck(name, pw);
 
     if (idCurrentUser == null) {
-      _showAlertDialog('Fehler!',
-          'Spielername oder Passwort ist falsch!');
-          name = null;
-          pw = null;
+      _showAlertDialog('Fehler!', 'Spielername oder Passwort ist falsch!');
+      name = null;
+      pw = null;
     } else {
       _showAlertDialog('Willkommen!',
           'Sie haben sich erfolgreich eingeloggt. Viel Spaß beim spielen!');
       print(idCurrentUser);
       await helper.getTopicFromGoogleSheet();
-      //await helper.getDataFromGoogleSheet();
+      await helper.getDataFromGoogleSheet();
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -175,6 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  //method to print out error messages
   void _showAlertDialog(String title, String message) {
     AlertDialog alertDialog = AlertDialog(
       title: Text(title),
@@ -182,5 +193,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
     showDialog(context: context, builder: (_) => alertDialog);
   }
-
 }

@@ -6,6 +6,9 @@ import 'package:sd_quiz/model/user.dart';
 import 'package:sd_quiz/screens/login/login_screen.dart';
 import 'package:sd_quiz/screens/login/widget/input_text_field.dart';
 import 'package:sd_quiz/screens/quiz_overview/quiz_overview_screen.dart';
+import 'package:sd_quiz/screens/shared/constants.dart';
+import 'package:sd_quiz/screens/shared/leading_text_button_app_bar.dart';
+import 'package:sd_quiz/screens/shared/text_button_app_bar.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -13,6 +16,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  //variables
   DatabaseHelper helper = DatabaseHelper();
   int idCurrentUser;
   int counter = 0;
@@ -22,42 +26,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
-        backgroundColor: Colors.teal[800],
+        backgroundColor: mainColorSD,
         elevation: 0,
         centerTitle: true,
         title: Text(
           'neu_anmelden',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          style: textStyleAppBar,
         ).tr(),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        leading: LeadingTextButtonAppBar(),
+        actions: [
+          TextButtonAppBar(
+              iconAppBar: Icons.person,
+              title: 'Login',                                       //NEUER TEXT
+              nextPage: LoginScreen()),
+        ],
       ),
+
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20,),
-           Container(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                child: Text(
-                  'bitte_daten_eingeben',
-                  style: TextStyle(
-                    color: Colors.teal[900],
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ).tr(),
-              ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              child: Text(
+                'bitte_daten_eingeben',
+                style: TextStyle(
+                  color: Colors.teal[900],
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ).tr(),
+            ),
+
+
+            //input fields for name, pw & pw2
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Column(
@@ -68,7 +76,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       name = value;
                     },
                   ),
-                  SizedBox(height: 16,),
+                  SizedBox(
+                    height: 16,
+                  ),
                   InputTextField(
                     label: 'passwort'.tr(),
                     password: true,
@@ -76,7 +86,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       pw = value;
                     },
                   ),
-                  SizedBox(height: 16,),
+                  SizedBox(
+                    height: 16,
+                  ),
                   InputTextField(
                     label: 'passwort_wdh'.tr(),
                     password: true,
@@ -87,14 +99,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 50,),
+            SizedBox(
+              height: 50,
+            ),
+
+            //Button to register
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: FlatButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(36),
-                ),
-                color: Colors.teal[700],
+                shape: quizButtonShape,
+                color: colorOne,
                 onPressed: () {
                   _checkPassword(name, pw, pw2, counter);
                 },
@@ -111,7 +125,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            //Keinen Account/ Register
+
+            //switch to login
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
               alignment: Alignment.center,
@@ -146,15 +161,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  //method checks if password are longer then 4 digits and equal
   void _checkPassword(String name, String pw, String pw2, int counter) {
     if (pw != pw2) {
       _showAlertDialog('Fehler!',
           'Ihre Passwörter stimmen nicht überein. Versuchen Sie es erneut.');
       pw = null;
       pw2 = null;
-    } if(pw.length < 4 ){
-      _showAlertDialog('Fehler!',
-          'Das Passwort muss mindestens 4 Zeichen lang sein');
+    }
+    if (pw.length < 4) {
+      _showAlertDialog(
+          'Fehler!', 'Das Passwort muss mindestens 4 Zeichen lang sein');
       pw = null;
       pw2 = null;
     } else {
@@ -162,14 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  void _showAlertDialog(String title, String message) {
-    AlertDialog alertDialog = AlertDialog(
-      title: Text(title),
-      content: Text(message),
-    );
-    showDialog(context: context, builder: (_) => alertDialog);
-  }
-
+  //method checks if user name already exists in db, if not it registers new user
   Future _addUserToDB(String name, String pw, int counter) async {
     bool userExistsAlready = await helper.userExistsAlreadyCheck(name);
 
@@ -194,5 +204,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       );
     }
+  }
+
+  //method to print out error messages
+  void _showAlertDialog(String title, String message) {
+    AlertDialog alertDialog = AlertDialog(
+      title: Text(title),
+      content: Text(message),
+    );
+    showDialog(context: context, builder: (_) => alertDialog);
   }
 }
