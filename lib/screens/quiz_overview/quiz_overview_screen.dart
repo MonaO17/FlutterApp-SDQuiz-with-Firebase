@@ -13,7 +13,7 @@ import '../settings/language_screen.dart';
 import 'widget/category_card.dart';
 
 class QuizOverviewScreen extends StatefulWidget {
-  int idCurrentUser;
+  final int idCurrentUser;
 
   //constructor
   QuizOverviewScreen({Key key, @required this.idCurrentUser}) : super(key: key);
@@ -113,8 +113,7 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
                       //List of quizzes to choose from
                       Expanded(
                         child: GridView.count(
-                          crossAxisCount: 2,
-                          // crossAxisCount is the number of columns
+                          crossAxisCount: 2, // crossAxisCount is the number of columns
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 15,
                           children: List.generate(topic.length, (index) {

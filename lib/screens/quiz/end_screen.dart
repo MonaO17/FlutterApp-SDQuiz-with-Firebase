@@ -7,12 +7,12 @@ import 'package:sd_quiz/screens/quiz_overview/quiz_overview_screen.dart';
 import 'package:sd_quiz/screens/shared/constants.dart';
 import 'package:sd_quiz/screens/shared/text_button_app_bar.dart';
 
-class QuizPodiumScreen extends StatefulWidget {
+class QuizEndScreen extends StatefulWidget {
   //variables
   int quizScore, totalQuizScore, idCurrentUser, topicID;
 
   //constructor
-  QuizPodiumScreen(
+  QuizEndScreen(
       {Key key,
       @required this.idCurrentUser,
       @required this.quizScore,
@@ -21,11 +21,11 @@ class QuizPodiumScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  _QuizPodiumScreenState createState() =>
-      _QuizPodiumScreenState(idCurrentUser, quizScore, totalQuizScore, topicID);
+  _QuizEndScreenState createState() =>
+      _QuizEndScreenState(idCurrentUser, quizScore, totalQuizScore, topicID);
 }
 
-class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
+class _QuizEndScreenState extends State<QuizEndScreen> {
   //variables
   int score, quizScore, totalQuizScore, idCurrentUser, topicID, percent;
   DatabaseHelper helper = DatabaseHelper();
@@ -33,7 +33,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
   Future userFuture;
 
   //constructor
-  _QuizPodiumScreenState(
+  _QuizEndScreenState(
       this.idCurrentUser, this.quizScore, this.totalQuizScore, this.topicID);
 
   @override
@@ -53,7 +53,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
           TextButtonAppBar(
               iconAppBar: Icons.home,
               title: 'Home',                                      //NEUER TEXT
-              nextPage: QuizOverviewScreen()),
+              nextPage: QuizOverviewScreen(idCurrentUser: idCurrentUser)),
         ],
       ),
 
@@ -61,7 +61,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
       body: SingleChildScrollView(
         child: Column(
 
-          //gratulations
+          //congratulations
           children: [
             Padding(
               padding: const EdgeInsets.all(40.0),
@@ -72,7 +72,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
                 ).tr(),
               ),
             ),
-            Image(image: AssetImage('assets/thumbsUp.JPG')),
+            Image(image: AssetImage('assets/thumbsUp.jpg'), width: 200.0, height: 200.0,),
             SizedBox(height: 10),
 
             //score
@@ -80,8 +80,8 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
               padding: const EdgeInsets.all(40.0),
               child: Center(
                 child: Text(
-                        '${(quizScore / 3).toInt()} von ${(totalQuizScore / 3).toInt()} Richtige! \n\n'
-                        '      ${quizScore} Punkte!!!',
+                        '${quizScore ~/ 3} von ${totalQuizScore ~/ 3} Richtige! \n\n'
+                        '      $quizScore Punkte!!!',
                         style: textStyle1)
                     .tr(),
               ),

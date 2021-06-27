@@ -7,7 +7,7 @@ import '../quiz_overview_screen.dart';
 
 
 class DrawerNavigation extends StatefulWidget {
-  int idCurrentUser;
+  final int idCurrentUser;
 
   //constructor
   DrawerNavigation({Key key, @required this.idCurrentUser}) : super(key: key);

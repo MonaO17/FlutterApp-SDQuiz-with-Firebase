@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/screens/quiz/quiz_screen.dart';
 
 // general settings
 const mainColorSD = Color(0xFF00796B);
-const colorOne = Color(0xFF004445);
+const colorOne = Color(0xFF006264);
 const colorRight = Color(0xFF43A047);
 const colorWrong = Color(0xFFB71C1C);
 //const fontStyleSD = ;

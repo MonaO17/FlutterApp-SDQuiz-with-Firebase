@@ -123,7 +123,7 @@ class DatabaseHelper {
 
   //check for login, whether username & password match
   Future<int> userExistsCheck(String name, String pw) async {
-    int userExists = null;
+    int userExists = 0;
     var userMapList = await getUserMapList(); // Get 'Map List' from database
     int count =
         userMapList.length; // Count the number of map entries in db table
@@ -158,8 +158,7 @@ class DatabaseHelper {
     int count =
         userMapList.length; // Count the number of map entries in db table
 
-    List<User> userList =
-        List<User>(); // For loop to create a 'Note List' from a 'Map List'
+    //List<User> userList = List<User>(); // For loop to create a 'Note List' from a 'Map List'
     for (int i = 0; i < count; i++) {
       User user = User.fromMapObject(userMapList[i]);
       if (user.name == name) {
@@ -195,7 +194,6 @@ class DatabaseHelper {
     User user = await getCurrentUser(id);
 
     int score = user.counter + quizScore;
-    print('score: $score');
 
     var res = await db.rawUpdate(
         'UPDATE $userTable SET $colCounter = ? WHERE id = ?', [score, id]);
@@ -214,7 +212,6 @@ class DatabaseHelper {
     var jsonSDQuizAppContent = convert.jsonDecode(raw.body);
 
     jsonSDQuizAppContent.forEach((element) {
-      //print('$element THIS IS NEXT!!');
       Quiz quizContentHelper = new Quiz();
       quizContentHelper.quizID = element['quizID'];
       quizContentHelper.qTopicID = element['topicID'];
@@ -227,7 +224,6 @@ class DatabaseHelper {
 
       _addDataToDB(quizContentHelper);
     });
-    print("getDataFromGoogleSheet done!");
   }
 
   //
@@ -246,7 +242,7 @@ class DatabaseHelper {
       if (exists == false) {
         print("NEW QUIZ: ${quiz.quizID} , ${quiz.question}");
         //add new quizIDs to database
-        var result = await db.rawInsert(''' INSERT INTO quizTable (
+        await db.rawInsert(''' INSERT INTO quizTable (
         quizID, qTopicID, answerID, question, answerOne, answerTwo, answerThree, answerFour
     ) VALUES (?,?,?,?,?,?,?,?)
     ''', [
@@ -260,7 +256,6 @@ class DatabaseHelper {
           quiz.answerFour
         ]);
       }
-    print("adDataToDB done!");
   }
 
 // Get the 'Map List' [ List<Map> ] and convert it to 'Quiz List' [ List<Quiz> ]
@@ -274,7 +269,6 @@ class DatabaseHelper {
     for (int i = 0; i < count; i++) {
       quizList.add(Quiz.fromMapObject(quizMapList[i]));
     }
-    print("allGetQuizList done!");
     return quizList;
   }
 
@@ -283,7 +277,6 @@ class DatabaseHelper {
 
     var result = await db.rawQuery('SELECT * FROM $quizTable');
     // var result = await db.query(noteTable, orderBy: '$colPriority ASC');
-    print("allGetQuizMapList done!");
     return result;
   }
 
@@ -323,7 +316,6 @@ class DatabaseHelper {
     var jsonSDTopicAppContent = convert.jsonDecode(raw.body);
 
     jsonSDTopicAppContent.forEach((element) {
-      print('$element THIS IS NEXT!!');
       Topic topicContentHelper = new Topic();
       topicContentHelper.topicID = element['topicID'];
       topicContentHelper.topic = element['topicName'];
@@ -331,7 +323,6 @@ class DatabaseHelper {
 
       _addTopicDataToDB(topicContentHelper);
     });
-    print("getDataFromGoogleSheet done!");
   }
 
   //
@@ -349,7 +340,7 @@ class DatabaseHelper {
     if (exists == false) {
       print("NEW TOPIC: ${topic.topicID} , ${topic.topic}");
       //add new quizIDs to database
-      var result = await db.rawInsert(''' INSERT INTO topicTable (
+      await db.rawInsert(''' INSERT INTO topicTable (
         topicID, topic, topicPic
     ) VALUES (?,?,?)
     ''', [
@@ -358,7 +349,6 @@ class DatabaseHelper {
         topic.topicPic
       ]);
     }
-    print("adTopicDataToDB done!");
   }
 
 // Get the 'Map List' [ List<Map> ] and convert it to 'Quiz List' [ List<Quiz> ]
@@ -371,7 +361,6 @@ class DatabaseHelper {
     for (int i = 0; i < count; i++) {
       topicList.add(Topic.fromMapObject(topicMapList[i]));
     }
-    print("getTopicList done!");
     return topicList;
   }
 
@@ -379,7 +368,6 @@ class DatabaseHelper {
     Database db = await this.database;
 
     var result = await db.rawQuery('SELECT * FROM $topicTable');
-    print("getTopicMapList done!");
     return result;
   }
 

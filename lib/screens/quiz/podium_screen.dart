@@ -38,7 +38,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
 
   @override
   Widget build(BuildContext context) {
-    percent = (quizScore * 100 / totalQuizScore).toInt();
+    percent = (quizScore * 100 ~/ totalQuizScore);
     return Scaffold(
 
       appBar: AppBar(
@@ -54,7 +54,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
           TextButtonAppBar(
               iconAppBar: Icons.home,
               title: 'Home',                                      //NEUER TEXT
-              nextPage: QuizOverviewScreen()),
+              nextPage: QuizOverviewScreen(idCurrentUser: idCurrentUser)),
         ],
       ),
 
@@ -80,8 +80,8 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
               padding: const EdgeInsets.all(40.0),
               child: Center(
                 child: Text(
-                        '${(quizScore / 3).toInt()} von ${(totalQuizScore / 3).toInt()} Richtige! \n\n'
-                        '      ${quizScore} Punkte!!!',
+                        '${quizScore ~/ 3} von ${totalQuizScore ~/ 3} Richtige! \n\n'
+                        '      $quizScore Punkte!!!',
                         style: textStyle1)
                     .tr(),
               ),

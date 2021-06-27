@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/database/database_helper.dart';
@@ -54,7 +55,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
           TextButtonAppBar(
               iconAppBar: Icons.home,
               title: 'Home', //NEUER TEXT
-              nextPage: QuizOverviewScreen()),
+              nextPage: QuizOverviewScreen(idCurrentUser: idCurrentUser)),
         ],
       ),
       body: SingleChildScrollView(
@@ -181,3 +182,5 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
     );
   }
 }
+
+ */

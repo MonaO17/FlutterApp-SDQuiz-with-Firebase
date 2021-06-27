@@ -70,7 +70,7 @@ flutter:
     - assets/qbackground.jpg
     - assets/quiz.jpg
     - assets/rocket.jpg
-    - assets/thumbsUp.JPG
+    - assets/thumbsUp.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
