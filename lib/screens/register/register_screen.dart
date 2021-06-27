@@ -181,6 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _showAlertDialog('Willkommen!',
           'Sie haben sich erfolgreich registriert. Viel Spaß beim spielen!');
       idCurrentUser = await helper.insertUser(name, pw, counter);
+      await helper.getTopicFromGoogleSheet();
       await helper.getDataFromGoogleSheet();
       print(idCurrentUser);
 

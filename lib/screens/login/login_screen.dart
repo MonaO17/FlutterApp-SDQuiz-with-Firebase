@@ -162,7 +162,8 @@ class _LoginScreenState extends State<LoginScreen> {
       _showAlertDialog('Willkommen!',
           'Sie haben sich erfolgreich eingeloggt. Viel Spaß beim spielen!');
       print(idCurrentUser);
-      await helper.getDataFromGoogleSheet();
+      await helper.getTopicFromGoogleSheet();
+      //await helper.getDataFromGoogleSheet();
       Navigator.push(
         context,
         MaterialPageRoute(

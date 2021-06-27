@@ -19,6 +19,7 @@
 //      - Put it all together (connect DB to UI)
 
 import 'package:sd_quiz/model/quiz.dart';
+import 'package:sd_quiz/model/topic.dart';
 import 'package:sd_quiz/model/user.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
@@ -52,9 +53,10 @@ class DatabaseHelper {
 
   //Table & columns for table 'topicTable'
   static final String topicTable = 'topicTable';
-  static final String colTopicTableID = 'ttID';
+  static final String colTopicTableID = 'topicTableID';
   static final String colTopicID = 'topicID';
   static final String colTopic = 'topic';
+  static final String colTopicPic = 'topicPic';
 
   DatabaseHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
 
@@ -76,7 +78,7 @@ class DatabaseHelper {
   Future<Database> initializeDatabase() async {
     // Get the directory path for both Android and iOS to store database.
     Directory directory = await getApplicationDocumentsDirectory();
-    String path = directory.path + 'db5.db';
+    String path = directory.path + 'db6.db';
     // Open/create the database at a given path
     var notesDatabase =
         await openDatabase(path, version: 1, onCreate: _createDb);
@@ -107,7 +109,8 @@ class DatabaseHelper {
     CREATE TABLE $topicTable (
     $colTopicTableID INTEGER PRIMARY KEY AUTOINCREMENT,
     $colTopicID INTEGER NOT NULL,
-    $colTopic TEXT NOT NULL
+    $colTopic TEXT NOT NULL,
+    $colTopicPic TEXT NOT NULL
     )''');
   }
 
@@ -307,4 +310,77 @@ class DatabaseHelper {
     // var result = await db.query(noteTable, orderBy: '$colPriority ASC');
     return result;
   }
+
+
+
+  //****************          METHODS REGARDING TOPIC          ****************//
+  Future getTopicFromGoogleSheet() async {
+    //get Data from Google Sheet
+
+    var urlTopic = 'https://script.google.com/macros/s/AKfycby0RtLCk4hMHKupykeguCESPVnLeCKdbgiV9jbzHmrEVVg0iGCE/exec';
+    http.Response raw = await http.get(urlTopic);
+
+    var jsonSDTopicAppContent = convert.jsonDecode(raw.body);
+
+    jsonSDTopicAppContent.forEach((element) {
+      print('$element THIS IS NEXT!!');
+      Topic topicContentHelper = new Topic();
+      topicContentHelper.topicID = element['topicID'];
+      topicContentHelper.topic = element['topicName'];
+      topicContentHelper.topicPic = element['topicPicture'];
+
+      _addTopicDataToDB(topicContentHelper);
+    });
+    print("getDataFromGoogleSheet done!");
+  }
+
+  //
+  Future _addTopicDataToDB(Topic topic) async {
+    Database db = await this.database;
+    bool exists = false;
+
+    //check if QuizID already exists
+    List<Topic> existingTopics = await getTopicList(); //List with existing Quizzes
+    for (int i = 0; i < existingTopics.length; i++) {
+      if (existingTopics[i].topicID == topic.topicID) {
+        exists = true;
+      }
+    }
+    if (exists == false) {
+      print("NEW TOPIC: ${topic.topicID} , ${topic.topic}");
+      //add new quizIDs to database
+      var result = await db.rawInsert(''' INSERT INTO topicTable (
+        topicID, topic, topicPic
+    ) VALUES (?,?,?)
+    ''', [
+        topic.topicID,
+        topic.topic,
+        topic.topicPic
+      ]);
+    }
+    print("adTopicDataToDB done!");
+  }
+
+// Get the 'Map List' [ List<Map> ] and convert it to 'Quiz List' [ List<Quiz> ]
+  Future<List<Topic>> getTopicList() async {
+    var topicMapList = await getTopicMapList(); // Get 'Map List' from database
+    int count = topicMapList.length; // Count the number of map entries in db table
+
+    List<Topic> topicList = List<Topic>();
+    // For loop to create a 'Note List' from a 'Map List'
+    for (int i = 0; i < count; i++) {
+      topicList.add(Topic.fromMapObject(topicMapList[i]));
+    }
+    print("getTopicList done!");
+    return topicList;
+  }
+
+  Future<List<Map<String, dynamic>>> getTopicMapList() async {
+    Database db = await this.database;
+
+    var result = await db.rawQuery('SELECT * FROM $topicTable');
+    print("getTopicMapList done!");
+    return result;
+  }
+
 }

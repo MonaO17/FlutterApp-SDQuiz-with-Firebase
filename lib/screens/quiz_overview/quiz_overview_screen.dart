@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:sd_quiz/model/topic.dart';
 import 'package:sd_quiz/model/user.dart';
 import 'package:sd_quiz/screens/quiz/quiz_screen.dart';
 import 'package:sd_quiz/screens/quiz_overview/widget/drawer_navigation.dart';
@@ -22,11 +23,8 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
   int idCurrentUser;
   DatabaseHelper helper = DatabaseHelper();
   User user;
+  List<Topic> topic;
   Future userFuture;
-  int a = 1;
-  int b = 2;
-  int c = 3;
-  int d = 4;
 
   //constructor
   _QuizOverviewScreenState(this.idCurrentUser);
@@ -34,7 +32,13 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
   @override
   void initState() {
     super.initState();
+    _getTopics();
     userFuture = _getUser(idCurrentUser);
+  }
+
+  _getTopics() async {
+    print('get Topics');
+    topic = await helper.getTopicList();
   }
 
   _getUser(idCurrentUser) async {
@@ -49,9 +53,7 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery
-        .of(context)
-        .size; // total height and with from device
+    var size = MediaQuery.of(context).size; // total height and with from device
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -80,177 +82,61 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
                 ),
                 child: SafeArea(
                   child: Column(
-                    children: [ Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Padding(
-                        padding:
-                        const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-                        child: Text(
-                          'willkommen'.tr() + " ${snapshot.data.name}",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.teal[900],
-                            fontSize: 28,
-                            fontWeight: FontWeight.w600,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+                            child: Text(
+                              'willkommen'.tr() + " ${snapshot.data.name}",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.teal[900],
+                                fontSize: 28,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Expanded(
+                        child: GridView.count(
+                          // crossAxisCount is the number of columns
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 15,
+                          // This creates two columns with two items in each column
+                          children: List.generate(topic.length, (index) {
+                            return CategoryCard(
+                              title: ('${topic[index].topic}'),
+                              image: topic[index].topicPic,
+                              press: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return QuizScreen(
+                                          topicID: topic[index].topicID,
+                                          idCurrentUser: idCurrentUser); // Quizseite verlinken
+                                    },
+                                  ),
+                                );
+                              }, //Verlinkung zu Quizfragen
+                            );
+                          }),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      //childAspectRatio: .95,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 15,
-                      children: [
-                        CategoryCard(
-                          title: ('trends'.tr()),
-                          image: 'assets/trends.png',
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return QuizScreen(topicID: a,
-                                      idCurrentUser: idCurrentUser); // Quizseite verlinken
-                                },
-                              ),
-                            );
-                          }, //Verlinkung zu Quizfragen
-                        ),
-                        CategoryCard(
-                          title: ('unternehmen'.tr()),
-                          image: 'assets/unternehmen.png',
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return QuizScreen(
-                                      topicID: b,
-                                      idCurrentUser:
-                                      idCurrentUser); // Quizseite verlinken
-                                },
-                              ),
-                            );
-                          }, //Verlinkung zu Quizfragen
-                        ),
-                        CategoryCard(
-                          title: ('daten'.tr()),
-                          image: 'assets/daten.png',
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return QuizScreen(
-                                      topicID: c,
-                                      idCurrentUser:
-                                      idCurrentUser); // Quizseite verlinken
-                                },
-                              ),
-                            );
-                          }, //Verlinkung zu Quizfragen
-                        ),
-                        CategoryCard(
-                          title: ('abkuerzungen'.tr()),
-                          image: 'assets/abkrz.png',
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return QuizScreen(
-                                      topicID: d,
-                                      idCurrentUser:
-                                      idCurrentUser); // Quizseite verlinken
-                                },
-                              ),
-                            );
-                          }, //Verlinkung zu Quizfragen
-                        ),
-                        CategoryCard(
-                          title: ('trends'.tr()),
-                          image: 'assets/trends.png',
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return QuizScreen(
-                                      topicID: a,
-                                      idCurrentUser:
-                                      idCurrentUser); // Quizseite verlinken
-                                },
-                              ),
-                            );
-                          }, //Verlinkung zu Quizfragen
-                        ),
-                        CategoryCard(
-                          title: ('unternehmen'.tr()),
-                          image: 'assets/unternehmen.png',
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return QuizScreen(
-                                      topicID: b,
-                                      idCurrentUser:
-                                      idCurrentUser); // Quizseite verlinken
-                                },
-                              ),
-                            );
-                          }, //Verlinkung zu Quizfragen
-                        ),
-                        CategoryCard(
-                          title: ('trends'.tr()),
-                          image: 'assets/trends.png',
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return QuizScreen(
-                                      topicID: a,
-                                      idCurrentUser:
-                                      idCurrentUser); // Quizseite verlinken
-                                },
-                              ),
-                            );
-                          }, //Verlinkung zu Quizfragen
-                        ),
-                        CategoryCard(
-                          title: ('unternehmen'.tr()),
-                          image: 'assets/unternehmen.png',
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return QuizScreen(
-                                      topicID: b,
-                                      idCurrentUser:
-                                      idCurrentUser); // Quizseite verlinken
-                                },
-                              ),
-                            );
-                          }, //Verlinkung zu Quizfragen
-                        ),
-                      ],
-                    ),
-                  ),
-                  ],
                 ),
-              ),
-            );
+              );
             } else {
-            return Loading();
+              return Loading();
             }
           }),
     );
@@ -278,7 +164,7 @@ class CategoryCard extends StatelessWidget {
       //borderRadius: BorderRadius.circular(13),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          //color: Colors.grey[100],
           borderRadius: BorderRadius.circular(13),
         ),
         child: Material(
@@ -291,7 +177,7 @@ class CategoryCard extends StatelessWidget {
                 children: [
                   Spacer(),
                   Expanded(
-                    child: Image.asset(image),
+                    child: Image.network(image),
                     flex: 6,
                   ),
                   Text(
