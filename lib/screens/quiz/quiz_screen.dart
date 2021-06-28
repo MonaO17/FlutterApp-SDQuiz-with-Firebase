@@ -15,10 +15,11 @@ import 'end_screen.dart';
 int quizScore = 0;
 int questionNumber = 0;
 int ans = 0;
-Color buttonColor1 = Colors.teal[800];
-Color buttonColor2 = Colors.teal[800];
-Color buttonColor3 = Colors.teal[800];
-Color buttonColor4 = Colors.teal[800];
+Color buttonColor1 = mainColorSD;
+Color buttonColor2 = mainColorSD;
+Color buttonColor3 = mainColorSD;
+Color buttonColor4 = mainColorSD;
+
 
 class QuizScreen extends StatefulWidget {
   int topicID, idCurrentUser;
@@ -48,6 +49,7 @@ class _QuizScreenState extends State<QuizScreen> {
     futureList = _getQuiz(topicID);
   }
 
+  //method gets relevant data from db
   _getQuiz(topicID) async {
     quizList = await helper.getQuizList(topicID);
     len = quizList.length;
@@ -57,12 +59,9 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      //disabel the back button, otherwise user could go back to questions to increase their score
-      child: Center(
+    return Center(
         child: Scaffold(
-          //*******   AppBar (Leiste oben)   *******
+
           appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: mainColorSD,
@@ -75,13 +74,14 @@ class _QuizScreenState extends State<QuizScreen> {
             actions: [
               TextButtonAppBar(
                   iconAppBar: Icons.home,
-                  title: 'Home',                                      //NEUER TEXT
+                  title: 'Home',
                   nextPage: QuizOverviewScreen(idCurrentUser: idCurrentUser)),
             ],
           ),
-          //*******   Body (Restlicher Screen)   *******
+
+
           body:
-          //*******   Hintergrundbild Karteikarte   *******
+          //Background
           Container(
             constraints: BoxConstraints.expand(),
             decoration: BoxDecoration(
@@ -92,13 +92,13 @@ class _QuizScreenState extends State<QuizScreen> {
                 fit: BoxFit.cover,
               ),
             ),
-            //*******   SingleChildScrollView & FutureBuilder   *******
             child: SingleChildScrollView(
               child: FutureBuilder(
                 future: futureList,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    //*******   Zeile oben (Frage 1/8, Score:...  *******
+
+                    //Top row with score and question number
                     return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -111,18 +111,18 @@ class _QuizScreenState extends State<QuizScreen> {
                               children: <Widget>[
                                 Text(
                                   "Frage ${questionNumber + 1} von $len ",
-                                  style: TextStyle(fontSize: 20.0),
+                                  style: textStyle1,
                                 ),
                                 Text(
                                   "Punkte: $quizScore",
-                                  style: TextStyle(fontSize: 20.0),
+                                  style: textStyle1,
                                 )
                               ],
                             ),
                           ),
                           Padding(padding: EdgeInsets.all(7.0)),
 
-                          //*******   Frage   *******
+                          //Question
                           Container(
                             height:
                             MediaQuery.of(context).copyWith().size.height /
@@ -131,15 +131,13 @@ class _QuizScreenState extends State<QuizScreen> {
                               child: Text(
                                 snapshot.data[questionNumber].question,
                                 textAlign: TextAlign.center,
-                                style: new TextStyle(
-                                  fontSize: 20.0,
-                                ),
+                                style: textStyle1,
                               ),
                             ),
                           ),
                           Padding(padding: EdgeInsets.all(5.0)),
 
-                          //*******   Antwort 1   *******
+                          //Answer 1
                           Container(
                             height:
                             MediaQuery.of(context).copyWith().size.height /
@@ -149,12 +147,12 @@ class _QuizScreenState extends State<QuizScreen> {
                                 if (1 ==
                                     snapshot.data[questionNumber].answerID) {
                                   setState(() {
-                                    buttonColor1 = Colors.green[600];
+                                    buttonColor1 = colorRight;
                                   });
                                   quizScore += 3;
                                 } else {
                                   setState(() {
-                                    buttonColor1 = Colors.red[800];
+                                    buttonColor1 = colorWrong;
                                   });
                                 }
                                 updateQuestion(
@@ -173,7 +171,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                           Padding(padding: EdgeInsets.all(5.0)),
 
-                          //*******   Antwort 2   *******
+                          //Answer 2
                           Container(
                             height:
                             MediaQuery.of(context).copyWith().size.height /
@@ -183,12 +181,12 @@ class _QuizScreenState extends State<QuizScreen> {
                                 if (2 ==
                                     snapshot.data[questionNumber].answerID) {
                                   setState(() {
-                                    buttonColor2 = Colors.green[600];
+                                    buttonColor2 = colorRight;
                                   });
                                   quizScore += 3;
                                 } else {
                                   setState(() {
-                                    buttonColor2 = Colors.red[800];
+                                    buttonColor2 = colorWrong;
                                   });
                                 }
                                 updateQuestion(
@@ -207,7 +205,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                           Padding(padding: EdgeInsets.all(5.0)),
 
-                          //*******   Antwort 3   *******
+                          //Answer 3
                           Container(
                             height:
                             MediaQuery.of(context).copyWith().size.height /
@@ -217,12 +215,12 @@ class _QuizScreenState extends State<QuizScreen> {
                                 if (3 ==
                                     snapshot.data[questionNumber].answerID) {
                                   setState(() {
-                                    buttonColor3 = Colors.green[600];
+                                    buttonColor3 = colorRight;
                                   });
                                   quizScore += 3;
                                 } else {
                                   setState(() {
-                                    buttonColor3 = Colors.red[800];
+                                    buttonColor3 = colorWrong;
                                   });
                                 }
                                 updateQuestion(
@@ -241,7 +239,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                           Padding(padding: EdgeInsets.all(5.0)),
 
-                          //*******   Antwort 4   *******
+                          //Answer 4
                           Container(
                             height:
                             MediaQuery.of(context).copyWith().size.height /
@@ -251,12 +249,12 @@ class _QuizScreenState extends State<QuizScreen> {
                                 if (4 ==
                                     snapshot.data[questionNumber].answerID) {
                                   setState(() {
-                                    buttonColor4 = Colors.green[600];
+                                    buttonColor4 = colorRight;
                                   });
                                   quizScore += 3;
                                 } else {
                                   setState(() {
-                                    buttonColor4 = Colors.red[800];
+                                    buttonColor4 = colorWrong;
                                   });
                                 }
                                 updateQuestion(
@@ -282,17 +280,16 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 
   void updateQuestion(int idCurrentUser, int quizScore, int topicID) {
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
-        buttonColor1 = Colors.teal[800];
-        buttonColor2 = Colors.teal[800];
-        buttonColor3 = Colors.teal[800];
-        buttonColor4 = Colors.teal[800];
+        buttonColor1 = mainColorSD;
+        buttonColor2 = mainColorSD;
+        buttonColor3 = mainColorSD;
+        buttonColor4 = mainColorSD;
         if (questionNumber == len - 1 && quizScore >= (totalQuizScore * 0.7)) {
           Navigator.push(
               context,

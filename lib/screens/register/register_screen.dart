@@ -39,7 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         actions: [
           TextButtonAppBar(
               iconAppBar: Icons.person,
-              title: 'Login',                                       //NEUER TEXT
+              title: 'Login',
               nextPage: LoginScreen()),
         ],
       ),
@@ -56,11 +56,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Text(
                 'bitte_daten_eingeben',
-                style: TextStyle(
-                  color: Colors.teal[900],
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: textStyle1,
               ).tr(),
             ),
 
@@ -108,7 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: FlatButton(
                 shape: quizButtonShape,
-                color: colorOne,
+                color: mainColorSD,
                 onPressed: () {
                   _checkPassword(name, pw, pw2, counter);
                 },
@@ -138,7 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     TextSpan(
                         text: 'hier_einloggen'.tr(),
                         style: TextStyle(
-                          color: Colors.teal[900],
+                          color: mainColorSD,
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {

@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
         actions: [
           TextButtonAppBar(
               iconAppBar: Icons.person,
-              title: 'Register',                                  //NEUER TEXT
+              title: 'Register',
               nextPage: RegisterScreen()),
         ],
       ),
@@ -54,11 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Text(
                 'Willkommen',
-                style: TextStyle(
-                  color: Colors.teal[900],
-                  fontSize: 32,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: textStyle3,
               ).tr(),
             ),
 
@@ -104,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: FlatButton(
                       shape: quizButtonShape,
-                      color: colorOne,
+                      color: mainColorSD,
                       onPressed: () async {
                         await _loginCheck(name, pw);
                       },
@@ -137,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextSpan(
                         text: 'neu_anmelden'.tr(),
                         style: TextStyle(
-                          color: Colors.teal[900],
+                          color: mainColorSD,
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {

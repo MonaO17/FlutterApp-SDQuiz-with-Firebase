@@ -37,6 +37,17 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
       this.idCurrentUser, this.quizScore, this.totalQuizScore, this.topicID);
 
   @override
+  void initState() {
+    super.initState();
+    _updateScore(idCurrentUser, quizScore);
+  }
+
+  //updates score in db
+  _updateScore(idCurrentUser, quizScore) async {
+    await helper.updateScore(idCurrentUser, quizScore);
+  }
+
+  @override
   Widget build(BuildContext context) {
     percent = (quizScore * 100 ~/ totalQuizScore);
     return Scaffold(
@@ -160,8 +171,7 @@ class _QuizPodiumScreenState extends State<QuizPodiumScreen> {
   String getTrophyImage(int percentage) {
     if (percentage < 80) {
       return 'assets/bronze.png';
-    }
-    if (percentage >= 80 && percentage < 90) {
+    } if (percentage >= 80 && percentage < 90) {
       return 'assets/silber.png';
     } else {
       return 'assets/gold.png';

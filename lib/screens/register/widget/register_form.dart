@@ -8,13 +8,15 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-
   String name, pw, pw2;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30,),
+      padding: const EdgeInsets.symmetric(
+        vertical: 20,
+        horizontal: 30,
+      ),
       child: Column(
         children: [
           InputTextField(
@@ -23,7 +25,9 @@ class _RegisterFormState extends State<RegisterForm> {
               name = value;
             },
           ),
-          SizedBox(height: 16,),
+          SizedBox(
+            height: 16,
+          ),
           InputTextField(
             label: 'passwort'.tr(),
             password: true,
@@ -31,7 +35,9 @@ class _RegisterFormState extends State<RegisterForm> {
               pw = value;
             },
           ),
-          SizedBox(height: 16,),
+          SizedBox(
+            height: 16,
+          ),
           InputTextField(
             label: 'passwort_wdh'.tr(),
             password: true,
@@ -44,12 +50,11 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 
-
+  //method checks if passwords are equal. If they are not an error message is shown
   void checkPassword(String pw, String pw2) {
     if (pw != pw2) {
       _showAlertDialog('Fehler!',
           'Ihre Passwörter stimmen nicht überein. Versuchen Sie es erneut.');
-
     } else {
       // Failure
       _showAlertDialog('Willkommen!',
@@ -57,6 +62,7 @@ class _RegisterFormState extends State<RegisterForm> {
     }
   }
 
+  //method to print out error messages
   void _showAlertDialog(String title, String message) {
     AlertDialog alertDialog = AlertDialog(
       title: Text(title),
@@ -65,6 +71,3 @@ class _RegisterFormState extends State<RegisterForm> {
     showDialog(context: context, builder: (_) => alertDialog);
   }
 }
-
-
-

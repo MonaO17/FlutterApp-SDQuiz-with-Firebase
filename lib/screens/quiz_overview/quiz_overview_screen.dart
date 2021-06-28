@@ -97,11 +97,7 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
                             child: Text(
                               'willkommen'.tr() + " ${snapshot.data.name}",
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.teal[900],
-                                fontSize: 28,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: textStyle4,
                             ),
                           ),
                         ],

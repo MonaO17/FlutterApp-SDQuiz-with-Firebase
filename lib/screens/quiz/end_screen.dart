@@ -37,6 +37,17 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
       this.idCurrentUser, this.quizScore, this.totalQuizScore, this.topicID);
 
   @override
+  void initState() {
+    super.initState();
+    _updateScore(idCurrentUser, quizScore);
+  }
+
+  //updates score in db
+  _updateScore(idCurrentUser, quizScore) async {
+    await helper.updateScore(idCurrentUser, quizScore);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
 
@@ -52,7 +63,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
         actions: [
           TextButtonAppBar(
               iconAppBar: Icons.home,
-              title: 'Home',                                      //NEUER TEXT
+              title: 'Home',
               nextPage: QuizOverviewScreen(idCurrentUser: idCurrentUser)),
         ],
       ),

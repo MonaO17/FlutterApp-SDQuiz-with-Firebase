@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sd_quiz/screens/shared/constants.dart';
 
 class CategoryCard extends StatelessWidget {
   final String image;
@@ -16,10 +17,8 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRect(
-      //borderRadius: BorderRadius.circular(13),
       child: Container(
         decoration: BoxDecoration(
-          //color: Colors.grey[100],
           borderRadius: BorderRadius.circular(13),
         ),
         child: Material(
@@ -38,11 +37,7 @@ class CategoryCard extends StatelessWidget {
                   Text(
                     title,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.teal[900],
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: textStyle2,
                   ),
                 ],
               ),

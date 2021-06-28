@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/database/database_helper.dart';
 import 'package:sd_quiz/model/user.dart';
+import 'package:sd_quiz/screens/shared/constants.dart';
+import 'package:sd_quiz/screens/shared/loading.dart';
 import '../../settings/language_screen.dart';
 import '../quiz_overview_screen.dart';
 
@@ -32,8 +34,9 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
     userFuture = _getUser(idCurrentUser);
   }
 
+  //method gets relevant data from db
   _getUser(idCurrentUser) async {
-    print('user $idCurrentUser');
+    print('DrawerNavigation user $idCurrentUser');
     user = await helper.getCurrentUser(idCurrentUser);
     print(user.name);
     return user;
@@ -58,18 +61,15 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                                 'https://cdn.pixabay.com/photo/2016/12/21/00/36/woman-1921883_1280.jpg'),
                           ),
                           accountName: Text('${snapshot.data.name}'),
-                          accountEmail: Text(
-                              'Punktestand: ${snapshot.data.counter}'),
-                          decoration: BoxDecoration(color: Colors.teal[800],),
+                          accountEmail: Text('Punktestand: ${snapshot.data.counter}'),
+                          decoration: BoxDecoration(color: mainColorSD,),
                         ),
                       ),
                       ListTile( //Auswahl Menü führt zu entsprechenden Seite
                         leading: Icon(Icons.home,
                           size: 30,),
                         title: Text('start',
-                          style: TextStyle(
-                              fontSize: 17
-                          ),
+                          style: textStyle2,
                         ).tr(),
                         onTap: () =>
                             Navigator.of(context).push(MaterialPageRoute(
@@ -81,9 +81,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                         leading: Icon(Icons.language,
                           size: 30,),
                         title: Text('sprache',
-                          style: TextStyle(
-                              fontSize: 17
-                          ),
+                          style: textStyle2,
                         ).tr(),
                         onTap: () =>
                             Navigator.of(context).push(MaterialPageRoute(
@@ -94,7 +92,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               ),
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Loading();
           }
         }
     );

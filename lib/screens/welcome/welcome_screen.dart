@@ -16,11 +16,7 @@ class WelcomeScreen extends StatelessWidget {
             SizedBox(height: 10,),
              Text('\n\n'+'willkommensText'.tr(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: mainColorSD,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-              ),
+                  style: textStyle2,
              ),
             SizedBox(height: 10,),
             LoginAndRegister(),

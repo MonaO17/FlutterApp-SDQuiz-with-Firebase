@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-
-// Aussehen für die Textfelder
+import 'package:sd_quiz/screens/shared/constants.dart';
 
 class InputTextField extends StatelessWidget {
   const InputTextField({
-    Key key, this.label, this.onChange, this.password = false,
+    Key key,
+    this.label,
+    this.onChange,
+    this.password = false,
   }) : super(key: key);
 
   final String label;
@@ -22,13 +24,12 @@ class InputTextField extends StatelessWidget {
         labelStyle: TextStyle(color: Colors.grey),
         border: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.teal[900],
-              width: 2,
-            )
-        ),
+          color: mainColorSD,
+          width: 2,
+        )),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.teal[900],
+            color: mainColorSD,
             width: 2,
           ),
         ),
@@ -42,6 +43,3 @@ class InputTextField extends StatelessWidget {
     );
   }
 }
-
-
-
