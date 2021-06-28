@@ -10,8 +10,15 @@ class Quiz {
   String answerFour;
 
   // constructor
-  Quiz({this.quizID, this.qTopicID, this.answerID, this.question, this.answerOne,
-    this.answerTwo, this.answerThree, this.answerFour});
+  Quiz(
+      {this.quizID,
+      this.qTopicID,
+      this.answerID,
+      this.question,
+      this.answerOne,
+      this.answerTwo,
+      this.answerThree,
+      this.answerFour});
 
   //Convert a Quiz object into a Map object
   Map<String, dynamic> toMap() {
@@ -46,8 +53,7 @@ class Quiz {
     this.answerFour = map['answerFour'];
   }
 
-  // convert JSON that we get into this model(=QuizContentHelper) in this class (seperate Strings etc.),
-  // so that we can create a list of this model and then show the details in a list view
+  // convert JSON that we get into this model(=QuizContentHelper) in this class (seperate Strings etc.)
   factory Quiz.fromJson(dynamic json) {
     return Quiz(
         quizID: json['quizID'],
@@ -57,9 +63,6 @@ class Quiz {
         answerOne: "${json['ans1']}",
         answerTwo: "${json['ans2']}",
         answerThree: "${json['ans3']}",
-        answerFour: "${json['ans4']}"
-    );
+        answerFour: "${json['ans4']}");
   }
-
 }
-

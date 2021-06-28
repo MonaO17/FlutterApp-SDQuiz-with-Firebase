@@ -7,7 +7,7 @@ class Topic {
   // constructor
   Topic({this.topicID, this.topic, this.topicPic});
 
-  //Convert a Quiz object into a Map object
+  //Convert a Topic object into a Map object
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>(); //instanciate map object
 
@@ -30,15 +30,11 @@ class Topic {
     this.topicPic = map['topicPic'];
   }
 
-  // convert JSON that we get into this model(=QuizContentHelper) in this class (seperate Strings etc.),
-  // so that we can create a list of this model and then show the details in a list view
+  // convert JSON that we get into this model(=QuizContentHelper) in this class (seperate Strings etc.)
   factory Topic.fromJson(dynamic json) {
     return Topic(
         topicID: json['topicID'],
         topic: "${json['topicName']}",
-        topicPic: "${json['topicPicture']}"
-    );
+        topicPic: "${json['topicPicture']}");
   }
-
 }
-
