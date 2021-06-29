@@ -1,5 +1,5 @@
 {
-  "willkommensText": "Welcome",
+  "willkommensText": "Welcome to the Worry-Free Digital Quiz App . This is a completely free app that allows you to playfully test and improve your knowledge of topics related to IT and digitalisation. Would you like more information about the topics in the quizzes? Visit our website to find out more: www.sorgenfrei-digital.com \n Have fun!",
   "login": "Login",
   "neu_anmelden": "Register",
   "bitte_daten_eingeben": "Please enter your data",
@@ -10,6 +10,17 @@
 
   "passwort_vergessen": "Forgot your password?",
   "keinen_account": "No account? ",
+
+  "fehler": "Error!",
+  "fehler_nachricht": "Player name or password is incorrect!",
+  "willkommen_title": "Welcome!",
+  "willkommen_nachricht": "You have successfully logged in. Have fun playing!",
+
+  "fehler_pw": "Your passwords do not match. Try again.",
+  "fehler_zeichenlänge": "The password must be at least 4 characters long",
+  "fehler_name": "Your player name is already taken. Please choose another one!",
+  "willkommen_register": "You have successfully registered. Have fun playing!",
+
   "neu_anmelden": "New registration",
 
   "willkommen": "Welcome ",

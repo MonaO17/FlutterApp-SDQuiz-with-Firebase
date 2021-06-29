@@ -13,6 +13,16 @@
   "passwort_vergessen": "Passwort vergessen?",
   "keinen_account": "Keinen Account? ",
 
+  "fehler": "Fehler!",
+  "fehler_nachricht": "Spielername oder Passwort ist falsch!",
+  "willkommen_title": "Wilkommen!",
+  "willkommen_nachricht": "Sie haben sich erfolgreich eingeloggt. Viel Spaß beim spielen!",
+
+  "fehler_pw": "Ihre Passwörter stimmen nicht überein. Versuchen Sie es erneut.",
+  "fehler_zeichenlänge": "Das Passwort muss mindestens 4 Zeichen lang sein",
+  "fehler_name": "Ihr Spielername ist bereits vergeben. Wählen Sie bitte einen anderen!",
+  "willkommen_register": "Sie haben sich erfolgreich registriert. Viel Spaß beim spielen!",
+
   "willkommen": "Willkommen ",
 
   "sprache": "Sprache",

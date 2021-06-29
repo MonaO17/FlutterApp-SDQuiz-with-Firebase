@@ -160,14 +160,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
   //method checks if password are longer then 4 digits and equal
   void _checkPassword(String name, String pw, String pw2, int counter) {
     if (pw != pw2) {
-      _showAlertDialog('Fehler!',
-          'Ihre Passwörter stimmen nicht überein. Versuchen Sie es erneut.');
+      _showAlertDialog('fehler'.tr(), 'fehler_pw'.tr());
       pw = null;
       pw2 = null;
     }
     if (pw.length < 4) {
       _showAlertDialog(
-          'Fehler!', 'Das Passwort muss mindestens 4 Zeichen lang sein');
+          'fehler'.tr(), 'fehler_zeichenlänge'.tr());
       pw = null;
       pw2 = null;
     } else {
@@ -180,12 +179,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     bool userExistsAlready = await helper.userExistsAlreadyCheck(name);
 
     if (userExistsAlready == true) {
-      _showAlertDialog('Fehler!',
-          'Ihr Spielername ist bereits vergeben. Wählen Sie bitte einen anderen!');
+      _showAlertDialog('fehler'.tr(), 'fehler_name'.tr());
       name = null;
     } else {
-      _showAlertDialog('Willkommen!',
-          'Sie haben sich erfolgreich registriert. Viel Spaß beim spielen!');
+      _showAlertDialog('willkommen_title'.tr(), 'willkommen_register'.tr());
       idCurrentUser = await helper.insertUser(name, pw, counter);
       await helper.getTopicFromGoogleSheet();
       await helper.getDataFromGoogleSheet();

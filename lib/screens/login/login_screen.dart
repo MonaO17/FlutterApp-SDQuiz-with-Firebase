@@ -161,12 +161,11 @@ class _LoginScreenState extends State<LoginScreen> {
     idCurrentUser = await helper.userExistsCheck(name, pw);
 
     if (idCurrentUser == null) {
-      _showAlertDialog('Fehler!', 'Spielername oder Passwort ist falsch!');
+      _showAlertDialog('fehler'.tr(), 'fehler_nachricht'.tr());
       name = null;
       pw = null;
     } else {
-      _showAlertDialog('Willkommen!',
-          'Sie haben sich erfolgreich eingeloggt. Viel Spaß beim spielen!');
+      _showAlertDialog('willkommen_title'.tr(), 'willkommen_nachricht'.tr());
       print(idCurrentUser);
       await helper.getTopicFromGoogleSheet();
       await helper.getDataFromGoogleSheet();
