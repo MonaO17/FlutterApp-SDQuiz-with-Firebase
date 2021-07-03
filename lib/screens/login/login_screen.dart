@@ -13,6 +13,8 @@ import '../../database/database_helper.dart';
 
 /// LoginScreen is the screen the user sees when logging in
 class LoginScreen extends StatefulWidget {
+
+  /// calls _LoginScreenState
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }

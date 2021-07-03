@@ -4,11 +4,15 @@ import 'package:sd_quiz/screens/login/login_screen.dart';
 import 'package:sd_quiz/screens/register/register_screen.dart';
 import 'package:sd_quiz/screens/shared/constants.dart';
 
+/// contains Buttons "Login" and "Register"
 class LoginAndRegister extends StatelessWidget {
+
+  ///constructor LoginAndRegister
   const LoginAndRegister({
     Key key,
   }) : super(key: key);
 
+  /// builds container with buttons
   @override
   Widget build(BuildContext context) {
     return Container(

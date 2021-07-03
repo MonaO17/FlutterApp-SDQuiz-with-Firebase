@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/screens/shared/constants.dart';
 import 'package:sd_quiz/screens/welcome/widget/login_and_register.dart';
 
+/// WelcomeScreen is the screen where user is welcomed and can decide to login or to register
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

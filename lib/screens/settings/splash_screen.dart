@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sd_quiz/screens/welcome/welcome_screen.dart';
 
-//Logo Screen, zeigt ein Logo ein paar Sekunden lang, leitet dann zum HomeScreen (WillkomenScreen) weiter
-
+/// SplashScreen shows the logo while starting the app
 class SplashScreen extends StatefulWidget {
+
+  /// calls __SplashScreenState
   @override
-  __SplashScreenState createState() => __SplashScreenState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class __SplashScreenState extends State<SplashScreen> {
+/// private class called by _SplashScreenState, can change state
+class _SplashScreenState extends State<SplashScreen> {
+
+  //is called first, sets duration the logo is shown and sets next page
   @override
   void initState() {
     var d = Duration(seconds:2);
@@ -29,7 +33,7 @@ class __SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
-
+  /// builds screen with Scaffold-Widget, contains logo
   @override
   Widget build(BuildContext context) {
     return Scaffold(

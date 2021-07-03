@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-// general settings
+/// contains constants for text, color and other design-elements
+
 const mainColorSD = Color(0xFF00796B);
 const colorTwo = Color(0xFF006264);
 const colorThree = Color(0xFFB2DFDB);

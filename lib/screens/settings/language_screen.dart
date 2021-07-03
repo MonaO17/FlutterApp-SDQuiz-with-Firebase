@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+/// LanguageScreen is the screen where the user can change the language
 class LanguageScreen extends StatelessWidget {
+
+  /// builds screen with Scaffold-Widget, contains AppBar, text, two icons with language
   @override
   Widget build(BuildContext context) {
     return Scaffold(
