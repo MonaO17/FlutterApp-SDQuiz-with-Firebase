@@ -1,4 +1,4 @@
-# sd_quiz
+## FlutterApp-SDQuiz
 
 # What's the project about?
 This was a project for my course "App Development" in the 4th semester. The goal of the work was a functioning quiz app.
