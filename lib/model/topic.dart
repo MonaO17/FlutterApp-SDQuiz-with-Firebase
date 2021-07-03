@@ -1,13 +1,19 @@
+/// model class for topic-object
+
 class Topic {
+  /// unique topic ID
   int topicTableID;
+  /// topic ID from Google Sheet
   int topicID;
+  /// topic name
   String topic;
+  /// topic picture (in form of a link)
   String topicPic;
 
-  // constructor
+  /// constructor [Topic]
   Topic({this.topicID, this.topic, this.topicPic});
 
-  //Convert a Topic object into a Map object
+  /// convert a topic-object into a map-object
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>(); //instanciate map object
 
@@ -22,7 +28,7 @@ class Topic {
     return map;
   }
 
-  //Extract a Quiz object from a Map object
+  /// extracts a quiz-object from a map-object
   Topic.fromMapObject(Map<String, dynamic> map) {
     this.topicTableID = map['topicTableID'];
     this.topic = map['topic'];
@@ -30,7 +36,7 @@ class Topic {
     this.topicPic = map['topicPic'];
   }
 
-  // convert JSON that we get into this model(=QuizContentHelper) in this class (seperate Strings etc.)
+  /// receives [json], converts [json] into topic-object
   factory Topic.fromJson(dynamic json) {
     return Topic(
         topicID: json['topicID'],

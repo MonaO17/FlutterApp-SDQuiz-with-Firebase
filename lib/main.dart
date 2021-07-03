@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sd_quiz/screens/welcome/welcome_screen.dart';
+import 'package:sd_quiz/screens/settings/splash_screen.dart';
 
+/// main method starts app, defines language
 void main() {
   runApp(
     EasyLocalization(
@@ -13,6 +14,7 @@ void main() {
   );
 }
 
+/// defines theme and first screen
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: WelcomeScreen(),
+      home: SplashScreen(),
     );
   }
 }

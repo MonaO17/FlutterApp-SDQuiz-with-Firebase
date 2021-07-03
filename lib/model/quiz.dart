@@ -1,15 +1,26 @@
+/// model class for quiz-object
+
 class Quiz {
+  /// unique quiz ID
   int itemID;
+  /// quiz ID from Google Sheet
   int quizID;
+  /// topic ID
   int qTopicID;
+  /// answer ID, contains numer of right answer
   int answerID;
+  /// question
   String question;
+  /// answer 1
   String answerOne;
+  /// answer 2
   String answerTwo;
+  /// answer 3
   String answerThree;
+  /// answer 4
   String answerFour;
 
-  // constructor
+  /// constructor [Quiz]
   Quiz(
       {this.quizID,
       this.qTopicID,
@@ -20,7 +31,7 @@ class Quiz {
       this.answerThree,
       this.answerFour});
 
-  //Convert a Quiz object into a Map object
+  /// converts a quiz-object into a map-object
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>(); //instanciate map object
 
@@ -40,7 +51,7 @@ class Quiz {
     return map;
   }
 
-  //Extract a Quiz object from a Map object
+  /// extracts a quiz-object from a map-object
   Quiz.fromMapObject(Map<String, dynamic> map) {
     this.itemID = map['itemID'];
     this.quizID = map['quizID'];
@@ -53,7 +64,7 @@ class Quiz {
     this.answerFour = map['answerFour'];
   }
 
-  // convert JSON that we get into this model(=QuizContentHelper) in this class (seperate Strings etc.)
+  /// receives [json], converts [json] into quiz-object
   factory Quiz.fromJson(dynamic json) {
     return Quiz(
         quizID: json['quizID'],

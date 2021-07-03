@@ -10,37 +10,46 @@ import '../../database/database_helper.dart';
 import 'package:flutter/rendering.dart';
 import 'end_screen.dart';
 
-// variables
+/// quiz score
 int quizScore = 0;
+/// question number
 int questionNumber = 0;
-int ans = 0;
+/// color of buttons
 Color buttonColor1 = mainColorSD;
 Color buttonColor2 = mainColorSD;
 Color buttonColor3 = mainColorSD;
 Color buttonColor4 = mainColorSD;
 
-
+/// QuizScreen is the screen seen during the quiz
 class QuizScreen extends StatefulWidget {
+  ///[topicID] is the id that identifies the quiz topic, [idCurrentUser] is the id that identifies the current user
   int topicID, idCurrentUser;
 
-  //constructor
+  /// constructor _QuizScreenState
   QuizScreen({Key key, @required this.topicID, @required this.idCurrentUser})
       : super(key: key);
 
+  /// calls _QuizScreenState, hands over variables
   @override
   _QuizScreenState createState() => _QuizScreenState(topicID, idCurrentUser);
 }
 
+/// private class called by QuizScreen, can change state
 class _QuizScreenState extends State<QuizScreen> {
-  DatabaseHelper helper =
-  DatabaseHelper(); // get singelton instance of Database-Helper class
+  /// instance of [DatabaseHelper]
+  DatabaseHelper helper =  DatabaseHelper(); // get singelton instance of Database-Helper class
+  /// future-object, needed for future-builder
   Future futureList;
+  /// list with quizzes for regarding topicID
   List<Quiz> quizList;
+  /// [len] is the length of the quiz, [totalQuizScore] is the total amount of points that can be reached,
+  /// [topicID] identifies the topic, [idCurentUser] identfies current user
   int len, totalQuizScore, topicID, idCurrentUser;
 
-  //constructor
+  /// constructor _QuizScreenState
   _QuizScreenState(this.topicID, this.idCurrentUser);
 
+  /// initState is called first, initializes [quizScore] with 0 and [futureList] with return-value of method [_getQuiz]
   @override
   void initState() {
     super.initState();
@@ -48,7 +57,7 @@ class _QuizScreenState extends State<QuizScreen> {
     futureList = _getQuiz(topicID);
   }
 
-  //method gets relevant data from db
+  /// requests list of all quizzes with corresponding [topicID], initalizes [len] and [totalQuizScore], returns list with quizzes [quizList]
   _getQuiz(topicID) async {
     quizList = await helper.getQuizList(topicID);
     len = quizList.length;
@@ -56,6 +65,7 @@ class _QuizScreenState extends State<QuizScreen> {
     return quizList;
   }
 
+  /// builds screen with Scaffold-Widget
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -281,6 +291,7 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
+  /// receives [idCurrentUser], [quizScore] and [topicID], updates question or leads to next screen, when quiz is finished
   void updateQuestion(int idCurrentUser, int quizScore, int topicID) {
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {

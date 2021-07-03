@@ -11,19 +11,24 @@ import 'package:sd_quiz/screens/shared/leading_text_button_app_bar.dart';
 import 'package:sd_quiz/screens/shared/text_button_app_bar.dart';
 import '../../database/database_helper.dart';
 
-
+/// LoginScreen is the screen the user sees when logging in
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
+/// private class called by LoginScreen, can change state
 class _LoginScreenState extends State<LoginScreen> {
-  //variables
+  /// instance of  [DatabaseHelper]
   DatabaseHelper helper = DatabaseHelper();
+  /// variables [name] for user name and [pw] for user passowrd
   var name, pw;
+  /// identifies current user
   int idCurrentUser;
+  /// user-object, later initialized with current user
   User user;
 
+  /// builds screen with Scaffold-Widget, contains AppBar, two input-fields, login-button, link to register-screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // method checks weather user data is correct. If not it gives back an error-message, if yes the user gets logged in
+  /// checks whether user data is correct. If not it gives back an error-message, if yes the user gets logged in
   Future _loginCheck(String name, String pw) async {
     idCurrentUser = await helper.userExistsCheck(name, pw);
 
@@ -180,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  //method to print out error messages
+  /// prints out error messages
   void _showAlertDialog(String title, String message) {
     AlertDialog alertDialog = AlertDialog(
       title: Text(title),

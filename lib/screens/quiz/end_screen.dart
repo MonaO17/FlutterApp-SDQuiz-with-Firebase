@@ -7,11 +7,13 @@ import 'package:sd_quiz/screens/quiz_overview/quiz_overview_screen.dart';
 import 'package:sd_quiz/screens/shared/constants.dart';
 import 'package:sd_quiz/screens/shared/text_button_app_bar.dart';
 
+/// Screen that is shown in the end of the quiz, when quiz was lost
 class QuizEndScreen extends StatefulWidget {
-  //variables
+  /// [quizScore] is the score reached by the user, [totalQuizScore] is the total score, that could have been reached,
+  /// [idCurrentUser] identifies current user, [topicID] defines the quiz-topic
   int quizScore, totalQuizScore, idCurrentUser, topicID;
 
-  //constructor
+  /// constructor QuizEndScreen
   QuizEndScreen(
       {Key key,
       @required this.idCurrentUser,
@@ -20,33 +22,37 @@ class QuizEndScreen extends StatefulWidget {
       @required this.topicID})
       : super(key: key);
 
+  /// calls _QuizEndScreenState, hands over variables
   @override
   _QuizEndScreenState createState() =>
       _QuizEndScreenState(idCurrentUser, quizScore, totalQuizScore, topicID);
 }
 
+/// private class called by QuizEndScreen, can change state
 class _QuizEndScreenState extends State<QuizEndScreen> {
-  //variables
+  /// [score] is the total score of user, [quizScore] is the score reached by the user, [totalQuizScore] is the total score, that could have been reached,
+  /// [idCurrentUser] identifies current user, [topicID] defines the quiz-topic, [percent] defines percentage of correctly answered questions
   int score, quizScore, totalQuizScore, idCurrentUser, topicID, percent;
+  /// instance of [DatabaseHelper]
   DatabaseHelper helper = DatabaseHelper();
-  User user;
-  Future userFuture;
 
-  //constructor
+  /// constructor _QuizEndScreenState
   _QuizEndScreenState(
       this.idCurrentUser, this.quizScore, this.totalQuizScore, this.topicID);
 
+  /// initState is called first, calls method [_update Score]
   @override
   void initState() {
     super.initState();
     _updateScore(idCurrentUser, quizScore);
   }
 
-  //updates score in db
+  /// updates score of user in database
   _updateScore(idCurrentUser, quizScore) async {
     await helper.updateScore(idCurrentUser, quizScore);
   }
 
+  /// builds screen with Scaffold-Widget, contains appBar, text, picture, score, 2 buttons
   @override
   Widget build(BuildContext context) {
     return Scaffold(

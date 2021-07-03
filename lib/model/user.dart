@@ -1,32 +1,44 @@
+/// model class for user-object
+
 class User {
+  /// unique ID of user
   int _id;
+  /// name of user
   String _name;
+  /// password of user
   String _password;
+  /// score of user
   int _counter;
 
-  // constructor
+  /// constructor [User]
   User(this._name, this._password, this._counter);
 
-  // named constructor
+  /// named constructor
   User.withID(this._name, this._password, this._counter);
 
-  // getters
+  /// getters
+  /// returns user ID
   int get id => _id;
+  /// returns user name
   String get name => _name;
+  /// returns user password
   String get password => _password;
+  /// returns user score
   int get counter => _counter;
 
-  // setters
-  //id is generated automatically
+  /// setters
+  /// sets user name
   set name(String newName) {this._name = newName;}
+  /// sets user password
   set password(String newPW) {this._password = newPW;}
+  /// sets user score
   set counter(int newCounter) {
     if (newCounter >= 1 && newCounter <= 2) {
       this._counter = newCounter;
     }
   }
 
-  //Convert a User object into a Map object
+  /// converts a user-object into a map-object
   Map<String, dynamic> toMap() {
     //map['id'] etc are all Strings ('id', 'title', 'description'...) but on the right as a value we have Strings and ints => therefore we use dynamic.
     //if we would only have values of type int, we could define the Map as "Map<String, int> to Map()"
@@ -43,7 +55,7 @@ class User {
     return map;
   }
 
-  //Extract a User object from a Map object
+  /// extracts a user-object from a map-object
   User.fromMapObject(Map<String, dynamic> map) {
     this._id = map['id'];
     this._name = map['name'];
