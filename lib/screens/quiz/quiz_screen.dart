@@ -8,7 +8,6 @@ import 'package:sd_quiz/screens/shared/loading.dart';
 import 'package:sd_quiz/screens/shared/text_button_app_bar.dart';
 import '../../database/database_helper.dart';
 import 'package:flutter/rendering.dart';
-
 import 'end_screen.dart';
 
 // variables
@@ -125,8 +124,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           //Question
                           Container(
                             height:
-                            MediaQuery.of(context).copyWith().size.height /
-                                3,
+                            MediaQuery.of(context).copyWith().size.height / 3,
                             child: Center(
                               child: Text(
                                 snapshot.data[questionNumber].question,

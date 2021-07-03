@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // method checks weather user data is correct. If not it gives back an error-message, if yes the user gets logged in
   Future _loginCheck(String name, String pw) async {
-    int idCurrentUser = await helper.userExistsCheck(name, pw);
+    idCurrentUser = await helper.userExistsCheck(name, pw);
 
     if (idCurrentUser == null) {
       _showAlertDialog('Fehler!', 'Spielername oder Passwort ist falsch!');

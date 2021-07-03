@@ -58,7 +58,7 @@ class DatabaseHelper {
   static final String colTopic = 'topic';
   static final String colTopicPic = 'topicPic';
 
-  DatabaseHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
+  DatabaseHelper._createInstance(); // Named constructor to create instance of db-helper
 
   factory DatabaseHelper() {
     if (_databaseHelper == null) {
