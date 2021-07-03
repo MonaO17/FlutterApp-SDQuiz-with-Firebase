@@ -1,5 +1,10 @@
-//https://www.youtube.com/watch?v=LJH8UI8E1Lw&list=PLDQl6gZtjvFu5l20K5KTEBLCjfRjHowLj&index=5
+/* Inspiration & Tutorials für dieses File:
+       - https://www.youtube.com/watch?v=LJH8UI8E1Lw&list=PLDQl6gZtjvFu5l20K5KTEBLCjfRjHowLj&index=5
+       - MONA: API von GoogleSheet
+       - MONA: 3. Tutorial DB
+*/
 
+// Generelle Funktionsweise SQLite in Flutter
 // SQLite Database: SQLite is an in-process library that implements a
 //      - self-contained (= minimal support from external libraries, good for platform-independent application),
 //      - serverless (= reads & writes directly from the db files on disk/file system of Android or iOS device),
@@ -28,6 +33,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
+/// Database is created, initialized and methods to perform CRUD(Create, Read, Update, Delete) operation are available
 class DatabaseHelper {
   static DatabaseHelper _databaseHelper; // Singleton DatabaseHelper
   static Database _database; // Singleton Database
@@ -60,6 +66,7 @@ class DatabaseHelper {
 
   DatabaseHelper._createInstance(); // Named constructor to create instance of db-helper
 
+  /// constructor for DatabaseHelper
   factory DatabaseHelper() {
     if (_databaseHelper == null) {
       _databaseHelper = DatabaseHelper
@@ -68,6 +75,7 @@ class DatabaseHelper {
     return _databaseHelper;
   }
 
+  /// returns database
   Future<Database> get database async {
     if (_database == null) {
       _database = await initializeDatabase();
@@ -75,6 +83,7 @@ class DatabaseHelper {
     return _database;
   }
 
+  /// sets directory when initializing database, returns initialized database [notesDatabase]
   Future<Database> initializeDatabase() async {
     // Get the directory path for both Android and iOS to store database.
     Directory directory = await getApplicationDocumentsDirectory();
@@ -84,6 +93,7 @@ class DatabaseHelper {
     return notesDatabase;
   }
 
+  /// creates database
   void _createDb(Database db, int newVersion) async {
     await db.execute('''
     CREATE TABLE $userTable(
@@ -114,14 +124,16 @@ class DatabaseHelper {
   }
 
 
-  //****************          METHODS REGARDING USER          ****************//
+  /// Methods regarding user-object
+
+  /// returns all users in form of MapList
   Future<List<Map<String, dynamic>>> getUserMapList() async {
     Database db = await this.database;
     var result = await db.rawQuery('SELECT * FROM $userTable');
     return result;
   }
 
-  //check for login, whether username & password match
+  /// checks for login, whether username & password match, returns Integer with [userID] or 0
   Future<int> userExistsCheck(String name, String pw) async {
     int userExists = 0;
     var userMapList = await getUserMapList();
@@ -136,7 +148,7 @@ class DatabaseHelper {
     return userExists;
   }
 
-  //inserts new user in db
+  /// inserts new user into database, returns [userID] of added user
   Future<int> insertUser(String name, String pw, int counter) async {
     var db = await this.database;
 
@@ -150,7 +162,7 @@ class DatabaseHelper {
     return result;
   }
 
-  //check during registration, whether a username is already taken
+  /// checks during registration, whether a username is already taken, returns true if user exists or false if he dosen't
   Future<bool> userExistsAlreadyCheck(String name) async {
     bool userExists = false;
     var userMapList = await getUserMapList();
@@ -165,7 +177,7 @@ class DatabaseHelper {
     return userExists;
   }
 
-  //get the 'Map List' [ List<Map> ] and convert it to 'User List' [ List<User> ]
+  /// requests all users in form of a MapList and converts it into List<User> [userList], returns [userList]
   Future<List<User>> getUserList() async {
     var userMapList = await getUserMapList(); // Get 'Map List' from database
     int count = userMapList.length; // Count the number of map entries in db table
@@ -177,7 +189,7 @@ class DatabaseHelper {
     return userList;
   }
 
-  //returns user that belongs to id
+  /// receives [id], returns user that belongs to [id] or Null if there is no corresponding user
   Future<User> getCurrentUser(int id) async {
     final db = await this.database;
     var result = await db.rawQuery('SELECT * FROM $userTable WHERE id = $id');
@@ -185,7 +197,7 @@ class DatabaseHelper {
     return result.isNotEmpty ? User.fromMapObject(result.first) : Null;
   }
 
-  //updates score in db, returns score
+  /// receives [id] and [quizScore], updates [score] for user with corresponding [id] in database and returns new [score]
   Future<int> updateScore(int id, int quizScore) async {
     final db = await this.database;
     User user = await getCurrentUser(id);
@@ -198,9 +210,9 @@ class DatabaseHelper {
     return score;
   }
 
+  /// Methods regarding quiz-object
 
-  //****************          METHODS REGARDING QUIZ          ****************//
-  //get Data from GoogleSheet
+  /// requests data from GoogleSheet
   Future getDataFromGoogleSheet() async {
     var url = 'https://script.google.com/macros/s/AKfycbw_6uvHxG5QNXiOrGMCX-F1qFUF2v6xERPEucVQoI5nJeA7K_uN/exec';
     http.Response raw = await http.get(url);
@@ -222,7 +234,7 @@ class DatabaseHelper {
     });
   }
 
-  //receive quiz, check if the quiz already exists, if not the quiz is added to the db
+  /// receives quiz-object [quiz], checks if [quizID] already exists in database, if not the quiz is added to the database
   Future _addDataToDB(Quiz quiz) async {
     Database db = await this.database;
     bool exists = false;
@@ -252,7 +264,7 @@ class DatabaseHelper {
     }
   }
 
-  //get the 'Map List' [ List<Map> ] and convert it to 'Quiz List' [ List<Quiz> ]
+  /// requests all quizzes in form of a MapList and converts the MapList into a List<Quiz> [quizList], returns [quizList]
   Future<List<Quiz>> allGetQuizList() async {
     var quizMapList = await allGetQuizMapList(); // Get 'Map List' from database
     int count = quizMapList.length; // Count the number of map entries in db table
@@ -264,7 +276,7 @@ class DatabaseHelper {
     return quizList;
   }
 
-  //return all quiz objects in a map list
+  /// returns all quiz-objects in form of a MapList
   Future<List<Map<String, dynamic>>> allGetQuizMapList() async {
     Database db = await this.database;
 
@@ -272,7 +284,7 @@ class DatabaseHelper {
     return result;
   }
 
-  //get the 'Map List' [ List<Map> ] and convert it to 'Quiz List' [ List<Quiz> ]
+  /// receives [quizID], requests all quizzes with that [quizID] in form of a MapList and converts the MapList into a List<Quiz> [quizList], returns [quizList]
   Future<List<Quiz>> getQuizList(quizID) async {
     var quizMapList = await getQuizMapList(quizID); // Get 'Map List' from database
     int count =  quizMapList.length; // Count the number of map entries in db table
@@ -284,7 +296,7 @@ class DatabaseHelper {
     return quizList;
   }
 
-  //get list with all quiz objects to a chosen topic
+  /// receives [topicID], return all quiz-objects in form of a MapList where [topicID] matches
   Future<List<Map<String, dynamic>>> getQuizMapList(topicID) async {
     Database db = await this.database;
 
@@ -293,8 +305,9 @@ class DatabaseHelper {
   }
 
 
-  //****************          METHODS REGARDING TOPIC          ****************//
-  //get Data from Google Sheet
+  /// Methods regarding topic-object
+
+  /// requests Data from Google Sheet
   Future getTopicFromGoogleSheet() async {
     var urlTopic ='https://script.google.com/macros/s/AKfycby0RtLCk4hMHKupykeguCESPVnLeCKdbgiV9jbzHmrEVVg0iGCE/exec';
     http.Response raw = await http.get(urlTopic);
@@ -311,7 +324,7 @@ class DatabaseHelper {
     });
   }
 
-  //receive topic, check if the topic already exists, if not the topic is added to the db
+  /// receives topic-object [topic], checks whether the topic already exists in database, if not the topic is added to the database
   Future _addTopicDataToDB(Topic topic) async {
     Database db = await this.database;
     bool exists = false;
@@ -333,7 +346,7 @@ class DatabaseHelper {
     }
   }
 
-  //get the 'Map List' [ List<Map> ] and convert it to 'Quiz List' [ List<Quiz> ]
+  /// requests all topics in form of MapList and converts MapList into List<Topic> [topicList], returns [topicList]
   Future<List<Topic>> getTopicList() async {
     var topicMapList = await getTopicMapList(); // Get 'Map List' from database
     int count = topicMapList.length; // Count the number of map entries in db table
@@ -345,7 +358,7 @@ class DatabaseHelper {
     return topicList;
   }
 
-  //get all topics from db
+  /// returns all topics from database
   Future<List<Map<String, dynamic>>> getTopicMapList() async {
     Database db = await this.database;
 
