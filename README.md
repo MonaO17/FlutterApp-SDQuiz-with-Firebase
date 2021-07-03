@@ -1,16 +1,14 @@
 # sd_quiz
 
-A new Flutter application.
+# What's the project about?
+This was a project for my course "App Development" in the 4th semester. The goal of the work was a functioning quiz app.
 
-## Getting Started
+# Which programming languages & technologies were used?
+The app was programmed with the cross-platform framework Flutter and the programming language Dart in Android Studio. 
 
-This project is a starting point for a Flutter application.
+# Who worked on the projekt?
+This was a teamwork with Anja Gerstenberg
 
-A few resources to get you started if this is your first Flutter project:
+# Sources
+All sources are mentioned in the code. There was also a great tutorial from "The Net Ninja" that taught us the basics: https://www.youtube.com/watch?v=1ukSR1GRtMU&list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
