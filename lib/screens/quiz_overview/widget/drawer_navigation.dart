@@ -7,34 +7,40 @@ import 'package:sd_quiz/screens/shared/loading.dart';
 import '../../settings/language_screen.dart';
 import '../quiz_overview_screen.dart';
 
-
+/// DrawerNavigation is the menu, where the user can see his [score] and set the language
 class DrawerNavigation extends StatefulWidget {
   final int idCurrentUser;
 
-  //constructor
+  /// constructor DrawerNavigation
   DrawerNavigation({Key key, @required this.idCurrentUser}) : super(key: key);
 
+  /// calls _DrawerNavigationState, hands over variable [idCurrentUser]
   @override
   _DrawerNavigationState createState() => _DrawerNavigationState(idCurrentUser);
 }
 
+/// private class called by DrawerNavigation, can change state
 class _DrawerNavigationState extends State<DrawerNavigation> {
-  //variables
+  /// identifies user
   int idCurrentUser;
+  /// instance of [DatabaseHelper]
   DatabaseHelper helper = DatabaseHelper();
+  // user-object
   User user;
+  /// future variable, needed for future-builder
   Future userFuture;
 
-  //constructor
+  /// constructor_DrawerNavigationState
   _DrawerNavigationState(this.idCurrentUser);
 
+  /// initState is called first, initializes [userFuture] with return value of method [_getUser()]
   @override
   void initState() {
     super.initState();
     userFuture = _getUser(idCurrentUser);
   }
 
-  //method gets relevant data from db
+  /// initializes [user] with return value of [DatabaseHelper]-method [getCurrentUser], returns [user]
   _getUser(idCurrentUser) async {
     print('DrawerNavigation user $idCurrentUser');
     user = await helper.getCurrentUser(idCurrentUser);
@@ -42,6 +48,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
     return user;
   }
 
+  /// builds screen with Scaffold-Widget, contains image, [score] and [name] of [user], 2 ListTiles
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

@@ -10,19 +10,26 @@ import 'package:sd_quiz/screens/shared/constants.dart';
 import 'package:sd_quiz/screens/shared/leading_text_button_app_bar.dart';
 import 'package:sd_quiz/screens/shared/text_button_app_bar.dart';
 
+/// RegisterScreen is the screen the user sees for registeration
 class RegisterScreen extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
+/// private class called by RegisterScreen, can change state
 class _RegisterScreenState extends State<RegisterScreen> {
-  //variables
+  /// instance of [DatabaseHelper]
   DatabaseHelper helper = DatabaseHelper();
+  /// identifies current user
   int idCurrentUser;
+  /// sets initial score to null
   int counter = 0;
+  /// user object
   User user;
+  /// [name] is the name of the user, [pw] the password and [pw2] the control of the password
   String name, pw, pw2;
 
+  /// builds screen with Scaffold-Widget, contains AppBar, three input-fields, login-button, link to login-screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  //method checks if password are longer then 4 digits and equal
+  /// checks whether [pw] is longer then 4 digits and equal to [pw2]
   void _checkPassword(String name, String pw, String pw2, int counter) {
     if (pw != pw2) {
       _showAlertDialog('fehler'.tr(), 'fehler_pw'.tr());
@@ -174,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  //method checks if user name already exists in db, if not it registers new user
+  /// checks whether [name] already exists in database, if not it registers new user
   Future _addUserToDB(String name, String pw, int counter) async {
     bool userExistsAlready = await helper.userExistsAlreadyCheck(name);
 
@@ -199,7 +206,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  //method to print out error messages
+  /// prints out error messages
   void _showAlertDialog(String title, String message) {
     AlertDialog alertDialog = AlertDialog(
       title: Text(title),

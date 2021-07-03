@@ -65,7 +65,7 @@ class _QuizScreenState extends State<QuizScreen> {
     return quizList;
   }
 
-  /// builds screen with Scaffold-Widget
+  /// builds screen with Scaffold-Widget, with text, question and four answer-buttons
   @override
   Widget build(BuildContext context) {
     return Center(

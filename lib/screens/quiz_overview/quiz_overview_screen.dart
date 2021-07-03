@@ -12,28 +12,36 @@ import '../../database/database_helper.dart';
 import '../settings/language_screen.dart';
 import 'widget/category_card.dart';
 
+/// QuizOverviewScreen shows all quizzes available
 class QuizOverviewScreen extends StatefulWidget {
   final int idCurrentUser;
 
-  //constructor
+  /// constructor QuizOverviewScreen
   QuizOverviewScreen({Key key, @required this.idCurrentUser}) : super(key: key);
 
+  /// calls _QuizOverviewScreenState, hands over variables
   @override
   _QuizOverviewScreenState createState() =>
       _QuizOverviewScreenState(idCurrentUser);
 }
 
+/// private class called by QuizOverviewScreen, can change state
 class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
-  //variables
+  /// identifies current user
   int idCurrentUser;
+  /// instance of [DatabaseHelper]
   DatabaseHelper helper = DatabaseHelper();
+  /// user object
   User user;
+  /// list with all topics-objects
   List<Topic> topic;
+  /// future variable, needed for future-builder
   Future userFuture;
 
-  //constructor
+  /// constructor _QuizOverviewScreenState
   _QuizOverviewScreenState(this.idCurrentUser);
 
+  /// initState is called first, calls method [_getTopics()] and initializes [userFuture] with return value of method [_getUser()]
   @override
   void initState() {
     super.initState();
@@ -41,13 +49,13 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
     userFuture = _getUser(idCurrentUser);
   }
 
-  //method gets relevant data from db
+  /// initializes [topic] with return value of  [DatabaseHelper]-method [getTopicList()]
   _getTopics() async {
     print('get Topics');
     topic = await helper.getTopicList();
   }
 
-  //method gets relevant data from db
+  /// initializes [user] with return value of [DatabaseHelper]-method [getCurrentUser], returns [user]
   _getUser(idCurrentUser) async {
     print('user $idCurrentUser');
     user = await helper.getCurrentUser(idCurrentUser);
@@ -55,6 +63,7 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
     return user;
   }
 
+  /// builds screen with Scaffold-Widget, contains welcome-text, list of quizzes
   @override
   Widget build(BuildContext context) {
     return Scaffold(
