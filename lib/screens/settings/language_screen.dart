@@ -1,3 +1,9 @@
+/* Inspiration & Tutorials für dieses File:
+       - https://www.youtube.com/watch?v=7CHeU1DstoQ
+
+*/
+
+
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 

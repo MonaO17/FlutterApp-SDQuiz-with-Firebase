@@ -1,3 +1,9 @@
+/* Inspiration & Tutorials für dieses File:
+       - https://www.youtube.com/watch?v=RNQ1meh9k48
+
+*/
+
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';

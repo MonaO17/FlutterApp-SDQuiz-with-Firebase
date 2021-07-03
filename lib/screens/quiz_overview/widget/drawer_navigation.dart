@@ -1,3 +1,9 @@
+/* Inspiration & Tutorials für dieses File:
+       - https://www.youtube.com/watch?v=h8ooegi95v0&list=PLjOFHn8uDrvT00AlU-zKJN4efsBN-OFOB&index=3
+
+
+*/
+
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/database/database_helper.dart';
