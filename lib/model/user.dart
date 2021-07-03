@@ -1,3 +1,7 @@
+/* code partly inspired by
+       - https://www.youtube.com/watch?v=t39VV2XyqR0&list=PLDQl6gZtjvFu5l20K5KTEBLCjfRjHowLj&index=6
+*/
+
 /// model class for user-object
 
 class User {

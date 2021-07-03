@@ -1,3 +1,6 @@
+/* code partly inspired by
+       - https://www.youtube.com/watch?v=7CHeU1DstoQ
+*/
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sd_quiz/screens/settings/splash_screen.dart';

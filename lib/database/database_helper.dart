@@ -1,7 +1,7 @@
-/* Inspiration & Tutorials für dieses File:
+/* code partly inspired by
        - https://www.youtube.com/watch?v=LJH8UI8E1Lw&list=PLDQl6gZtjvFu5l20K5KTEBLCjfRjHowLj&index=5
-       - MONA: API von GoogleSheet
-       - MONA: 3. Tutorial DB
+       - https://www.youtube.com/watch?v=RjQuPzn3dsg
+       - https://www.youtube.com/watch?v=xke5_yGL0uk&list=PLDQl6gZtjvFu5l20K5KTEBLCjfRjHowLj&index=9
 */
 
 // Generelle Funktionsweise SQLite in Flutter

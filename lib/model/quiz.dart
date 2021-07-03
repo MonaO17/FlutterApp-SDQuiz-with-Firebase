@@ -1,3 +1,7 @@
+/* code partly inspired by
+       - https://www.youtube.com/watch?v=xke5_yGL0uk&list=PLDQl6gZtjvFu5l20K5KTEBLCjfRjHowLj&index=9
+*/
+
 /// model class for quiz-object
 
 class Quiz {

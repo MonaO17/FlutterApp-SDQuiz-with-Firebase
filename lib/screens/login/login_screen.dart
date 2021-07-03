@@ -1,6 +1,5 @@
-/* Inspiration & Tutorials für dieses File:
+/* code partly inspired by
        - https://www.youtube.com/watch?v=RNQ1meh9k48
-
 */
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';

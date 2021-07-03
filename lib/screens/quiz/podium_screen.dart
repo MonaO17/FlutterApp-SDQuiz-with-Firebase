@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sd_quiz/database/database_helper.dart';
-import 'package:sd_quiz/model/user.dart';
 import 'package:sd_quiz/screens/quiz/quiz_screen.dart';
 import 'package:sd_quiz/screens/quiz_overview/quiz_overview_screen.dart';
 import 'package:sd_quiz/screens/shared/constants.dart';

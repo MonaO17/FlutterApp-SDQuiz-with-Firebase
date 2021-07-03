@@ -1,3 +1,6 @@
+/* code partly inspired by
+       - https://www.youtube.com/watch?v=a3W_TQ5G7JA
+*/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sd_quiz/model/quiz.dart';

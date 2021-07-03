@@ -1,6 +1,5 @@
-/* Inspiration & Tutorials für dieses File:
+/* code partly inspired by
        - https://www.youtube.com/watch?v=NEiy6-XWO8o
-
 */
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
