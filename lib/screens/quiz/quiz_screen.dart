@@ -4,20 +4,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sd_quiz/model/quiz.dart';
-import 'package:sd_quiz/screens/quiz/podium_screen.dart';
+import 'package:sd_quiz/screens/quiz_end_screen/quiz_end_screen.dart';
 import 'package:sd_quiz/screens/quiz_overview/quiz_overview_screen.dart';
 import 'package:sd_quiz/screens/shared/constants.dart';
 import 'package:sd_quiz/screens/shared/loading.dart';
 import 'package:sd_quiz/screens/shared/text_button_app_bar.dart';
 import '../../database/database_helper.dart';
 import 'package:flutter/rendering.dart';
-import 'end_screen.dart';
 
-/// quiz score
 int quizScore = 0;
-/// question number
 int questionNumber = 0;
-/// color of buttons
 Color buttonColor1 = mainColorSD;
 Color buttonColor2 = mainColorSD;
 Color buttonColor3 = mainColorSD;
@@ -25,28 +21,21 @@ Color buttonColor4 = mainColorSD;
 
 /// QuizScreen is the screen seen during the quiz
 class QuizScreen extends StatefulWidget {
-  ///[topicID] is the id that identifies the quiz topic, [idCurrentUser] is the id that identifies the current user
   int topicID, idCurrentUser;
 
   /// constructor _QuizScreenState
   QuizScreen({Key key, @required this.topicID, @required this.idCurrentUser})
       : super(key: key);
 
-  /// calls _QuizScreenState, hands over variables
   @override
   _QuizScreenState createState() => _QuizScreenState(topicID, idCurrentUser);
 }
 
 /// private class called by QuizScreen, can change state
 class _QuizScreenState extends State<QuizScreen> {
-  /// instance of [DatabaseHelper]
   DatabaseHelper helper =  DatabaseHelper(); // get singelton instance of Database-Helper class
-  /// future-object, needed for future-builder
   Future futureList;
-  /// list with quizzes for regarding topicID
   List<Quiz> quizList;
-  /// [len] is the length of the quiz, [totalQuizScore] is the total amount of points that can be reached,
-  /// [topicID] identifies the topic, [idCurentUser] identfies current user
   int len, totalQuizScore, topicID, idCurrentUser;
 
   /// constructor _QuizScreenState
@@ -302,18 +291,7 @@ class _QuizScreenState extends State<QuizScreen> {
         buttonColor2 = mainColorSD;
         buttonColor3 = mainColorSD;
         buttonColor4 = mainColorSD;
-        if (questionNumber == len - 1 && quizScore >= (totalQuizScore * 0.7)) {
-          Navigator.push(
-              context,
-              new MaterialPageRoute(
-                  builder: (context) => QuizPodiumScreen(
-                      idCurrentUser: idCurrentUser,
-                      quizScore: quizScore,
-                      totalQuizScore: totalQuizScore,
-                      topicID: topicID)));
-          questionNumber = 0;
-        } else if (questionNumber == len - 1 &&
-            quizScore < (totalQuizScore * 0.7)) {
+        if (questionNumber == len - 1) {
           Navigator.push(
               context,
               new MaterialPageRoute(

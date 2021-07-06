@@ -39,49 +39,29 @@ class DatabaseHelper {
   static Database _database; // Singleton Database
 
   /// Table & columns for table [userTable]
-  /// table [userTable]
   static final String userTable = 'userTable';
-  /// column-name for unique ID for user
   static final String colId = 'id';
-  /// column-name for user name
   static final String colName = 'name';
-  /// column-name for user password
   static final String colPassword = 'password';
-  /// column-name for user score
   static final String colCounter = 'counter';
 
   /// Table & columns for table [quizTable]
-  /// table [quizTable]
   static final String quizTable = 'quizTable';
-  /// column-name for unique quiz ID
   static final String colItemID = 'itemID';
-  /// column-name for quiz ID from Google Sheet
   static final String colQuizID = 'quizID';
-  /// column-name for topic ID
   static final String colQTopicID = 'qTopicID';
-  /// column-name for answer ID
   static final String colAnswerID = 'answerID';
-  /// column-name for question
   static final String colQuestion = 'question';
-  /// column-name for answer 1
   static final String colAnswerOne = 'answerOne';
-  /// column-name for answer 2
   static final String colAnswerTwo = 'answerTwo';
-  /// column-name for answer 3
   static final String colAnswerThree = 'answerThree';
-  /// column-name for answer 4
   static final String colAnswerFour = 'answerFour';
 
   /// Table & columns for table [topicTable]
-  /// table [topicTable]
   static final String topicTable = 'topicTable';
-  /// column-name for unique topic ID
   static final String colTopicTableID = 'topicTableID';
-  /// column-name for topic ID from Google Sheet
   static final String colTopicID = 'topicID';
-  /// column-name for topic name
   static final String colTopic = 'topic';
-  /// column-name for topic picture
   static final String colTopicPic = 'topicPic';
 
   DatabaseHelper._createInstance(); // Named constructor to create instance of db-helper

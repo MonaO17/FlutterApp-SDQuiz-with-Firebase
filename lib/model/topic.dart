@@ -5,13 +5,9 @@
 /// model class for topic-object
 
 class Topic {
-  /// unique topic ID
   int topicTableID;
-  /// topic ID from Google Sheet
   int topicID;
-  /// topic name
   String topic;
-  /// topic picture (in form of a link)
   String topicPic;
 
   /// constructor [Topic]

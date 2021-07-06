@@ -24,13 +24,9 @@ class LoginScreen extends StatefulWidget {
 
 /// private class called by LoginScreen, can change state
 class _LoginScreenState extends State<LoginScreen> {
-  /// instance of  [DatabaseHelper]
   DatabaseHelper helper = DatabaseHelper();
-  /// variables [name] for user name and [pw] for user passowrd
   var name, pw;
-  /// identifies current user
   int idCurrentUser;
-  /// user-object, later initialized with current user
   User user;
 
   /// builds screen with Scaffold-Widget, contains AppBar, two input-fields, login-button, link to register-screen

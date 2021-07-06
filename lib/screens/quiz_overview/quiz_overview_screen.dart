@@ -30,15 +30,10 @@ class QuizOverviewScreen extends StatefulWidget {
 
 /// private class called by QuizOverviewScreen, can change state
 class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
-  /// identifies current user
   int idCurrentUser;
-  /// instance of [DatabaseHelper]
   DatabaseHelper helper = DatabaseHelper();
-  /// user object
   User user;
-  /// list with all topics-objects
   List<Topic> topic;
-  /// future variable, needed for future-builder
   Future userFuture;
 
   /// constructor _QuizOverviewScreenState

@@ -26,13 +26,9 @@ class DrawerNavigation extends StatefulWidget {
 
 /// private class called by DrawerNavigation, can change state
 class _DrawerNavigationState extends State<DrawerNavigation> {
-  /// identifies user
   int idCurrentUser;
-  /// instance of [DatabaseHelper]
   DatabaseHelper helper = DatabaseHelper();
-  // user-object
   User user;
-  /// future variable, needed for future-builder
   Future userFuture;
 
   /// constructor_DrawerNavigationState

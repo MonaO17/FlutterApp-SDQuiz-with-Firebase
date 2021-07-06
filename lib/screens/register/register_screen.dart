@@ -21,15 +21,10 @@ class RegisterScreen extends StatefulWidget {
 
 /// private class called by RegisterScreen, can change state
 class _RegisterScreenState extends State<RegisterScreen> {
-  /// instance of [DatabaseHelper]
   DatabaseHelper helper = DatabaseHelper();
-  /// identifies current user
   int idCurrentUser;
-  /// sets initial score to null
   int counter = 0;
-  /// user object
   User user;
-  /// [name] is the name of the user, [pw] the password and [pw2] the control of the password
   String name, pw, pw2;
 
   /// builds screen with Scaffold-Widget, contains AppBar, three input-fields, login-button, link to login-screen

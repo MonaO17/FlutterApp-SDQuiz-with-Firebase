@@ -7,11 +7,8 @@ import 'package:sd_quiz/screens/shared/constants.dart';
 
 /// CategoryCard is the template, that is used to display the single topics
 class CategoryCard extends StatelessWidget {
-  /// image above the topic
   final String image;
-  /// topic name
   final String title;
-  /// function press, reacts to being pressed
   final Function press;
 
   /// constructor CategoryCard

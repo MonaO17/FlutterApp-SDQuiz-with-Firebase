@@ -5,13 +5,9 @@
 /// model class for user-object
 
 class User {
-  /// unique ID of user
   int _id;
-  /// name of user
   String _name;
-  /// password of user
   String _password;
-  /// score of user
   int _counter;
 
   /// constructor [User]
@@ -21,21 +17,14 @@ class User {
   User.withID(this._name, this._password, this._counter);
 
   /// getters
-  /// returns user ID
   int get id => _id;
-  /// returns user name
   String get name => _name;
-  /// returns user password
   String get password => _password;
-  /// returns user score
   int get counter => _counter;
 
   /// setters
-  /// sets user name
   set name(String newName) {this._name = newName;}
-  /// sets user password
   set password(String newPW) {this._password = newPW;}
-  /// sets user score
   set counter(int newCounter) {
     if (newCounter >= 1 && newCounter <= 2) {
       this._counter = newCounter;

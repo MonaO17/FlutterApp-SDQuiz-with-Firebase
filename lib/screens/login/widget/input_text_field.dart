@@ -15,11 +15,8 @@ class InputTextField extends StatelessWidget {
     this.password = false,
   }) : super(key: key);
 
-  /// grey text, that tells user what information is requested
   final String label;
-  /// onChange function
   final Function onChange;
-  /// true when input text is a password, otherwise false
   final bool password;
 
   /// builds customized TextField
